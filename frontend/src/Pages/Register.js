@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import './home.css';
+import './login.css';
 import Swal from 'sweetalert2'
 import Cookies from 'universal-cookie';
 import Button from 'react-bootstrap/Button';
@@ -40,7 +40,7 @@ export default function Register() {
     };
 
     return (
-        <div className='container-fluid background'>
+        <div className='container-fluid-login background'>
 
 
             <div className='row justify-content-center'>

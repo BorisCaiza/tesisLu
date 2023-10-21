@@ -1,0 +1,21 @@
+.background {
+  background-image: url("../../Images/fondo_1.svg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+
+.title-games {
+  background-color: rgba(0, 150, 136, 0.5);
+  padding: 1rem 1rem;
+  width: 100%;
+}
+
+.title-games h1 {
+  color: white;
+}
