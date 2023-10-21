@@ -157,6 +157,10 @@ const Game1 = () => {
                                         top: `${letterData.top}px`,
                                     }}
                                     onDragStart={(e) => e.dataTransfer.setData('letter', letterData.letter)}
+                                    onDragEnd={(e) => {
+                                        letters[index].left = e.clientX;
+                                        letters[index].top = e.clientY;
+                                    } }
                                     draggable
                                 >
                                     <span>{letterData.letter}</span>
