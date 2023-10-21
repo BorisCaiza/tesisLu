@@ -7,6 +7,7 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import ForgetPassword from './Pages/ForgetPassword';
 import Games from './Pages/Games/Games';
+import Game1  from './Pages/Games/game1/Game1';
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
       <Route path='/register' element={<Register />} />
       <Route path='/forgot-password' element={<ForgetPassword />} />
       <Route path='/games' element={<Games />} />
-
+      <Route path='/games/game1' element={<Game1  />} />
 
     </Routes>
 

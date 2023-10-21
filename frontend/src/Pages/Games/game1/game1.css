@@ -1,0 +1,68 @@
+.board {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 7px solid black;
+    border-radius: 15px;
+}
+
+.piece {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    cursor: grab;
+    border-radius: 50%;
+    font-size: 100px;
+    font-weight: bold;
+    color: black;
+}
+
+.target {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.016);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 100px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.344);
+}
+
+.play-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Estilos para las estadísticas */
+.stats {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.stats>div {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.stats span {
+    font-weight: bold;
+    color: #3498db;
+}
