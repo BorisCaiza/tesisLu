@@ -8,7 +8,6 @@ const Game1 = () => {
     const [letters, setLetters] = useState([]);
     const [targetLetter, setTargetLetter] = useState('');
     const [gameResult, setGameResult] = useState(null);
-    const [stars, setStars] = useState(0);
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
     const [showPlayButton, setShowPlayButton] = useState(true);
@@ -17,27 +16,35 @@ const Game1 = () => {
     const [bestTime, setBestTime] = useState(null);
 
     const generateRandomLetter = () => {
-        const randomCharCode = Math.floor(Math.random() * 26) + 65; // Generates random ASCII code for A to Z
+        const randomCharCode = Math.floor(Math.random() * 26) + 65;
         return String.fromCharCode(randomCharCode);
     };
 
     const randomizeLetters = () => {
         const randomizedLetters = [];
-        for (let i = 0; i < 3; i++) {
-            // Distribuye las piezas dentro de un rango más amplio, evitando el centro
-            randomizedLetters.push({
-                id: i + 1,
-                letter: generateRandomLetter(),
-                left: Math.random() * 400 + 100, // Ajusta estos valores según tus preferencias
-                top: Math.random() * 400 + 100,  // Ajusta estos valores según tus preferencias
-            });
+        const usedLetters = [];
+
+        while (randomizedLetters.length < 2) {
+            const randomLetter = generateRandomLetter();
+            if (!usedLetters.includes(randomLetter)) {
+                usedLetters.push(randomLetter);
+
+                randomizedLetters.push({
+                    id: randomizedLetters.length + 1,
+                    letter: randomLetter,
+                    left: Math.random() * 400 + 100, 
+                    top: Math.random() * 400 + 100,
+                });
+            }
         }
+
         setLetters(randomizedLetters);
 
-        const randomIndex = Math.floor(Math.random() * 3);
+        const randomIndex = Math.floor(Math.random() * 2);
         setTargetLetter(randomizedLetters[randomIndex].letter);
         setGameResult(null);
     };
+
     useEffect(() => {
         let interval;
         if (isRunning) {
@@ -75,9 +82,6 @@ const Game1 = () => {
 
     const handleDrop = (droppedLetter, position) => {
         const gano = droppedLetter === targetLetter;
-
-        const puntuacion = gano ? 3 : 0;
-        setStars(puntuacion);
 
         if (gano) {
             setWins(wins + 1);
@@ -153,6 +157,10 @@ const Game1 = () => {
                                         top: `${letterData.top}px`,
                                     }}
                                     onDragStart={(e) => e.dataTransfer.setData('letter', letterData.letter)}
+                                    onDragEnd={(e) => {
+                                        letters[index].left = e.clientX;
+                                        letters[index].top = e.clientY;
+                                    } }
                                     draggable
                                 >
                                     <span>{letterData.letter}</span>
@@ -163,7 +171,6 @@ const Game1 = () => {
                     )}
                 </div>
                 <div>Cronómetro: {time} segundos</div>
-                <div>Estrellas: {stars}</div>
                 <div>Partidas ganadas: {wins}</div>
                 <div>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
                 {!showPlayButton && (

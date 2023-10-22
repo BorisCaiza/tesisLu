@@ -54,7 +54,7 @@
 .label-auth {
   font-size: 14px;
   font-weight: 600;
-  color: #51bed0;
+  color: #e4800e;
 }
 
 .boton-login {
@@ -68,6 +68,7 @@
   text-decoration: none;
   display: inline-block;
 }
+
 .boton-login {
   font: inherit;
   padding: 0.5rem 1.5rem;
@@ -85,8 +86,10 @@
   background-color: #e4800e;
   color: white;
   border: none;
-  padding: 10px 20px; /* Ajusta el padding para hacer el botón más grande */
-  font-size: 12px; /* Ajusta el tamaño de fuente para hacer el texto más grande */
+  padding: 10px 20px;
+  /* Ajusta el padding para hacer el botón más grande */
+  font-size: 12px;
+  /* Ajusta el tamaño de fuente para hacer el texto más grande */
 }
 
 .main-button:hover {
@@ -96,4 +99,9 @@
 .centrado {
   text-align: center;
   justify-content: center;
+}
+
+.forgot-password a {
+  text-decoration: none;
+  color: #e4800e;
 }
