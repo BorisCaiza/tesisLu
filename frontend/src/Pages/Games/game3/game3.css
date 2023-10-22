@@ -1,0 +1,11 @@
+.board {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 7px solid black;
+    border-radius: 15px;
+}
