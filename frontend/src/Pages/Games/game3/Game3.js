@@ -51,22 +51,29 @@ const Game3 = () => {
         }
     };
 
-
     return (
-        <div>
-            <div className="board">
-                <div>
-                    <h1>{targetWord && targetWord.name}</h1>
-                    <h3>Rhymes with...</h3>
+        <div className="board">
+            <div>
+                <h1>{targetWord && targetWord.name}</h1>
+                <h3>Rhymes with...</h3>
+                <div className="button-container">
                     {orden === 1 ? (
                         <>
-                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>{optionIncorrectSelect && optionIncorrectSelect.name}</button>
-                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>{optionCorrectSelect && optionCorrectSelect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>
+                                <img src="ruta_imagen_incorrecta.png" alt="Option Incorrect" />
+                            </button>
+                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>
+                                <img src="ruta_imagen_correcta.png" alt="Option Correct" />
+                            </button>
                         </>
                     ) : (
                         <>
-                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>{optionCorrectSelect && optionCorrectSelect.name}</button>
-                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>{optionIncorrectSelect && optionIncorrectSelect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>
+                                <img src="ruta_imagen_correcta.png" alt="Option Correct" />
+                            </button>
+                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>
+                                <img src="ruta_imagen_incorrecta.png" alt="Option Incorrect" />
+                            </button>
                         </>
                     )}
                 </div>
