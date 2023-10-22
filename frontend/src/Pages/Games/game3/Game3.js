@@ -5,16 +5,16 @@ import { getrhymingWords } from '../../../services/datosServices';
 
 const Game3 = () => {
     const [targetWord, setTargetWord] = useState(null);
-    const [optionCorrect, setOptionCorrect] = useState(null);
-    const [optionIncorrect, setOptionIncorrect] = useState(null);
+    const [optionCorrectSelect, setOptionCorrectSelect] = useState(null);
+    const [optionIncorrectSelect, setOptionIncorrectSelect] = useState(null);
     const [gameResult, setGameResult] = useState(null);
     const orden = Math.random() < 0.5 ? 1 : 2;
 
     const getDatos = () => {
-        const [randomWord, randomWordOption1, randomWordOption2] = getrhymingWords();
+        const [randomWord, optionCorrect, optionIncorrect] = getrhymingWords();
         setTargetWord(randomWord);
-        setOptionCorrect(randomWordOption1);
-        setOptionIncorrect(randomWordOption2);
+        setOptionCorrectSelect(optionCorrect);
+        setOptionIncorrectSelect(optionIncorrect);
     };
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Game3 = () => {
     }, []);
 
     const handleOptionSelect = (selectedOption) => {
-        if (selectedOption === optionCorrect) {
+        if (selectedOption.name === optionCorrectSelect.name) {
             // El jugador ha ganado
             Swal.fire({
                 title: '¡Ganaste!',
@@ -60,13 +60,13 @@ const Game3 = () => {
                     <h3>Rhymes with...</h3>
                     {orden === 1 ? (
                         <>
-                            <button onClick={() => handleOptionSelect(optionIncorrect)}>{optionCorrect && optionCorrect.name}</button>
-                            <button onClick={() => handleOptionSelect(optionCorrect)}>{optionIncorrect && optionIncorrect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>{optionIncorrectSelect && optionIncorrectSelect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>{optionCorrectSelect && optionCorrectSelect.name}</button>
                         </>
                     ) : (
                         <>
-                            <button onClick={() => handleOptionSelect(optionIncorrect)}>{optionIncorrect && optionIncorrect.name}</button>
-                            <button onClick={() => handleOptionSelect(optionCorrect)}>{optionCorrect && optionCorrect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>{optionCorrectSelect && optionCorrectSelect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>{optionIncorrectSelect && optionIncorrectSelect.name}</button>
                         </>
                     )}
                 </div>

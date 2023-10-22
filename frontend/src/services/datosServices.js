@@ -433,18 +433,18 @@ export const wordsWithRhymesDataService = () => {
         { id: 2, name: "pato", rimas: [1, 5], image: "https://ejemplo.com/pato.jpg" },
         { id: 3, name: "perro", rimas: [4], image: "https://ejemplo.com/perro.jpg" },
         { id: 4, name: "cerro", rimas: [3], image: "https://ejemplo.com/cerro.jpg" },
-        { id: 5, name: "zapato", rimas: [1, 2], image: "https://ejemplo.com/raton.jpg" },
-        { id: 6, name: "colifor", rimas: [15, 16], image: "https://ejemplo.com/tigre.jpg" },
-        { id: 7, name: "elefante", rimas: [8], image: "https://ejemplo.com/elefante.jpg" },
-        { id: 8, name: "rinoceronte", rimas: [7], image: "https://ejemplo.com/rinoceronte.jpg" },
+        { id: 5, name: "zapato", rimas: [1, 2], image: "https://ejemplo.com/zapato.jpg" },
+        { id: 6, name: "colifor", rimas: [7, 8], image: "https://ejemplo.com/colifor.jpg" },
+        { id: 7, name: "elefante", rimas: [6], image: "https://ejemplo.com/elefante.jpg" },
+        { id: 8, name: "rinoceronte", rimas: [6], image: "https://ejemplo.com/rinoceronte.jpg" },
         { id: 9, name: "serpiente", rimas: [10], image: "https://ejemplo.com/serpiente.jpg" },
         { id: 10, name: "camaleón", rimas: [9], image: "https://ejemplo.com/camaleon.jpg" },
         { id: 11, name: "ventana", rimas: [12], image: "https://ejemplo.com/ventana.jpg" },
         { id: 12, name: "ballena", rimas: [11], image: "https://ejemplo.com/ballena.jpg" },
         { id: 13, name: "carta", rimas: [14], image: "https://ejemplo.com/carta.jpg" },
         { id: 14, name: "tarta", rimas: [13], image: "https://ejemplo.com/tarta.jpg" },
-        { id: 15, name: "flor", rimas: [16, 6], image: "https://ejemplo.com/flor.jpg" },
-        { id: 16, name: "color", rimas: [15], image: "https://ejemplo.com/olor.jpg" },
+        { id: 15, name: "flor", rimas: [16, 17], image: "https://ejemplo.com/flor.jpg" },
+        { id: 16, name: "color", rimas: [15], image: "https://ejemplo.com/color.jpg" },
         { id: 17, name: "mesa", rimas: [18], image: "https://ejemplo.com/mesa.jpg" },
         { id: 18, name: "fresa", rimas: [17], image: "https://ejemplo.com/fresa.jpg" },
         { id: 19, name: "vino", rimas: [20], image: "https://ejemplo.com/vino.jpg" },
@@ -453,9 +453,9 @@ export const wordsWithRhymesDataService = () => {
         { id: 22, name: "frasa", rimas: [21], image: "https://ejemplo.com/frasa.jpg" },
         { id: 23, name: "rojo", rimas: [24], image: "https://ejemplo.com/rojo.jpg" },
         { id: 24, name: "pojo", rimas: [23], image: "https://ejemplo.com/pojo.jpg" },
-        { id: 25, name: "sol", rimas: [26], image: "https://ejemplo.com/sol.jpg" },
+        { id: 25, name: "sol", rimas: [26, 27], image: "https://ejemplo.com/sol.jpg" },
         { id: 26, name: "col", rimas: [25], image: "https://ejemplo.com/col.jpg" },
-        { id: 27, name: "mesa", rimas: [28], image: "https://ejemplo.com/mesa.jpg" },
+        { id: 27, name: "mesa", rimas: [25, 28], image: "https://ejemplo.com/mesa.jpg" },
         { id: 28, name: "presa", rimas: [27], image: "https://ejemplo.com/presa.jpg" },
         { id: 29, name: "café", rimas: [30], image: "https://ejemplo.com/cafe.jpg" },
         { id: 30, name: "gafe", rimas: [29], image: "https://ejemplo.com/gafe.jpg" },
@@ -463,8 +463,6 @@ export const wordsWithRhymesDataService = () => {
         { id: 32, name: "pago", rimas: [31], image: "https://ejemplo.com/pago.jpg" },
         { id: 33, name: "nube", rimas: [34], image: "https://ejemplo.com/nube.jpg" },
         { id: 34, name: "tubo", rimas: [33], image: "https://ejemplo.com/tubo.jpg" },
-        { id: 35, name: "flor", rimas: [36], image: "https://ejemplo.com/flor.jpg" },
-        { id: 36, name: "amor", rimas: [35], image: "https://ejemplo.com/amor.jpg" },
         { id: 37, name: "luz", rimas: [38], image: "https://ejemplo.com/luz.jpg" },
         { id: 38, name: "cruz", rimas: [37], image: "https://ejemplo.com/cruz.jpg" },
         { id: 39, name: "río", rimas: [40], image: "https://ejemplo.com/rio.jpg" },
@@ -480,8 +478,8 @@ export const wordsWithRhymesDataService = () => {
         { id: 49, name: "sol", rimas: [50], image: "https://ejemplo.com/sol.jpg" },
         { id: 50, name: "clamor", rimas: [49], image: "https://ejemplo.com/clamor.jpg" }
     ];
-
 }
+
 
 export const getrhymingWords = () => {
     // Llamar al servicio para obtener las palabras que riman
@@ -491,16 +489,30 @@ export const getrhymingWords = () => {
     const randomIndex = Math.floor(Math.random() * rhymingWords.length);
 
     const randomWord = rhymingWords[randomIndex];
-    
-    const randomIndex2 = Math.floor(Math.random() * randomWord.rimas.length);
 
-    const randomWordOption1 = rhymingWords[randomWord.rimas[randomIndex2] -1];
-    console.log(randomWordOption1);
+    // Seleccionar una palabra aleatoria que rime con la palabra inicial
+    const validRimas = randomWord.rimas.map(rimaIndex => {
+        return rhymingWords.find(word => word.id === rimaIndex);
+    });
+
+    if (validRimas.length === 0) {
+        // Si no hay rimas válidas, simplemente elige una palabra al azar
+        const randomIndex2 = Math.floor(Math.random() * rhymingWords.length);
+        const optionCorrect = rhymingWords[randomIndex2];
+        return [randomWord, optionCorrect];
+    }
+
+    // Elige una rima válida al azar
+    const randomIndex2 = Math.floor(Math.random() * validRimas.length);
+    const optionCorrect = validRimas[randomIndex2];
+
+    // Elige otra palabra que no sea la palabra original ni la opción 1
     let randomIndex3;
     do {
         randomIndex3 = Math.floor(Math.random() * rhymingWords.length);
-    } while (randomIndex3 === randomIndex2 || randomIndex3 === randomIndex2);
-    const randomWordOption2 = rhymingWords[randomIndex3];
-console.log(randomWord, randomWordOption1, randomWordOption2);
-    return [randomWord, randomWordOption1, randomWordOption2];
+    } while (randomIndex3 === randomIndex || randomIndex3 === randomIndex2);
+    const optionIncorrect = rhymingWords[randomIndex3];
+
+    console.log(randomWord, optionCorrect, optionIncorrect);
+    return [randomWord, optionCorrect, optionIncorrect];
 }
