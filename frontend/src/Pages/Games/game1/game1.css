@@ -1,4 +1,4 @@
-.board {
+.board-game1 {
     width: 400px;
     height: 400px;
     background-color: white;
@@ -11,8 +11,8 @@
 }
 
 .piece {
-    width: 300px;
-    height: 300px;
+    width: auto;
+    height: auto;
     background-color: rgba(255, 255, 255, 0);
     display: flex;
     justify-content: center;
@@ -26,8 +26,8 @@
 }
 
 .target {
-    width: 300px;
-    height: 300px;
+    width: auto;
+    height: auto;
     background-color: rgba(0, 0, 0, 0.016);
     display: inline;
     justify-content: center;

@@ -61,7 +61,7 @@ const Game2 = () => {
     return (
         <div>
             <DndProvider backend={HTML5Backend}>
-                <div className="targetWord">targetWord</div>
+                <div className=".target-word ">targetWord</div>
                 <div className="center">
                     <div className="title">
                         {word ? word.word : ''}
@@ -76,7 +76,7 @@ const Game2 = () => {
                 </div>
                 {!showPlayAgainButton ? (
                     <div
-                        className="piece"
+                        className="piece-word"
                         onDragStart={(e) => e.dataTransfer.setData('word', word ? word.word : '')}
                         draggable
                     >

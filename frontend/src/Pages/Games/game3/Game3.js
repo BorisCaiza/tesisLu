@@ -55,7 +55,7 @@ const Game3 = () => {
         <div className="board">
             <div>
                 <h1>{targetWord && targetWord.name}</h1>
-                <h3>Rhymes with...</h3>
+                <h3>Rima con...</h3>
                 <div className="button-container">
                     {orden === 1 ? (
                         <>

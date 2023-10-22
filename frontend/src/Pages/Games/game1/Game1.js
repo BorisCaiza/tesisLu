@@ -32,8 +32,8 @@ const Game1 = () => {
                 randomizedLetters.push({
                     id: randomizedLetters.length + 1,
                     letter: randomLetter,
-                    left: Math.random() * 400 + 100, 
-                    top: Math.random() * 400 + 100,
+                    left: Math.random() * 400,
+                    top: Math.random() * 400,
                 });
             }
         }
@@ -89,6 +89,16 @@ const Game1 = () => {
                 setBestTime(time);
             }
 
+            // Mueve la pieza a otro lugar cuando se gana
+            const updatedLetters = letters.map((letterData) => {
+                if (letterData.letter === droppedLetter) {
+                    letterData.left = Math.random() * 400;
+                    letterData.top = Math.random() * 400;
+                }
+                return letterData;
+            });
+            setLetters(updatedLetters);
+
             Swal.fire({
                 html: `<div>
                     <p style="font-size: 40px">⭐⭐⭐</p>
@@ -128,10 +138,11 @@ const Game1 = () => {
         }
     };
 
+
     return (
         <div>
             <DndProvider backend={HTML5Backend}>
-                <div className="board">
+                <div className="board-game1">
                     {showPlayButton ? (
                         <button onClick={handlePlay} className="play-button">
                             Jugar
@@ -156,11 +167,12 @@ const Game1 = () => {
                                         left: `${letterData.left}px`,
                                         top: `${letterData.top}px`,
                                     }}
-                                    onDragStart={(e) => e.dataTransfer.setData('letter', letterData.letter)}
-                                    onDragEnd={(e) => {
-                                        letters[index].left = e.clientX;
-                                        letters[index].top = e.clientY;
-                                    } }
+                                    onDragStart={(e) => {
+                                        e.dataTransfer.setData('letter', letterData.letter);
+                                        letters[index].top = e.clientx
+                                        letters[index].left = e.clientY
+                                    }
+                                    }
                                     draggable
                                 >
                                     <span>{letterData.letter}</span>
