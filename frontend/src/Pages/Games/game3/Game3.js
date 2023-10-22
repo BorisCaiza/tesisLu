@@ -5,22 +5,52 @@ import { getrhymingWords } from '../../../services/datosServices';
 
 const Game3 = () => {
     const [targetWord, setTargetWord] = useState(null);
-    const [option1, setOption1] = useState(null);
-    const [option2, setOption2] = useState(null);
+    const [optionCorrect, setOptionCorrect] = useState(null);
+    const [optionIncorrect, setOptionIncorrect] = useState(null);
     const [gameResult, setGameResult] = useState(null);
-    const orden = Math.random() < 0.5 ? 1 : 2; // Corrected the random number comparison
+    const orden = Math.random() < 0.5 ? 1 : 2;
 
     const getDatos = () => {
         const [randomWord, randomWordOption1, randomWordOption2] = getrhymingWords();
         setTargetWord(randomWord);
-        setOption1(randomWordOption1);
-        setOption2(randomWordOption2);
+        setOptionCorrect(randomWordOption1);
+        setOptionIncorrect(randomWordOption2);
     };
 
-    // Load rhyming words when the component is mounted
     useEffect(() => {
         getDatos();
     }, []);
+
+    const handleOptionSelect = (selectedOption) => {
+        if (selectedOption === optionCorrect) {
+            // El jugador ha ganado
+            Swal.fire({
+                title: '¡Ganaste!',
+                text: '¡Bien hecho! La palabra rima correctamente.',
+                icon: 'success',
+                showCancelButton: true,
+                cancelButtonText: 'Volver a jugar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    getDatos();
+                }
+            });
+        } else {
+            // El jugador ha perdido
+            Swal.fire({
+                title: 'Perdiste',
+                text: 'La palabra seleccionada no rima correctamente.',
+                icon: 'error',
+                showCancelButton: true,
+                cancelButtonText: 'Volver a jugar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    getDatos();
+                }
+            });
+        }
+    };
+
 
     return (
         <div>
@@ -30,13 +60,13 @@ const Game3 = () => {
                     <h3>Rhymes with...</h3>
                     {orden === 1 ? (
                         <>
-                            <button>{option1 && option1.name}</button>
-                            <button>{option2 && option2.name}</button>
+                            <button onClick={() => handleOptionSelect(optionIncorrect)}>{optionCorrect && optionCorrect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionCorrect)}>{optionIncorrect && optionIncorrect.name}</button>
                         </>
                     ) : (
                         <>
-                            <button>{option2 && option2.name}</button>
-                            <button>{option1 && option1.name}</button>
+                            <button onClick={() => handleOptionSelect(optionIncorrect)}>{optionIncorrect && optionIncorrect.name}</button>
+                            <button onClick={() => handleOptionSelect(optionCorrect)}>{optionCorrect && optionCorrect.name}</button>
                         </>
                     )}
                 </div>
