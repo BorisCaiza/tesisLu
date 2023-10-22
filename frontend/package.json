@@ -19,13 +19,9 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.11.0",
-    "react-modal": "^3.16.1",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "sweetalert2": "^11.4.23",
-    "universal-cookie": "^6.1.1",
-    "validator": "^13.11.0"
+    "sweetalert2": "^11.4.23"
   },
   "scripts": {
     "start": "react-scripts start",

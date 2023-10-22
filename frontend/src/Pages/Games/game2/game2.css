@@ -1,0 +1,84 @@
+/* Estilos para el contenedor principal */
+.board {
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    display: flex;
+    border: 7px solid black;
+    border-radius: 15px;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilos para la esquina superior izquierda */
+.top-left {
+    padding: 10px;
+}
+
+/* Estilos para la palabra que se mueve a la derecha de la pantalla */
+.wordToMove {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Estilos para el centro */
+.center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilos para el título */
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Estilos para el área del botón de altavoz (personalizar según tus necesidades) */
+.speaker-button {
+    /* Agregar estilos para el botón de altavoz aquí */
+}
+
+/* Estilos para el área de separación de sílabas */
+.syllable-separation {
+    text-align: center;
+}
+
+/* Estilos para la pieza arrastrable (personalizar según tus necesidades) */
+.piece {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    border-radius: 10%;
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+}
+.target {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.016);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.344);
+    top: 0%;
+    left: 0%;
+}
+.altavoz-btn {
+    cursor: pointer;
+    height: 100px;
+}

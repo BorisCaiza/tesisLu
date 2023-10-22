@@ -29,7 +29,7 @@
     width: 300px;
     height: 300px;
     background-color: rgba(0, 0, 0, 0.016);
-    display: flex;
+    display: inline;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -38,10 +38,11 @@
     font-size: 300px;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.344);
+    
 }
 
 .play-button {
-    background-color: #3498db;
+    background-color: #e4800e;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -63,5 +64,5 @@
 
 .stats span {
     font-weight: bold;
-    color: #3498db;
+    color: #e4800e;
 }
