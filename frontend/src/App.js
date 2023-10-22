@@ -10,6 +10,8 @@ import Games from './Pages/Games/Games';
 import Game1 from './Pages/Games/game1/Game1';
 import Game2 from './Pages/Games/game2/Game2';
 import Game3 from './Pages/Games/game3/Game3';
+import LayoutGame from './Pages/Games/layoutGame/LayoutGame';
+
 function App() {
 
 
@@ -33,6 +35,7 @@ function App() {
       <Route path='/games/game1' element={<Game1 />} />
       <Route path='/games/game2' element={<Game2 />} />
       <Route path='/games/game3' element={<Game3 />} />
+      <Route path='/games/game' element={<LayoutGame />} />
     </Routes>
 
 

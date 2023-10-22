@@ -1,0 +1,43 @@
+/* Estilo para el fondo de ladrillos */
+.brick-wall {
+    background-image: url('../../../assets/images/bg-zoo.png');
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+/* Estilo para el componente central */
+.center-component {
+    background-color: white;
+    background-size: cover;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* Estilo para el botón de regreso */
+.back-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    
+}
+
+/* Estilo para el botón naranja más grande con texto negro */
+.large-orange-button {
+    background-color: orange;
+    color: black; /* Cambia el color del texto a negro */
+    border: none;
+    padding: 20px 40px;
+    border-radius: 5px;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilo para el efecto de sombra en el botón */
+.large-orange-button:hover {
+    box-shadow: 2px 2px 5px #888888;
+}
