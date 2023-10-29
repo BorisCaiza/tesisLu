@@ -5,7 +5,6 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
 
-    name: { type: String },
     email: { type: String, require: [true, 'Email requerido'] },
     password: { type: String, require: [true, 'Contraseña requerido'] },
     sesion: {
@@ -15,7 +14,9 @@ const UserSchema = new Schema({
         Bloqueado: { type: Boolean, default: false }
     },
 
-    refreshTokens: [{ type: String }],
+    tokens: [{ type: String }]
+
+
 
 
 

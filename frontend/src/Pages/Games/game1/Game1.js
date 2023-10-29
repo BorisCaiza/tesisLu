@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Swal from 'sweetalert2';
 import './game1.css';
+import api from "../../../api/api"
+import { AuthContext } from '../../../Context/AuthContext';
 
 const Game1 = () => {
+    const { user } = useContext(AuthContext);
     const [letters, setLetters] = useState([]);
     const [targetLetter, setTargetLetter] = useState('');
     const [gameResult, setGameResult] = useState(null);
@@ -14,6 +17,53 @@ const Game1 = () => {
     const [showRules, setShowRules] = useState(true);
     const [wins, setWins] = useState(0);
     const [bestTime, setBestTime] = useState(null);
+
+
+    useEffect(() => {
+        getScore()
+    }, []);
+
+    const getScore = async () => {
+
+        const score = {
+
+            token: user.token,
+            game: "game1"
+
+        }
+
+        try {
+
+            const response = await api.post('/getScore', score)
+
+            if (response.status === 200) {
+                setBestTime(response.data.game.bestTime)
+            }
+        } catch (error) {
+
+        }
+
+    }
+
+    const saveScore = async () => {
+
+
+
+
+        const score = {
+            bestTime: 15,
+            game: "game1",
+            token: user.token
+        }
+
+        try {
+
+            const response = await api.post('/score', score)
+
+        } catch (error) {
+
+        }
+    }
 
     const generateRandomLetter = () => {
         const randomCharCode = Math.floor(Math.random() * 26) + 65;
@@ -115,6 +165,8 @@ const Game1 = () => {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         handlePlay();
+                        saveScore();
+
                     }
                 });
             });

@@ -28,9 +28,9 @@ UserCtrl.login = async (req, res) => {
 
                 const token = await tokenSign(user)
                 // Refresh token
-                const refreshToken = await tokenRefreshSign(user)
+                //const refreshToken = await tokenRefreshSign(user)
 
-                user.refreshTokens.push(refreshToken);
+                user.tokens.push(token);
 
                 user.sesion.Bloqueado = false
                 user.sesion.nIntentos = 0
@@ -40,11 +40,8 @@ UserCtrl.login = async (req, res) => {
                     status: 'Bienvenido',
                     id: user._id,
                     token,
-                    refreshToken,
                     email: user.email,
-                    perfil: user.perfil,
-                    permisos: user.permisos,
-                    name: user.name
+
                 })
 
             } else {
@@ -78,11 +75,13 @@ UserCtrl.login = async (req, res) => {
                 const token = await tokenSign(user)
 
                 // Refresh token
-                const refreshToken = await tokenRefreshSign(user)
+                //const refreshToken = await tokenRefreshSign(user)
 
                 // user.arrayRefreshTokens.push(refreshToken)
-                user.refreshTokens.push(refreshToken);
+                user.tokens.push(token);
                 await user.save()
+
+
                 const hora = Date.now()
                 if (hora > user.sesion.HoraDesbloqueo) {
                     user.sesion.Bloqueado = false
@@ -95,13 +94,8 @@ UserCtrl.login = async (req, res) => {
                         res.status(200).send({
                             status: 'Bienvenido',
                             id: user._id,
-                            name: user.name,
                             token,
-                            refreshToken,
-                            permisos: user.permisos,
                             email: user.email,
-                            perfil: user.perfil,
-                            role: user.role
                         })
 
                     } else {
@@ -127,7 +121,7 @@ UserCtrl.login = async (req, res) => {
 };
 
 UserCtrl.register = async (req, res) => {
-    const { name, email, password, perfil } = req.body;
+    const { email, password } = req.body;
 
     try {
         // Comprueba si el correo electrónico ya está registrado
@@ -142,10 +136,9 @@ UserCtrl.register = async (req, res) => {
 
         // Crea un nuevo usuario con permisos
         const newUser = new userModel({
-            name,
             email,
             password,
-            perfil
+
         });
 
         // Hashea la contraseña antes de guardarla en la base de datos

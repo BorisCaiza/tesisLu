@@ -11,32 +11,35 @@ import Game1 from './Pages/Games/game1/Game1';
 import Game2 from './Pages/Games/game2/Game2';
 import Game3 from './Pages/Games/game3/Game3';
 import LayoutGame from './Pages/Games/layoutGame/LayoutGame';
+import Header from './Compoments/Header';
 
 function App() {
 
 
   const { user } = useContext(AuthContext);
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (!user) {
       navigate('/');
     }
-  }, [user]);*/
+  }, [user]);
 
 
   return (
+    <>
 
-    <Routes>
-      <Route index element={<Login />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/forgot-password' element={<ForgetPassword />} />
-      <Route path='/games' element={<Games />} />
-      <Route path='/games/game1' element={<Game1 />} />
-      <Route path='/games/game2' element={<Game2 />} />
-      <Route path='/games/game3' element={<Game3 />} />
-      <Route path='/games/game' element={<LayoutGame />} />
-    </Routes>
+      <Routes>
+        <Route index element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgetPassword />} />
+        <Route path='/games' element={<Games />} />
+        <Route path='/games/game1' element={<Game1 />} />
+        <Route path='/games/game2' element={<Game2 />} />
+        <Route path='/games/game3' element={<Game3 />} />
+        <Route path='/games/game' element={<LayoutGame />} />
+      </Routes>
+    </>
 
 
   );

@@ -40,6 +40,7 @@ app.get('/api/prueba', (req, res) => {
 
 
 app.use('/api', require('./routes/User.route'));
+app.use('/api', require('./routes/Score.route'));
 
 
 app.get('/api', (req, res) => {
