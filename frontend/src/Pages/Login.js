@@ -19,17 +19,36 @@ import {
 } from '@mui/material';
 import avatar from "../Images/avataaars.svg"
 import "./login.css"
+import { useNavigate } from "react-router-dom";
+import api from "../api/api"
+import { AuthContext } from "../Context/AuthContext";
+
+
 
 function Login() {
+
+
+    const navigator = useNavigate()
+
+    const { error, login } = useContext(AuthContext);
+
 
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const authSubmitHandler = (e) => {
+    const authSubmitHandler = async (e) => {
         e.preventDefault();
-        // Aquí puedes agregar la lógica de autenticación si es necesario
+
+        const user = { email, password }
+
+        await login(user)
+
+
+
+
+
     };
 
 
@@ -106,11 +125,16 @@ function Login() {
                                         Ingresar
                                     </button>
                                 </div>
-                                <p className="forgot-password text-right mt-2 "> <a href="/register">Registrate Aquí</a></p>
+                                <p className="forgot-password text-right mt-2" onClick={(e) => {
+                                    e.preventDefault();
+                                    navigator('/register'); // Utiliza la API de historial de React Router
+                                }}>Registrate Aquí</p>
 
-                                <p className="forgot-password text-right mt-2">
-                                    ¿Olvidaste tu <a href="/forgot-password">contraseña?</a>
-                                </p>
+
+                                <p className="forgot-password text-right mt-2" onClick={(e) => {
+                                    e.preventDefault();
+                                    navigator('/forgot-password'); // Utiliza la API de historial de React Router
+                                }}>¿Olvidaste tu contraseña?</p>
                             </div>
                         </Form >
                     </div>

@@ -17,17 +17,58 @@ import {
     IconButton,
     InputAdornment
 } from '@mui/material';
+import api from "../api/api"
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+
+    const navigator = useNavigate()
 
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    const authSubmitHandler = (e) => {
+    const authSubmitHandler = async (e) => {
         e.preventDefault();
-        // Aquí puedes agregar la lógica de autenticación si es necesario
+
+
+        const register = {
+            email,
+            password
+        }
+
+
+
+        try {
+
+            const response = await api.post('/user/register', register)
+
+            Swal.fire({
+                icon: 'success',
+                iconHtml: '<img src="https://www.easy-gst.in/wp-content/uploads/2017/07/success-icon-10.png" alt="Icono personalizado" width="98">',
+                title: "Por favor inicia sesión!",
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigator("/");
+                }
+            });
+
+        } catch (error) {
+
+            console.log("error", error.response.data.message)
+
+            Swal.fire({
+                icon: 'error',
+                iconHtml: '<img src="https://www.easy-gst.in/wp-content/uploads/2017/07/error-icon-10.png" alt="Icono personalizado" width="98">',
+                title: error.response.data.message,
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+            })
+
+        }
     };
 
 

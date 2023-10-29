@@ -21,7 +21,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "sweetalert2": "^11.4.23"
+    "sweetalert2": "^11.4.23",
+    "universal-cookie": "^6.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

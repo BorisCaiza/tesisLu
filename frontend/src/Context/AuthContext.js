@@ -68,6 +68,9 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+
+    /*
+
     useEffect(() => {
         if (user && user.refreshToken) {
             const refreshTokenInterval = setInterval(refreshToken, 3 * 60 * 1000); // Actualizar el token cada 15 minutos
@@ -75,7 +78,7 @@ const AuthProvider = ({ children }) => {
                 clearInterval(refreshTokenInterval);
             };
         }
-    }, [user]);
+    }, [user]);*/
 
     useEffect(() => {
         setUserToStorage(user);
@@ -84,7 +87,7 @@ const AuthProvider = ({ children }) => {
     const login = async (values) => {
         try {
             const response = await api.post('/user/login', values);
-            console.log("responmse", response.data)
+
             if (response.status === 200) {
                 setUser(response.data);
                 setUserToStorage(response.data);
@@ -99,7 +102,7 @@ const AuthProvider = ({ children }) => {
                     timer: 1500
                 })
 
-                navigator("/local")
+                navigator("/games")
             } else {
 
             }
@@ -131,7 +134,7 @@ const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            const res = await api.post('/user/logout', { refreshToken: user.refreshToken });
+            const res = await api.post('/user/logout', { token: user.token });
             console.log(res);
         } catch (error) {
             console.log(error);
