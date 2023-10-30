@@ -23,6 +23,20 @@ const Game1 = () => {
         getScore()
     }, []);
 
+    useEffect(() => {
+        let interval;
+        if (isRunning) {
+            interval = setInterval(() => {
+                setTime((prevTime) => prevTime + 1);
+            }, 1000);
+        } else {
+            clearInterval(interval);
+        }
+        return () => {
+            clearInterval(interval);
+        };
+    }, [isRunning]);
+
     const getScore = async () => {
 
         const score = {
@@ -95,19 +109,7 @@ const Game1 = () => {
         setGameResult(null);
     };
 
-    useEffect(() => {
-        let interval;
-        if (isRunning) {
-            interval = setInterval(() => {
-                setTime((prevTime) => prevTime + 1);
-            }, 1000);
-        } else {
-            clearInterval(interval);
-        }
-        return () => {
-            clearInterval(interval);
-        };
-    }, [isRunning]);
+
 
     const handlePlay = () => {
         if (showRules) {
