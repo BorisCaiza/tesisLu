@@ -109,10 +109,23 @@ ScoreCtrl.getScore = async (req, res) => {
 
             if (gameFinded) {
 
-                res.status(200).send({
-                    status: true,
-                    game: gameFinded
-                })
+                if (gameFinded.score > 0) {
+
+                    res.status(200).send({
+                        status: true,
+                        game: gameFinded
+                    })
+                } else {
+
+                    gameFinded.score = 0
+
+                    res.status(200).send({
+                        status: true,
+                        game: gameFinded
+                    })
+                }
+
+
             } else {
 
                 res.status(400).send({

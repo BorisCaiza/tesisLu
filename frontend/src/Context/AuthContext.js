@@ -102,7 +102,7 @@ const AuthProvider = ({ children }) => {
                     timer: 1500
                 })
 
-                navigator("/games")
+                navigator("/")
             } else {
 
             }

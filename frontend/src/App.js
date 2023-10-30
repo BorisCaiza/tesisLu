@@ -12,6 +12,7 @@ import Game2 from './Pages/Games/game2/Game2';
 import Game3 from './Pages/Games/game3/Game3';
 import LayoutGame from './Pages/Games/layoutGame/LayoutGame';
 import Header from './Compoments/Header';
+import NewPassword from './Pages/NewPassword';
 
 function App() {
 
@@ -30,14 +31,18 @@ function App() {
     <>
 
       <Routes>
-        <Route index element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgetPassword />} />
-        <Route path='/games' element={<Games />} />
-        <Route path='/games/game1' element={<Game1 />} />
-        <Route path='/games/game2' element={<Game2 />} />
-        <Route path='/games/game3' element={<Game3 />} />
-        <Route path='/games/game' element={<LayoutGame />} />
+        {!user && <Route index element={<Login />} />}
+        {!user && <Route path='/register' element={<Register />} />}
+        {!user && <Route path='/forgot-password' element={<ForgetPassword />} />}
+        {user && <Route index element={<Games />} />}
+        {user && <Route path='/games/game1' element={<Game1 />} />}
+        {user && <Route path='/games/game2' element={<Game2 />} />}
+        {user && <Route path='/games/game3' element={<Game3 />} />}
+        {user && <Route path='/games/game' element={<LayoutGame />} />}
+        {!user && <Route path="/newPassword/:token" element={<NewPassword />} />}
+        <Route path="*" element={<h1>No hay la página</h1>} />
+
+
       </Routes>
     </>
 

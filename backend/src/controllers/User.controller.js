@@ -4,6 +4,7 @@ const userModel = require('../model/User.model')
 const JWT = require('jsonwebtoken');
 const { tokenSign, tokenRefreshSign } = require('../helpers/token')
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer')
 
 UserCtrl.login = async (req, res) => {
 
@@ -354,6 +355,198 @@ UserCtrl.deleteUser = async (req, res) => {
 };
 
 
+
+UserCtrl.forgotPassword = async (req, res) => {
+
+
+    console.log("entree")
+
+
+    let { email } = req.body
+
+    let user, verificationLink, token
+
+    if (!email) {
+        res.status(200).send({
+            status: false,
+            message: "No existe el email"
+        })
+    }
+
+    try {
+
+        user = await userModel.findOne({ email: email })
+
+        if (!user) {
+            res.status(200).send({
+                status: false,
+                message: "No está registrado"
+            })
+        }
+
+
+
+        token = JWT.sign({ userId: user._id }, "RESET", { expiresIn: "10m" })
+
+        verificationLink = `http://localhost:3000/newPassword/${token}`
+
+
+
+
+    } catch (error) {
+
+        res.status(200).send({
+            status: false,
+            message: "Algo ocurrió mal"
+        })
+
+    }
+
+
+    try {
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+                user: process.env.EMAIL, // generated ethereal user
+                pass: process.env.TOKEN_EMAIL, // generated ethereal password
+            },
+        });
+
+        const mailOptions = {
+            from: "remitente", // sender address
+            to: email, // list of receivers
+            subject: "Recuperación de contraseña", // Subject line
+            //text: "Hello world?", // plain text body
+            html: `Hola esté es el servicio de recuperación de contraseña de promedicalTech. <br> 
+            Recuerda que tienes únicamente 10 minutos para cambiar tu contraseña. <br>
+            <a href=${verificationLink}> da click aquí para recuperar tu contraseña <a>`, // html body
+            //text: "Hola mundo"
+        }
+
+        transporter.sendMail(mailOptions, async (error, info) => {
+            // console.log("entre");
+
+            if (error) {
+                console.log("entre al error");
+                res.status(200).send({ error: error.message, message: "Algo courrió mal" })
+
+            }
+
+        })
+
+        user.resetToken = token
+
+        await user.save()
+
+
+        res.status(200).send({
+            status: true,
+            message: "Email envíado verifica tu correo electrónico"
+        })
+
+
+    } catch (error) {
+        console.log(error)
+
+        res.status(200).send({
+            status: false,
+            message: "Error"
+        })
+
+    }
+
+}
+
+UserCtrl.checkToken = async (req, res) => {
+
+
+
+    let resetToken = req.headers.reset
+
+    let user
+
+    if (!resetToken) {
+        res.status(200).send({
+            status: false,
+            message: "Token Requerido"
+        })
+    } else {
+
+        try {
+
+            user = await userModel.findOne({ resetToken: resetToken })
+
+            if (!user) {
+                res.status(200).send({
+                    status: false,
+                    message: "No existe el usuario"
+                })
+            } else {
+                res.status(200).send({
+                    status: true,
+                    email: user.email
+                })
+            }
+
+
+
+        } catch (error) {
+
+            res.status(200).send({
+                status: false,
+                message: "Algo ocurrió mal"
+            })
+
+        }
+    }
+}
+
+UserCtrl.newPassword = async (req, res) => {
+
+    const { newPassword } = req.body
+
+    const resetToken = req.headers.reset
+
+    let user, jwtPayload
+
+    if (!resetToken && !newPassword) {
+
+        res.status(200).send({
+            status: false,
+            message: "Token  y nueva contraseña requeridos"
+        })
+    }
+
+    try {
+
+        jwtPayload = JWT.verify(resetToken, "RESET")
+
+        user = await userModel.findOne({ resetToken: resetToken })
+
+        console.log(user)
+
+        user.password = await bcrypt.hash(newPassword, 10)
+
+        await user.save()
+
+        res.status(200).send({
+            status: true,
+            message: "Contraseña Creada"
+        })
+
+
+    } catch (error) {
+        console.log(error)
+        res.status(200).send({
+            status: false,
+            message: "Algo fue mal"
+        })
+
+    }
+}
 
 
 module.exports = UserCtrl;

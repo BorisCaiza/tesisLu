@@ -4,6 +4,20 @@ const userCtrl = require('../controllers/User.controller');
 
 
 
+
+router.post('/user/forgotPassword', userCtrl.forgotPassword)
+
+//cambiar contraseña
+
+router.put("/user/newPassword", userCtrl.newPassword)
+
+//chequearToken 
+
+router.get("/user/checkToken", userCtrl.checkToken)
+
+
+
+
 //crear
 router.post('/user', userCtrl.register);
 //Obtener todos
@@ -23,6 +37,8 @@ router.delete('/user/:id/', userCtrl.deleteUser)
 
 
 router.post('/user/register', userCtrl.register)
+
+
 
 
 

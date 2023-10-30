@@ -17,16 +17,61 @@ import {
     IconButton,
     InputAdornment
 } from '@mui/material';
+import api from "../api/api"
 
 export default function ForgetPassword() {
 
 
     const [email, setEmail] = useState('');
 
-    const authSubmitHandler = (e) => {
-        e.preventDefault();
-        // Aquí puedes agregar la lógica de autenticación si es necesario
-    };
+
+
+
+    const sendEmailAhandler = async event => {
+
+        let user = {
+            email: email
+        }
+
+        event.preventDefault();
+
+        await api.post('/user/forgotPassword', user).then(async (res) => {
+            let status = res.data.status
+            let message = res.data.message
+
+
+            if (status) {
+                Swal.fire({
+                    icon: 'success',
+                    title: message,
+                    showConfirmButton: true,
+
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = `/`;
+                    }
+                })
+
+
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: message,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+
+
+
+
+
+
+
+        })
+
+
+    }
 
 
 
@@ -71,7 +116,7 @@ export default function ForgetPassword() {
 
 
                                 <div className="d-grid gap-2 mt-3">
-                                    <button onClick={authSubmitHandler} className="main-button">
+                                    <button onClick={sendEmailAhandler} className="main-button">
                                         Recuperar
                                     </button>
                                 </div>
