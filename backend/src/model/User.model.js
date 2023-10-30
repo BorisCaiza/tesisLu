@@ -14,7 +14,8 @@ const UserSchema = new Schema({
         Bloqueado: { type: Boolean, default: false }
     },
 
-    tokens: [{ type: String }]
+    tokens: [{ type: String }],
+    resetToken: { type: String }
 
 
 
