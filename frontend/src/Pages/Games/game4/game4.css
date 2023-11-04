@@ -1,0 +1,53 @@
+h1 {
+    font-size: 2rem;
+    margin-top: 20px;
+}
+.message-game {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #27ae60;
+  }
+.board-game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+    border: 7px solid black;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* En tu archivo CSS personalizado o en App.css */
+.card-game {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner-game {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.card.front-game .card-inner-game {
+    transform: rotateY(180deg);
+}
+
+.card-front-game,
+.card-back-game {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    background-image: url('../../../assets/images/back.png');
+    background-size: cover;
+}

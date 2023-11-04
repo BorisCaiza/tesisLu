@@ -21,7 +21,7 @@ function VideoExplicacion() {
         game1: "Segmentación de sonidos",
         game2: "Conciencia de sílabas",
         game3: "Conciencia de rima",
-        game4: "Puzzle"
+        game4: "Juego de Memoria"
     };
     const next = () => {
         navigate("/games")

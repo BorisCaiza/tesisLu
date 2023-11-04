@@ -14,6 +14,7 @@ import LayoutGame from './Pages/Games/layoutGame/LayoutGame';
 import Header from './Compoments/Header';
 import VideoExplicacion from './Pages/Games/VideoExplicacion';
 
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 function App() {
@@ -23,24 +24,30 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
+    if (user) {
       navigate('/');
     }
   }, [user]);
 
   return (
     <>
+      {!user && <Header />}
       <Routes>
-        <Route index element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgetPassword />} />
-        <Route path='/games' element={<Games />} />
-        <Route path='/video/:id' element={<VideoExplicacion />} />
-        <Route path='/games/:id' element={<LayoutGame />} />
+        {user ? (
+          <>
+            <Route index element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/forgot-password' element={<ForgetPassword />} />
+          </>
+        ) : (
+          <>
+            <Route index element={<Games />} />
+            <Route path='/video/:id' element={<VideoExplicacion />} />
+            <Route path='/games/:id' element={<LayoutGame />} />
+          </>
+        )}
       </Routes>
     </>
-
-
   );
 }
 
