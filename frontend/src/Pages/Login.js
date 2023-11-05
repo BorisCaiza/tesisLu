@@ -62,18 +62,10 @@ function Login() {
 
     return (
         <div className='container-fluid-login  background'>
-
-
             <div className='row justify-content-center'>
-
                 <div className='col-sm'>
-
-
-
                     <h1 className='title mb-3'>Bienvenidos</h1>
-
                     <div className="center">
-
                         <Form className="Auth-form">
                             <div className="Auth-form-content">
                                 <h3 className="Auth-form-title">Ingresar</h3>

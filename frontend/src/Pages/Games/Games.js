@@ -8,8 +8,6 @@ import juego4 from "../../assets/images/juego4.png"
 import Header from '../../Compoments/Header';
 
 export default function Games() {
-
-
     const elementos = [
         {
             nombre: "Segmentación de sonidos",
@@ -30,8 +28,8 @@ export default function Games() {
             game: "game3"
         },
         {
-            nombre: "Puzzle",
-            descripcion: "Descripción del Elemento 4",
+            nombre: "Juego de Memoria ",
+            descripcion: "Juego de Memoria ",
             imagen: juego4,
             game: "game4"
         }
@@ -42,7 +40,7 @@ export default function Games() {
 
         <>
 
-            <Header />
+          
 
 
             <div className='container-fluid background-games up'>
