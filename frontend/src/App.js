@@ -12,7 +12,10 @@ import Game2 from './Pages/Games/game2/Game2';
 import Game3 from './Pages/Games/game3/Game3';
 import LayoutGame from './Pages/Games/layoutGame/LayoutGame';
 import Header from './Compoments/Header';
-import NewPassword from './Pages/NewPassword';
+import VideoExplicacion from './Pages/Games/VideoExplicacion';
+
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 function App() {
 
@@ -20,33 +23,26 @@ function App() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/');
-    }
-  }, [user]);
-
 
   return (
     <>
-
+      {!user && <Header />}
       <Routes>
-        {!user && <Route index element={<Login />} />}
-        {!user && <Route path='/register' element={<Register />} />}
-        {!user && <Route path='/forgot-password' element={<ForgetPassword />} />}
-        {user && <Route index element={<Games />} />}
-        {user && <Route path='/games/game1' element={<Game1 />} />}
-        {user && <Route path='/games/game2' element={<Game2 />} />}
-        {user && <Route path='/games/game3' element={<Game3 />} />}
-        {user && <Route path='/games/game' element={<LayoutGame />} />}
-        {!user && <Route path="/newPassword/:token" element={<NewPassword />} />}
-        <Route path="*" element={<h1>No hay la página</h1>} />
-
-
+        {!user ? (
+          <>
+            <Route index element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/forgot-password' element={<ForgetPassword />} />
+          </>
+        ) : (
+          <>
+            <Route index element={<Games />} />
+            <Route path='/video/:id' element={<VideoExplicacion />} />
+            <Route path='/games/:id' element={<LayoutGame />} />
+          </>
+        )}
       </Routes>
     </>
-
-
   );
 }
 

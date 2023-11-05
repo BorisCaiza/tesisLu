@@ -1,0 +1,46 @@
+.video-explicacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.video-explicacion__background {
+    background-image: url('../../assets/images/fondoVideo.png');
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.85;
+}
+
+.video-explicacion__content {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.video-explicacion__title {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.video-explicacion__video {
+    /* Estilos para el video o reproductor de video */
+}
+
+.video-explicacion__buttons {
+    margin-top: 20px;
+}
+
+.video-explicacion__button {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
