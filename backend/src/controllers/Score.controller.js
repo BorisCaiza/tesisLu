@@ -7,74 +7,56 @@ const userModel = require('../model/User.model')
 
 ScoreCtrl.create = async (req, res) => {
 
-    const { bestTime, game, token } = req.body
+    console.log("entree")
 
 
-
+    const { bestTime, game, token } = req.body;
 
     if (!bestTime || !game || !token) {
-        res.status(400).send({
+        return res.status(400).json({
             status: false,
-            message: 'El usuario no está registrado'
-        })
-    } else {
+            message: 'Faltan datos obligatorios (bestTime, game, token)'
+        });
+    }
 
-        const user = await userModel.findOne({ tokens: token })
-
-        try {
-
-            const game = await scoreModel.findOne({ user: user._id, game: game })
+    try {
+        const user = await userModel.findOne({ tokens: token });
 
 
 
-            if (game) {
+        if (!user) {
+            return res.status(400).json({
+                status: false,
+                message: 'No se encontró al usuario'
+            });
+        }
 
-                if (bestTime >= game.bestTime) {
-                    game.bestTime = bestTime
+        let gameFinded = await ScoreModel.findOne({ user: user._id, game: game });
 
-                    await game.save()
-                }
-
-
-            } else {
-
-                if (user) {
-
-                    const score = new ScoreModel({
-
-                        user: user._id,
-                        game: game,
-                        bestTime: bestTime
-
-                    })
+        if (gameFinded) {
 
 
-                    await score.save()
+            if (bestTime < gameFinded.bestTime || gameFinded.bestTime === null) {
 
-                    res.status(200).send({
-                        status: false,
-                        message: "Se ha creado el score"
-                    })
+                console.log("mejor tiempo", bestTime)
 
-
-                } else {
-
-                    res.status(400).send({
-                        status: false,
-                        message: "No se encontro al usuario"
-                    })
-                }
-
+                gameFinded.bestTime = bestTime
+                await gameFinded.save()
             }
 
-        } catch (error) {
+            res.status(200).json({
+                status: true,
+                message: 'Se ha creado el score'
+            });
 
-            console.log("error", error)
+        } else {
 
-            res.status(400).send({
-                status: false,
-                message: "Error al guardar score"
-            })
+            res.status(400).json({
+                status: true,
+                message: 'No se encontro el registro'
+            });
+
+
 
         }
 
@@ -82,6 +64,12 @@ ScoreCtrl.create = async (req, res) => {
 
 
 
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({
+            status: false,
+            message: 'Error al guardar score'
+        });
     }
 };
 
@@ -92,16 +80,23 @@ ScoreCtrl.getScore = async (req, res) => {
     const { game, token } = req.body
 
 
-
-
     if (!game || !token) {
         res.status(400).send({
             status: false,
             message: 'El usuario no está registrado'
         })
+
+
     } else {
 
         const user = await userModel.findOne({ tokens: token })
+
+        if (!user) {
+            return res.status(400).send({
+                status: false,
+                meessage: "El usuario no esta autenticado"
+            })
+        }
 
         try {
 
@@ -109,15 +104,7 @@ ScoreCtrl.getScore = async (req, res) => {
 
             if (gameFinded) {
 
-                if (gameFinded.score > 0) {
-
-                    res.status(200).send({
-                        status: true,
-                        game: gameFinded
-                    })
-                } else {
-
-                    gameFinded.score = 0
+                if (gameFinded) {
 
                     res.status(200).send({
                         status: true,
@@ -128,18 +115,23 @@ ScoreCtrl.getScore = async (req, res) => {
 
             } else {
 
-                res.status(400).send({
-                    status: false,
-                    message: "No se encontro información"
+                console.log("entree")
+
+                const newScore = scoreModel({
+                    user: user._id,
+                    game: game,
+                    bestTime: null
                 })
 
+                await newScore.save()
+
+                return res.status(200).send({
+                    status: true,
+                    game: newScore
+
+                })
             }
-
-
         } catch (error) {
-
-            console.log("error", error)
-
 
 
             res.status(400).send({

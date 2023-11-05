@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Usuario = require("./model/User.model");
 
+
 //variable de entorno
 if (process.env.NODE_ENV !== 'production') {
     require("dotenv").config();
@@ -45,6 +46,8 @@ async function initial() {
             await newUser.save(); // Usar await para esperar la operación de guardado
             console.log("Added 'Usuario' to the collection");
         }
+
+
 
 
     } catch (error) {

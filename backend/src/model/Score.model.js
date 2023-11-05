@@ -11,7 +11,7 @@ const ScoreSchema = new Schema({
     },
 
     game: { type: String },
-    bestTime: { type: Number }
+    bestTime: { type: Number, default: 0 }
 
 
 

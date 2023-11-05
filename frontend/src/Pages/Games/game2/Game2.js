@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './game2.css';
 import { wordsDataService } from '../../../services/datosServices';
 import altavoz from "../../../assets/altavoz.png"
+import { AuthContext } from '../../../Context/AuthContext';
+import api from "../../../api/api"
 
 const Game2 = () => {
+    const { user } = useContext(AuthContext);
     const [word, setWord] = useState(null);
     const [showPlayAgainButton, setShowPlayAgainButton] = useState(false);
+    const [bestTime, setBestTime] = useState(null);
+    const [time, setTime] = useState(0);
+
+
+
 
     const getWord = () => {
         const words = wordsDataService();
@@ -17,26 +25,69 @@ const Game2 = () => {
         setWord(randomWord);
     }
 
+    const getScore = async () => {
+
+        const score = {
+
+            token: user.token,
+            game: "game2"
+
+        }
+
+        try {
+
+            const response = await api.post('/getScore', score)
+
+            if (response.status === 200) {
+                setBestTime(response.data.game.bestTime)
+            }
+        } catch (error) {
+
+        }
+
+    }
+
+    const saveScore = async () => {
+
+
+
+
+        const score = {
+            bestTime: bestTime,
+            game: "game2",
+            token: user.token
+        }
+
+        try {
+
+            const response = await api.post('/score', score)
+
+        } catch (error) {
+
+        }
+    }
+
     useEffect(() => {
         getWord()
+        getScore()
     }, []);
 
     const speak = () => {
         if (word) {
             const syllables = word.syllable_separation.split('-');
-            
+
             const speechParts = syllables.map((syllable, index) => {
                 const utterance = new SpeechSynthesisUtterance(syllable);
                 utterance.pause = index < syllables.length - 1 ? 100 : 0;
                 return utterance;
             });
-    
+
             speechParts.forEach(part => {
                 window.speechSynthesis.speak(part);
             });
         }
     }
-    
+
 
 
 

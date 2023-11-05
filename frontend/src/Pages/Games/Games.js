@@ -17,19 +17,19 @@ export default function Games() {
         },
         {
             nombre: "Conciencia de sílabas",
-            descripcion: "Descripción del Elemento 2",
+            descripcion: "Selecciona la silaba correcta",
             imagen: juego2,
             game: "game2"
         },
         {
             nombre: "Conciencia de rima",
-            descripcion: "Descripción del Elemento 3",
+            descripcion: "Encuentra la rima correcta",
             imagen: juego3,
             game: "game3"
         },
         {
             nombre: "Juego de Memoria ",
-            descripcion: "Juego de Memoria ",
+            descripcion: "Encuentra la pareja correcta",
             imagen: juego4,
             game: "game4"
         }
@@ -40,9 +40,9 @@ export default function Games() {
 
         <>
 
-          
 
 
+            <Header />
             <div className='container-fluid background-games up'>
 
                 <div className='row justify-content-center'>
@@ -61,7 +61,7 @@ export default function Games() {
                     {elementos.map((elemento, index) => ( // Aquí corregidod
                         <div key={index} className="col-sm-5 mt-2">
                             <div className="card">
-                                <img src={elemento.imagen} alt={elemento.nombre} style={{height: "400px"}} className='card-img-top img-fluid im-card' />
+                                <img src={elemento.imagen} alt={elemento.nombre} style={{ height: "400px" }} className='card-img-top img-fluid im-card' />
                                 <div className="card-body">
                                     <h5 className="card-title title-card">{elemento.nombre}</h5>
                                     <p className="card-text">{elemento.descripcion}</p>
