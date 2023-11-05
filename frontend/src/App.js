@@ -23,17 +23,12 @@ function App() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
-  }, [user]);
 
   return (
     <>
       {!user && <Header />}
       <Routes>
-        {user ? (
+        {!user ? (
           <>
             <Route index element={<Login />} />
             <Route path='/register' element={<Register />} />

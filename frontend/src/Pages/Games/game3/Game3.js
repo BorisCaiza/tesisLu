@@ -4,17 +4,18 @@ import './game3.css';
 import { getrhymingWords } from '../../../services/datosServices';
 
 const Game3 = () => {
-    const [targetWord, setTargetWord] = useState(null);
-    const [optionCorrectSelect, setOptionCorrectSelect] = useState(null);
-    const [optionIncorrectSelect, setOptionIncorrectSelect] = useState(null);
+    const [targetWord, setTargetWord] = useState({});
+    const [optionCorrectSelect, setOptionCorrectSelect] = useState({});
+    const [optionIncorrectSelect, setOptionIncorrectSelect] = useState({});
     const [gameResult, setGameResult] = useState(null);
     const orden = Math.random() < 0.5 ? 1 : 2;
 
     const getDatos = () => {
-        const [randomWord, optionCorrect, optionIncorrect] = getrhymingWords();
-        setTargetWord(randomWord);
-        setOptionCorrectSelect(optionCorrect);
-        setOptionIncorrectSelect(optionIncorrect);
+        const { palabra, rima, seleccionAleatoria } = getrhymingWords();
+        console.log(`Palabra Aleatoria: ${palabra}`);
+        setTargetWord(palabra);
+        setOptionCorrectSelect(rima);
+        setOptionIncorrectSelect(seleccionAleatoria);
     };
 
     useEffect(() => {
@@ -23,7 +24,6 @@ const Game3 = () => {
 
     const handleOptionSelect = (selectedOption) => {
         if (selectedOption.name === optionCorrectSelect.name) {
-            // El jugador ha ganado
             Swal.fire({
                 title: '¡Ganaste!',
                 text: '¡Bien hecho! La palabra rima correctamente.',
@@ -36,7 +36,6 @@ const Game3 = () => {
                 }
             });
         } else {
-            // El jugador ha perdido
             Swal.fire({
                 title: 'Perdiste',
                 text: 'La palabra seleccionada no rima correctamente.',
@@ -54,25 +53,26 @@ const Game3 = () => {
     return (
         <div className="board">
             <div>
+                <img src={targetWord.image} alt="Option" style={{height: 75}} />
                 <h1>{targetWord && targetWord.name}</h1>
                 <h3>Rima con...</h3>
                 <div className="button-container">
                     {orden === 1 ? (
                         <>
                             <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>
-                                <img src="ruta_imagen_incorrecta.png" alt="Option Incorrect" />
+                                <img src={optionIncorrectSelect.image} alt="Option Incorrect" />
                             </button>
                             <button onClick={() => handleOptionSelect(optionCorrectSelect)}>
-                                <img src="ruta_imagen_correcta.png" alt="Option Correct" />
+                                <img src={optionCorrectSelect.image} alt="Option Correct" />
                             </button>
                         </>
                     ) : (
                         <>
                             <button onClick={() => handleOptionSelect(optionCorrectSelect)}>
-                                <img src="ruta_imagen_correcta.png" alt="Option Correct" />
+                                <img src={optionCorrectSelect.image} alt="Option Correct" />
                             </button>
                             <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>
-                                <img src="ruta_imagen_incorrecta.png" alt="Option Incorrect" />
+                                <img src={optionIncorrectSelect.image} alt="Option Incorrect" />
                             </button>
                         </>
                     )}

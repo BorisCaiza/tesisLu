@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './game2.css';
-import { getWordsData } from '../../../services/datosServices';
+import { wordsDataService } from '../../../services/datosServices';
 import altavoz from "../../../assets/altavoz.png"
 
 const Game2 = () => {
@@ -11,7 +11,7 @@ const Game2 = () => {
     const [showPlayAgainButton, setShowPlayAgainButton] = useState(false);
 
     const getWord = () => {
-        const words = getWordsData();
+        const words = wordsDataService();
         const randomIndex = Math.floor(Math.random() * words.length);
         const randomWord = words[randomIndex];
         setWord(randomWord);

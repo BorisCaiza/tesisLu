@@ -1,22 +1,22 @@
-import React from 'react';
-import './game4.css';
+import React from "react";
+import back from "../../../assets/images/back.png";
+import "./game4.css";
 
-function Card({ card, onClick, isFlipped }) {
+const Card = ({ card, isFlipped, handleClick }) => {
     return (
         <div
-            className={`card-game ${isFlipped ? 'flipped-game' : ''}`}
-            onClick={() => onClick(card)}
+            className={`card-game4 ${isFlipped ? "flipped-game4" : ""}`}
+            onClick={handleClick}
         >
-            <div className="card-inner-game">
-                <div className="card-front-game">
-                    <img src={`../../../assets/images/${card}.png`} alt={card} width="100%" height="100%" />
-                </div>
-                <div className="card-back-game">
-                    <img src="../../../assets/images/back.png" alt="back" width="100%" height="100%" />
-                </div>
-            </div>
+            <img
+                src={isFlipped ? card.image : back}
+                alt={card.name}
+            />
+            {card.match && (
+                <div className="checkmark-overlay">✔</div>
+            )}
         </div>
     );
-}
+};
 
 export default Card;

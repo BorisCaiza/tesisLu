@@ -12,14 +12,13 @@ const LayoutGame = () => {
     const navigate = useNavigate();
 
     const back = () => {
-       // navigate("/video/"+id)
-       navigate("/games")
+        navigate("/")
     }
 
     return (
         <div className="brick-wall">
             <div className="center-component">
-                {id === "game1" ? (<Game1 />): id === "game2" ? (<Game2 />): id === "game2" ? (<Game3 />):<Game4 /> }
+                {id === "game1" ? (<Game1 />) : id === "game2" ? (<Game2 />) : id === "game3" ? (<Game3 />) : <Game4 />}
             </div>
 
             <div className="back-button">

@@ -1,68 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
-import './game4.css';
-import Card from './Card';
-
-const cards = ['card1', 'card1', 'card1', 'card1', 'card1', 'card1', 'card1', 'card1'];
-
-function shuffleArray(array) {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-}
+import React, { useState, useEffect } from "react";
+import Card from "./Card";
+import card1 from "../../../assets/images/card1.png";
+import card2 from "../../../assets/images/card2.png";
+import card3 from "../../../assets/images/card3.png";
+import card4 from "../../../assets/images/card4.png";
+import "./game4.css";
 
 const Game4 = () => {
-    const [shuffledCards, setShuffledCards] = useState([]);
-    const [selectedCards, setSelectedCards] = useState([]);
-    const [matchedPairs, setMatchedPairs] = useState(0);
+    const initialCards = [
+        { name: "Card1", image: card1 },
+        { name: "Card2", image: card2 },
+        { name: "Card3", image: card3 },
+        { name: "Card4", image: card4 },
+    ];
+
+    const [cards, setCards] = useState([]);
+    const [selectedCard, setSelectedCard] = useState(null);
 
     useEffect(() => {
-        setShuffledCards(shuffleArray(cards.concat(cards)));
+        const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
+        duplicatedCards.sort(() => Math.random() - 0.5);
+        setCards(duplicatedCards);
     }, []);
 
-    const handleCardClick = (card) => {
-        if (selectedCards.length === 2) {
-            // Si ya hay 2 cartas seleccionadas, no hacer nada.
-            return;
-        }
-
-        if (selectedCards.length === 1 && selectedCards[0] === card) {
-            // Si se hace clic en la misma carta dos veces, no hacer nada.
-            return;
-        }
-
-        setSelectedCards([...selectedCards, card]);
-
-        if (selectedCards.length === 1) {
-            // Comprobar si las dos cartas coinciden.
-            if (shuffledCards[selectedCards[0]] === shuffledCards[card]) {
-                setMatchedPairs(matchedPairs + 1);
-                setSelectedCards([]);
-            } else {
-                // Si las cartas no coinciden, esperar un segundo y luego ocultarlas.
-                setTimeout(() => {
-                    setSelectedCards([]);
-                }, 1000);
-            }
+    const handleCardClick = (index) => {
+        updateCardState(index, true);
+        if (selectedCard === null) {
+            setSelectedCard(index);
+        } else {
+            checkForMatch(selectedCard, index);
         }
     };
 
+    const updateCardState = (index, isFlipped) => {
+        const updatedCards = [...cards];
+        updatedCards[index].isFlipped = isFlipped;
+        setCards(updatedCards);
+    };
+
+    const checkForMatch = (index1, index2) => {
+        if (cards[index1].name === cards[index2].name) {
+            const updatedCards = [...cards];
+            updatedCards[index1].match = true;
+            updatedCards[index2].match = true;
+            setCards(updatedCards);
+        } else {
+            setTimeout(() => {
+                updateCardState(index1, false);
+                updateCardState(index2, false);
+            }, 1000);
+        }
+        setSelectedCard(null);
+    };
 
     return (
-
-        <div className="board-game">
-            {shuffledCards.map((card, index) => (
+        <div className="game-game4">
+            {cards.map((card, index) => (
                 <Card
                     key={index}
                     card={card}
-                    onClick={handleCardClick}
-                    isFlipped={selectedCards.includes(index)}
+                    isFlipped={card.isFlipped}
+                    handleClick={() => handleCardClick(index)}
                 />
             ))}
-            {matchedPairs === 8 && <div className="message-game">¡Has ganado!</div>}
         </div>
     );
 };

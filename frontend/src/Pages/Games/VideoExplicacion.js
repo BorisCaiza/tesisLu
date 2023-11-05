@@ -24,7 +24,7 @@ function VideoExplicacion() {
         game4: "Juego de Memoria"
     };
     const next = () => {
-        navigate("/games")
+        navigate("/")
     }
     const back = () => {
         navigate("/games/"+id)
