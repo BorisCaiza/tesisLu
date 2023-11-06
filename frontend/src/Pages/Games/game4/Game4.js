@@ -77,9 +77,6 @@ const Game4 = () => {
         };
     }, [isRunning]);
 
-
-
-
     useEffect(() => {
         const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
         duplicatedCards.sort(() => Math.random() - 0.5);
@@ -113,7 +110,8 @@ const Game4 = () => {
             setCards(updatedCards);
             setCount(count - 2);
             console.log("no gane", count)
-            if (count === 0) {
+            if (count === 2) {
+                getWin();
                 console.log("gane", count)
             }
         } else {
@@ -121,9 +119,11 @@ const Game4 = () => {
             setTimeout(() => {
                 updateCardState(index1, false);
                 updateCardState(index2, false);
-            }, 400);
+            }, 500);
         }
+
         setSelectedCard(null);
+
         /*
                 if (count === 3) {
                     setCount(0)
@@ -144,8 +144,27 @@ const Game4 = () => {
                     })
                 }
         */
-
     };
+
+    const getWin = () => {
+            setCount(0)
+            Swal.fire({
+                html: `<div>
+                    <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
+                </div>`,
+                confirmButtonText: 'Jugar de Nuevo',
+                cancelButtonText: 'Salir',
+                showCancelButton: true
+            }).then((result) => {
+                saveScore();
+                if (result.isConfirmed) {
+                    window.location.reload();
+                } else {
+                    navigator("/")
+                }
+            })
+        
+    }
 
     return (
         <>
