@@ -14,10 +14,12 @@ const Game4 = () => {
     const navigator = useNavigate();
     const { user } = useContext(AuthContext);
     const [gameResult, setGameResult] = useState(null);
+    const [cards, setCards] = useState([]);
+    const [selectedCard, setSelectedCard] = useState(null);
     const [time, setTime] = useState(0);
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(null);
 
 
     useEffect(() => {
@@ -32,45 +34,32 @@ const Game4 = () => {
         { name: "Card4", image: card4 },
     ];
 
+    //obtner score 
     const getScore = async () => {
-
         const score = {
-
             token: user.token,
             game: "game4"
-
         }
-
         try {
-
             const response = await api.post('/getScore', score)
-
             if (response.status === 200) {
                 console.log("tiempo", response.data.game.bestTime)
                 setBestTime(response.data.game.bestTime)
             }
         } catch (error) {
-
         }
-
     }
 
     const saveScore = async () => {
-
-
         console.log("time", time)
         const score = {
             bestTime: time,
             game: "game4",
             token: user.token
         }
-
         try {
-
             const response = await api.post('/score', score)
-
         } catch (error) {
-
         }
     }
 
@@ -89,12 +78,12 @@ const Game4 = () => {
     }, [isRunning]);
 
 
-    const [cards, setCards] = useState([]);
-    const [selectedCard, setSelectedCard] = useState(null);
+
 
     useEffect(() => {
         const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
         duplicatedCards.sort(() => Math.random() - 0.5);
+        setCount(duplicatedCards.length)
         setCards(duplicatedCards);
     }, []);
 
@@ -103,7 +92,9 @@ const Game4 = () => {
         if (selectedCard === null) {
             setSelectedCard(index);
         } else {
-            checkForMatch(selectedCard, index);
+            if (index !== selectedCard) {
+                checkForMatch(selectedCard, index);
+            }
         }
     };
 
@@ -114,43 +105,45 @@ const Game4 = () => {
     };
 
     const checkForMatch = (index1, index2) => {
+        console.log();
         if (cards[index1].name === cards[index2].name) {
             const updatedCards = [...cards];
             updatedCards[index1].match = true;
             updatedCards[index2].match = true;
             setCards(updatedCards);
-            setCount(count + 1);
-            console.log("contador", count)
-
+            setCount(count - 2);
+            console.log("no gane", count)
+            if (count === 0) {
+                console.log("gane", count)
+            }
         } else {
+            setSelectedCard(null);
             setTimeout(() => {
                 updateCardState(index1, false);
                 updateCardState(index2, false);
-            }, 1000);
+            }, 400);
         }
         setSelectedCard(null);
-
-        if (count === 3) {
-            setCount(0)
-            Swal.fire({
-                html: `<div>
-                    <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
-                </div>`,
-                confirmButtonText: 'Jugar de Nuevo',
-                cancelButtonText: 'Salir',
-                showCancelButton: true
-            }).then((result) => {
-                saveScore();
-                if (result.isConfirmed) {
-                    window.location.reload();
-                } else {
-                    navigator("/")
+        /*
+                if (count === 3) {
+                    setCount(0)
+                    Swal.fire({
+                        html: `<div>
+                            <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
+                        </div>`,
+                        confirmButtonText: 'Jugar de Nuevo',
+                        cancelButtonText: 'Salir',
+                        showCancelButton: true
+                    }).then((result) => {
+                        saveScore();
+                        if (result.isConfirmed) {
+                            window.location.reload();
+                        } else {
+                            navigator("/")
+                        }
+                    })
                 }
-
-            })
-
-        }
-
+        */
 
     };
 
