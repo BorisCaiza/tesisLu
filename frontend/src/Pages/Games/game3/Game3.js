@@ -12,13 +12,13 @@ const Game3 = () => {
 
     const { user } = useContext(AuthContext);
     const [targetWord, setTargetWord] = useState({});
-    const [optionCorrectSelect, setOptionCorrectSelect] = useState({});
-    const [optionIncorrectSelect, setOptionIncorrectSelect] = useState({});
+    const [option1, setOption1] = useState({});
+    const [option2, setOption2] = useState({});
     const [gameResult, setGameResult] = useState(null);
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(0);
-    const orden = Math.random() < 0.5 ? 1 : 2;
+    const synth = window.speechSynthesis;
 
     const getScore = async () => {
 
@@ -70,11 +70,16 @@ const Game3 = () => {
 
 
     const getDatos = () => {
+        const orden = Math.random() < 0.5 ? 1 : 2;
         const { palabra, rima, seleccionAleatoria } = getrhymingWords();
-        console.log(`Palabra Aleatoria: ${palabra}`);
         setTargetWord(palabra);
-        setOptionCorrectSelect(rima);
-        setOptionIncorrectSelect(seleccionAleatoria);
+        if (orden === 1) {
+            setOption1(rima)
+            setOption2(seleccionAleatoria);
+        } else {
+            setOption1(seleccionAleatoria)
+            setOption2(rima);
+        }
     };
 
     useEffect(() => {
@@ -99,73 +104,51 @@ const Game3 = () => {
 
 
     const handleOptionSelect = (selectedOption) => {
-        if (selectedOption.name === optionCorrectSelect.name) {
-
+        let gano = false;
+        if (targetWord.rimas === selectedOption.id) {
+            gano = true;
             saveScore();
-            getScore();
-            Swal.fire({
-                title: '¡Ganaste!',
-                text: '¡Bien hecho! La palabra rima correctamente.',
-                icon: 'success',
-                showCancelButton: true,
-                cancelButtonText: 'Volver a jugar',
-                cancelButtonText: 'Salir',
-            }).then((result) => {
-
-                if (result.isConfirmed) {
-                    getDatos();
-                    getScore();
-                    setTime(0);
-                } else {
-                    navigator("/")
-                }
-            });
-        } else {
-            Swal.fire({
-                title: 'Perdiste',
-                text: 'La palabra seleccionada no rima correctamente.',
-                icon: 'error',
-                showCancelButton: true,
-                cancelButtonText: 'Volver a jugar',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    getDatos();
-                    getScore();
-                    setIsRunning(true);
-                    setTime(0);
-                } else {
-                    navigator("/")
-                }
-            });
         }
+        Swal.fire({
+            title: gano ? '¡Ganaste!' : 'Perdiste',
+            text: gano ? '¡Bien hecho! La palabra rima correctamente.' : 'La palabra seleccionada no rima correctamente.',
+            icon: gano ? 'success' : 'error',
+            confirmButtonText: 'Jugar de Nuevo',
+            cancelButtonText: 'Salir',
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                getDatos();
+                getScore();
+                setIsRunning(true);
+                setTime(0);
+            } else {
+                navigator("/")
+            }
+        });
     };
+
+    const getVoice = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-MX';
+        utterance.name = "Microsoft Sabina - Spanish (Mexico)";
+        utterance.voiceURI = "Microsoft Sabina - Spanish (Mexico)";
+        synth.speak(utterance);
+    }
 
     return (
         <div className="board">
             <div>
-                <img src={targetWord.image} alt="Option" style={{ height: 75 }} />
+                <img src={targetWord.image} onMouseEnter={() => getVoice(targetWord.word)} alt="Option" style={{ height: 75 }} />
                 <h1>{targetWord && targetWord.name}</h1>
                 <h3>Rima con...</h3>
                 <div className="button-container">
-                    {orden === 1 ? (
-                        <>
-                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>
-                                <img src={optionIncorrectSelect.image} alt="Option Incorrect" />
-                            </button>
-                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>
-                                <img src={optionCorrectSelect.image} alt="Option Correct" />
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <button onClick={() => handleOptionSelect(optionCorrectSelect)}>
-                                <img src={optionCorrectSelect.image} alt="Option Correct" />
-                            </button>
-                            <button onClick={() => handleOptionSelect(optionIncorrectSelect)}>
-                                <img src={optionIncorrectSelect.image} alt="Option Incorrect" />
-                            </button>
-                        </>
-                    )}
+                    <button onClick={() => handleOptionSelect(option1)} onMouseEnter={() => getVoice(option1.word)}>
+                        <img src={option1.image} alt="Option Incorrect" />
+                    </button>
+                    <button onClick={() => handleOptionSelect(option2)} onMouseEnter={() => getVoice(option2.word)}>
+                        <img src={option2.image} alt="Option Correct" />
+                    </button>
                 </div>
             </div>
             <div className='mt-3'>Cronómetro: {time} segundos</div>

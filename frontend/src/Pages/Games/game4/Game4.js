@@ -9,18 +9,18 @@ import { AuthContext } from "../../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
+import { useSpeechSynthesis } from 'speech-synthesis';
 
 const Game4 = () => {
     const navigator = useNavigate();
     const { user } = useContext(AuthContext);
-    const [gameResult, setGameResult] = useState(null);
     const [cards, setCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [time, setTime] = useState(0);
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [count, setCount] = useState(null);
-
+    const synth = window.speechSynthesis;
 
     useEffect(() => {
         getScore()
@@ -28,10 +28,10 @@ const Game4 = () => {
 
 
     const initialCards = [
-        { name: "Card1", image: card1 },
-        { name: "Card2", image: card2 },
-        { name: "Card3", image: card3 },
-        { name: "Card4", image: card4 },
+        { name: "gato", image: card1 },
+        { name: "jirafa", image: card2 },
+        { name: "perro", image: card3 },
+        { name: "león", image: card4 },
     ];
 
     //obtner score 
@@ -84,7 +84,16 @@ const Game4 = () => {
         setCards(duplicatedCards);
     }, []);
 
-    const handleCardClick = (index) => {
+    const getVoice = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-MX';
+        utterance.name = "Microsoft Sabina - Spanish (Mexico)";
+        utterance.voiceURI = "Microsoft Sabina - Spanish (Mexico)";
+        synth.speak(utterance);
+    }
+
+    const handleCardClick = (index, text) => {
+        getVoice(text);
         updateCardState(index, true);
         if (selectedCard === null) {
             setSelectedCard(index);
@@ -102,7 +111,6 @@ const Game4 = () => {
     };
 
     const checkForMatch = (index1, index2) => {
-        console.log();
         if (cards[index1].name === cards[index2].name) {
             const updatedCards = [...cards];
             updatedCards[index1].match = true;
@@ -123,64 +131,45 @@ const Game4 = () => {
         }
 
         setSelectedCard(null);
-
-        /*
-                if (count === 3) {
-                    setCount(0)
-                    Swal.fire({
-                        html: `<div>
-                            <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
-                        </div>`,
-                        confirmButtonText: 'Jugar de Nuevo',
-                        cancelButtonText: 'Salir',
-                        showCancelButton: true
-                    }).then((result) => {
-                        saveScore();
-                        if (result.isConfirmed) {
-                            window.location.reload();
-                        } else {
-                            navigator("/")
-                        }
-                    })
-                }
-        */
     };
 
     const getWin = () => {
-            setCount(0)
-            Swal.fire({
-                html: `<div>
+        setCount(0)
+        Swal.fire({
+            html: `<div>
                     <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
                 </div>`,
-                confirmButtonText: 'Jugar de Nuevo',
-                cancelButtonText: 'Salir',
-                showCancelButton: true
-            }).then((result) => {
-                saveScore();
-                if (result.isConfirmed) {
-                    window.location.reload();
-                } else {
-                    navigator("/")
-                }
-            })
-        
+            confirmButtonText: 'Jugar de Nuevo',
+            cancelButtonText: 'Salir',
+            showCancelButton: true
+        }).then((result) => {
+            saveScore();
+            if (result.isConfirmed) {
+                window.location.reload();
+            } else {
+                navigator("/")
+            }
+        })
+
     }
 
     return (
-        <>
+        <div className="board-game4">
             <div className="game-game4">
                 {cards.map((card, index) => (
                     <Card
                         key={index}
                         card={card}
                         isFlipped={card.isFlipped}
-                        handleClick={() => handleCardClick(index)}
+                        handleClick={() => handleCardClick(index, card.name)}
                     />
                 ))}
+
             </div>
             <div>Cronómetro: {time} segundos</div>
             <div>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
-        </>
+        </div>
+
     );
 };
 
