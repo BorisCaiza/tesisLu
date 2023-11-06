@@ -9,16 +9,18 @@ import { AuthContext } from "../../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
+import { useSpeechSynthesis } from 'speech-synthesis';
 
 const Game4 = () => {
     const navigator = useNavigate();
     const { user } = useContext(AuthContext);
-    const [gameResult, setGameResult] = useState(null);
+    const [cards, setCards] = useState([]);
+    const [selectedCard, setSelectedCard] = useState(null);
     const [time, setTime] = useState(0);
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
-    const [count, setCount] = useState(1);
-
+    const [count, setCount] = useState(null);
+    const synth = window.speechSynthesis;
 
     useEffect(() => {
         getScore()
@@ -26,51 +28,38 @@ const Game4 = () => {
 
 
     const initialCards = [
-        { name: "Card1", image: card1 },
-        { name: "Card2", image: card2 },
-        { name: "Card3", image: card3 },
-        { name: "Card4", image: card4 },
+        { name: "gato", image: card1 },
+        { name: "jirafa", image: card2 },
+        { name: "perro", image: card3 },
+        { name: "león", image: card4 },
     ];
 
+    //obtner score 
     const getScore = async () => {
-
         const score = {
-
             token: user.token,
             game: "game4"
-
         }
-
         try {
-
             const response = await api.post('/getScore', score)
-
             if (response.status === 200) {
                 console.log("tiempo", response.data.game.bestTime)
                 setBestTime(response.data.game.bestTime)
             }
         } catch (error) {
-
         }
-
     }
 
     const saveScore = async () => {
-
-
         console.log("time", time)
         const score = {
             bestTime: time,
             game: "game4",
             token: user.token
         }
-
         try {
-
             const response = await api.post('/score', score)
-
         } catch (error) {
-
         }
     }
 
@@ -88,22 +77,30 @@ const Game4 = () => {
         };
     }, [isRunning]);
 
-
-    const [cards, setCards] = useState([]);
-    const [selectedCard, setSelectedCard] = useState(null);
-
     useEffect(() => {
         const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
         duplicatedCards.sort(() => Math.random() - 0.5);
+        setCount(duplicatedCards.length)
         setCards(duplicatedCards);
     }, []);
 
-    const handleCardClick = (index) => {
+    const getVoice = (text) => {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-MX';
+        utterance.name = "Microsoft Sabina - Spanish (Mexico)";
+        utterance.voiceURI = "Microsoft Sabina - Spanish (Mexico)";
+        synth.speak(utterance);
+    }
+
+    const handleCardClick = (index, text) => {
+        getVoice(text);
         updateCardState(index, true);
         if (selectedCard === null) {
             setSelectedCard(index);
         } else {
-            checkForMatch(selectedCard, index);
+            if (index !== selectedCard) {
+                checkForMatch(selectedCard, index);
+            }
         }
     };
 
@@ -119,56 +116,60 @@ const Game4 = () => {
             updatedCards[index1].match = true;
             updatedCards[index2].match = true;
             setCards(updatedCards);
-            setCount(count + 1);
-            console.log("contador", count)
-
+            setCount(count - 2);
+            console.log("no gane", count)
+            if (count === 2) {
+                getWin();
+                console.log("gane", count)
+            }
         } else {
+            setSelectedCard(null);
             setTimeout(() => {
                 updateCardState(index1, false);
                 updateCardState(index2, false);
-            }, 1000);
+            }, 500);
         }
+
         setSelectedCard(null);
-
-        if (count === 3) {
-            setCount(0)
-            Swal.fire({
-                html: `<div>
-                    <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
-                </div>`,
-                confirmButtonText: 'Jugar de Nuevo',
-                cancelButtonText: 'Salir',
-                showCancelButton: true
-            }).then((result) => {
-                saveScore();
-                if (result.isConfirmed) {
-                    window.location.reload();
-                } else {
-                    navigator("/")
-                }
-
-            })
-
-        }
-
-
     };
 
+    const getWin = () => {
+        setCount(0)
+        Swal.fire({
+            html: `<div>
+                    <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
+                </div>`,
+            confirmButtonText: 'Jugar de Nuevo',
+            cancelButtonText: 'Salir',
+            showCancelButton: true
+        }).then((result) => {
+            saveScore();
+            if (result.isConfirmed) {
+                window.location.reload();
+            } else {
+                navigator("/")
+            }
+        })
+
+    }
+
     return (
-        <>
+        <div className="board-game4">
             <div className="game-game4">
                 {cards.map((card, index) => (
                     <Card
                         key={index}
                         card={card}
                         isFlipped={card.isFlipped}
-                        handleClick={() => handleCardClick(index)}
+                        handleClick={() => handleCardClick(index, card.name)}
                     />
                 ))}
+
             </div>
             <div>Cronómetro: {time} segundos</div>
             <div>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
-        </>
+        </div>
+
     );
 };
 

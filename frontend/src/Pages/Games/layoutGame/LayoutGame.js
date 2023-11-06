@@ -17,7 +17,7 @@ const LayoutGame = () => {
 
     return (
         <div className="brick-wall">
-            <div className="center-component">
+            <div className={id === "game4" ? "center-component-4" : "center-component"}>
                 {id === "game1" ? (<Game1 />) : id === "game2" ? (<Game2 />) : id === "game3" ? (<Game3 />) : <Game4 />}
             </div>
 
