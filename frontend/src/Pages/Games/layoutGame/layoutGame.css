@@ -17,6 +17,20 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 15px;
+    border: 2px solid black; 
+}
+.center-component-4 {
+    background-color: white;
+    background-size: cover;
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    padding: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    border: 2px solid black; 
 }
 /* Estilo para el botón de regreso */
 .back-button {

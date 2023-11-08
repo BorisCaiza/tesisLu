@@ -1,24 +1,32 @@
+.board-game4 {
+    width: 500px;
+    height: 400px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 3px solid black; 
+}
 .game-game4 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* 4 columnas */
     grid-template-rows: repeat(2, 1fr);
-    /* 2 filas */
-    gap: 10px;
-    max-width: 600px;
-    margin: 0 auto;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    padding: 1;
+    margin: 1 auto;
 }
 
 /* Estilos de las tarjetas */
 .card-game4 {
     width: 100px;
-    /* Ajusta el ancho de las tarjetas según tus preferencias */
     height: 150px;
-    /* Ajusta la altura de las tarjetas según tus preferencias */
-    background-color: #f0f0f0;
-    /* Color de fondo cuando la tarjeta está boca abajo */
     border: 2px solid #e0e0e0;
-    /* Borde de las tarjetas */
     display: flex;
     align-items: center;
     justify-content: center;
