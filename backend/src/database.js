@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 //const URL = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?authSource=admin`
 
-const URL = "mongodb://127.0.0.1:27017/tesisLu"
+const URL = "mongodb+srv://boriscaiza04:8PhzdXrt7M3LpQg8@cluster0.qdhgvmp.mongodb.net/tesisLu"
 
 
 //const URL = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?authSource=admin`

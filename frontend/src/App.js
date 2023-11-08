@@ -13,6 +13,7 @@ import Game3 from './Pages/Games/game3/Game3';
 import LayoutGame from './Pages/Games/layoutGame/LayoutGame';
 import Header from './Compoments/Header';
 import VideoExplicacion from './Pages/Games/VideoExplicacion';
+import NewPassword from "./Pages/NewPassword"
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -26,13 +27,14 @@ function App() {
 
   return (
     <>
-      {!user && <Header />}
+
       <Routes>
         {!user ? (
           <>
             <Route index element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/forgot-password' element={<ForgetPassword />} />
+            <Route path='/newPassword/:token' element={<NewPassword />} />
           </>
         ) : (
           <>
