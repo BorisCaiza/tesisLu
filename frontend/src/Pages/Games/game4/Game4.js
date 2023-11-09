@@ -20,6 +20,9 @@ const Game4 = () => {
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [count, setCount] = useState(null);
+    const [score, setScore] = useState(null)
+    const [matchTime, setMatchTime] = useState(null);
+
     const synth = window.speechSynthesis;
 
     useEffect(() => {
@@ -117,10 +120,16 @@ const Game4 = () => {
             updatedCards[index2].match = true;
             setCards(updatedCards);
             setCount(count - 2);
-            console.log("no gane", count)
+
+            const matchDuration = time - matchTime;
+            const quickMatchThreshold = 5;
+            const additionalPoints = matchDuration < quickMatchThreshold ? 10 : 0;
+            const newScore = time + additionalPoints;
+            setScore(newScore)
+            setMatchTime(null);
+
             if (count === 2) {
                 getWin();
-                console.log("gane", count)
             }
         } else {
             setSelectedCard(null);
@@ -132,6 +141,7 @@ const Game4 = () => {
 
         setSelectedCard(null);
     };
+
 
     const getWin = () => {
         setCount(0)
@@ -167,6 +177,7 @@ const Game4 = () => {
 
             </div>
             <div>Cronómetro: {time} segundos</div>
+            <div>Mejor puntaje: {score} puntos</div>
             <div>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
         </div>
 
