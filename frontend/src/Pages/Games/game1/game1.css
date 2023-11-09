@@ -1,71 +1,64 @@
-.board-game1 {
-  width: 400px;
-  height: 400px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border: 7px solid black;
-  border-radius: 15px;
-}
-
-.piece {
-  width: auto;
-  height: auto;
-  background-color: rgba(255, 255, 255, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  cursor: grab;
-  border-radius: 50%;
-  font-size: 300px;
-  font-weight: bold;
-  color: black;
-}
-
-.target {
-  width: auto;
-  height: auto;
-  background-color: rgba(0, 0, 0, 0.016);
-  display: inline;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 300px;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.344);
-}
-
-.play-button {
-  background-color: #e4800e;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  margin-top: 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.stats {
+.Game1 {
   text-align: center;
-  margin-top: 20px;
+  padding: 20px;
 }
 
-.stats > div {
-  margin-bottom: 10px;
-  font-size: 18px;
+h2 {
+  color: black;
+  font-size: 24px;
 }
 
-.stats span {
-  font-weight: bold;
-  color: #e4800e;
+.options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.options-buttons {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
 }
 
-.color {
-  color: white;
+.options-buttons button {
+  background: orange; /* Fondo naranja */
+  color: white; /* Texto blanco para contraste */
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px; /* Ajusta según sea necesario */
+}
+
+.options {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.options button {
+  background: orange; /* Fondo naranja */
+  color: white; /* Texto blanco para contraste */
+  border: none;
+  font-size: 36px;
+  opacity: 0.8;
+  cursor: pointer;
+  margin: 0 10px;
+  padding: 10px 20px; /* Ajusta según sea necesario */
+}
+
+.options-buttons button:hover,
+.options button:hover {
+  opacity: 1;
+}
+
+h1 {
+  font-size: 24px;
+  opacity: 0.8;
+  margin: 10px 0;
+}
+
+#target-letter {
+  font-size: 100px;
+  opacity: 0.5;
+  margin: 10px 0;
 }
