@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 
 const instance = axios.create({
     baseURL: "http://localhost:3004/api/",
-   // baseURL: "https://workout.virtusproject.online/api/"
+    // baseURL: "https://workout.virtusproject.online/api/"
 });
 instance.interceptors.request.use(
     (config) => {
@@ -28,7 +28,9 @@ instance.interceptors.response.use(
         const originalConfig = error.config;
         if (error.code === "ERR_NETWORK") {
             // Aquí puedes redirigir a una página específica cuando se produce un error de red
-            window.location.href = "/error-page";
+            //   window.location.href = "/error-page";
+            localStorage.clear();
+            console.error("Error conexion al back");;
             return Promise.reject(error);
         }
 
@@ -44,17 +46,20 @@ instance.interceptors.response.use(
                 showConfirmButton: true,
                 iconHtml: '<img src="https://cdn.icon-icons.com/icons2/317/PNG/512/sign-error-icon_34362.png" width="125">',
             }).then(() => {
-                window.location.href = "/auth/login";
+                localStorage.clear();
+                window.location.href = "/";
             });
         } else {
-            if (error.response?.status === 400) {
+            if (error.response?.status === 400 && error.response.data?.message === "El usuario no esta autenticado") {
                 if (error.response.data?.status === false) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
                         iconHtml: '<img src="https://cdn.icon-icons.com/icons2/317/PNG/512/sign-error-icon_34362.png" width="125">',
-                        text: error.response.data?.message || 'Ha ocurrido un error',
+                        text: error.response.data?.message || 'El usuario no esta autenticador',
                     });
+                    window.location.href = "/";
+                    localStorage.clear();
                 } else {
                     return Promise.reject(error.response.data); // Enviar response.data
                 }

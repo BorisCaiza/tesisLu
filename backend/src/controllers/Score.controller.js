@@ -94,7 +94,7 @@ ScoreCtrl.getScore = async (req, res) => {
         if (!user) {
             return res.status(400).send({
                 status: false,
-                meessage: "El usuario no esta autenticado"
+                message: "El usuario no esta autenticado"
             })
         }
 
