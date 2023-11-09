@@ -1,8 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import './login.css';
 import Swal from 'sweetalert2'
-import Cookies from 'universal-cookie';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
@@ -37,8 +35,6 @@ export default function Register() {
             email,
             password
         }
-
-
 
         try {
 
@@ -148,7 +144,7 @@ export default function Register() {
                                 <p className="forgot-password text-right mt-2 "> <a href="/">Inicia Sesión</a></p>
 
                                 <p className="forgot-password text-right mt-2">
-                                    ¿Olvidaste tu <a href="/forgot-password">contraseña?</a>
+                                    ¿Olvidaste tu <a href="/forgot-password" >contraseña?</a>
                                 </p>
                             </div>
                         </Form >

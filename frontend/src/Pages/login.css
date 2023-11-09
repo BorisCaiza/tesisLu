@@ -104,4 +104,11 @@
 .forgot-password a {
   text-decoration: none;
   color: #e4800e;
+  font-weight: bold;
+}
+.a{
+  color: #e4800e;
+}
+.a:hover{
+  cursor: pointer;
 }

@@ -111,33 +111,20 @@ function Login() {
                                         label="Password"
                                     />
                                 </FormControl>
-
                                 <div className="d-grid gap-2 mt-3">
                                     <button onClick={authSubmitHandler} className="main-button">
                                         Ingresar
                                     </button>
                                 </div>
-                                <p className="forgot-password text-right mt-2" onClick={(e) => {
-                                    e.preventDefault();
-                                    navigator('/register'); // Utiliza la API de historial de React Router
-                                }}>Registrate Aquí</p>
-
-
-                                <p className="forgot-password text-right mt-2" onClick={(e) => {
-                                    e.preventDefault();
-                                    navigator('/forgot-password'); // Utiliza la API de historial de React Router
-                                }}>¿Olvidaste tu contraseña?</p>
+                                <p className="forgot-password text-right mt-2 "> <a href="/register">Registrate Aquí</a></p>
+                                <p className="forgot-password text-right mt-2">
+                                    ¿Olvidaste tu <a href="/forgot-password" >contraseña?</a>
+                                </p>
                             </div>
                         </Form >
                     </div>
-
-
                 </div>
-
             </div>
-
-
-
         </div>
     );
 }
