@@ -20,12 +20,12 @@ h2 {
 }
 
 .options-buttons button {
-  background: orange; /* Fondo naranja */
-  color: white; /* Texto blanco para contraste */
+  background: orange; 
+  color: white; 
   border: none;
   font-size: 24px;
   cursor: pointer;
-  padding: 5px 10px; /* Ajusta según sea necesario */
+  padding: 5px 10px; 
 }
 
 .options {
@@ -36,14 +36,14 @@ h2 {
 }
 
 .options button {
-  background: orange; /* Fondo naranja */
-  color: white; /* Texto blanco para contraste */
+  background: orange; 
+  color: white; 
   border: none;
   font-size: 36px;
   opacity: 0.8;
   cursor: pointer;
   margin: 0 10px;
-  padding: 10px 20px; /* Ajusta según sea necesario */
+  padding: 10px 20px; 
 }
 
 .options-buttons button:hover,
@@ -59,6 +59,6 @@ h1 {
 
 #target-letter {
   font-size: 100px;
-  opacity: 0.5;
+  opacity: 0.8;
   margin: 10px 0;
 }
