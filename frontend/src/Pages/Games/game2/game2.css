@@ -86,6 +86,12 @@
 }
 
 .image-container {
-  float: left;
-  margin-right: 300px; /* Opcional: Agrega un margen derecho para separar el ImageContainer del DropTarget */
+}
+
+.imageDraw {
+  margin-right: 20rem;
+}
+
+.color {
+  color: white;
 }
