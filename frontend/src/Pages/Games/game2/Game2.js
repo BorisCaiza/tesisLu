@@ -18,14 +18,24 @@ const Game2 = () => {
     const [isVictory, setIsVictory] = useState(false);
     const [imageOpacity, setImageOpacity] = useState(1); // Establece la opacidad inicial en 1 (sin transparencia)
     const [word, setWord] = useState(null);
+    const [word2, setWord2] = useState(null);
     const [bestTime, setBestTime] = useState(null);
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(true);
+    const [shuffledImages, setShuffledImages] = useState([]);
+    const [images, setImages] = useState([])
+
 
     useEffect(() => {
         getWord();
         getScore();
-    }, []); // Agrega una coma después del primer argumento
+
+
+    }, []);
+
+
+
+
 
     useEffect(() => {
         let interval;
@@ -41,8 +51,8 @@ const Game2 = () => {
         };
     }, [isRunning]);
 
-    const handleDrop = () => {
-        if (!isVictory) {
+    const handleDrop = (item) => {
+        if (!isVictory && item.correct) {
             setIsVictory(true);
             setImageOpacity(0); // Establece la opacidad en 0 (completamente transparente)
             speak();
@@ -72,6 +82,24 @@ const Game2 = () => {
 
             Swal.fire({
                 html: html,
+                confirmButtonText: 'Jugar de Nuevo',
+                cancelButtonText: 'Salir',
+                showCancelButton: true
+            }).then((result) => {
+                saveScore();
+                if (result.isConfirmed) {
+                    window.location.reload();
+
+
+                } else {
+                    navigator("/")
+                }
+
+            })
+        } else {
+            Swal.fire({
+                text: "Perdiste !!!",
+                icon: 'error',
                 confirmButtonText: 'Jugar de Nuevo',
                 cancelButtonText: 'Salir',
                 showCancelButton: true
@@ -136,20 +164,22 @@ const Game2 = () => {
             <div>
                 {images.map((image, index) => (
                     <Image
+                        className="imageDraw"
                         key={index}
                         src={image.src}
                         alt={image.alt}
                         opacity={imageOpacity}
+                        correct={image.correct}
                     />
                 ))}
             </div>
         );
     };
 
-    const Image = ({ src, alt, isDragging, opacity }) => {
+    const Image = ({ src, alt, isDragging, opacity, correct }) => {
         const [, ref] = useDrag({
             type: 'IMAGE',
-            item: { src, alt },
+            item: { src, alt, correct },
         });
 
         const imageStyle = {
@@ -173,11 +203,20 @@ const Game2 = () => {
         if (word) {
             const syllables = word.word.split('-'); // Divide la palabra en sílabas
 
-            // Crea una instancia de SpeechSynthesisUtterance para cada sílaba y configúrala
+            // Obtén la lista de voces disponibles
+            const voices = window.speechSynthesis.getVoices();
+
+            console.log("voices", voices)
+
+            // Selecciona una voz específica (por ejemplo, la primera voz disponible)
+            const femaleVoice = voices.find(voice => voice.voiceURI.includes('female'));
+
+            // Crea una instancia de SpeechSynthesisUtterance y configúrala con la voz seleccionada
             syllables.forEach((syllable, index) => {
                 const utterance = new SpeechSynthesisUtterance(syllable);
                 utterance.lang = 'es-ES'; // Configura el idioma (puede variar según el idioma que desees)
                 utterance.rate = 0.7; // Ajusta la velocidad de pronunciación según tu preferencia
+                utterance.voice = femaleVoice;
                 utterance.onend = () => {
                     if (index < syllables.length - 1) {
                         window.speechSynthesis.speak(syllables[index + 1]); // Reproduce la siguiente sílaba
@@ -186,26 +225,52 @@ const Game2 = () => {
                 window.speechSynthesis.speak(utterance); // Reproduce la primera sílaba
             });
         }
-    }
+    };
 
     const getWord = () => {
         const words = wordsDataService();
         const randomIndex = Math.floor(Math.random() * words.length);
         const randomWord = words[randomIndex];
         setWord(randomWord);
-    }
+
+        let randomIndex2;
+        let randomWord2;
+
+        do {
+            randomIndex2 = Math.floor(Math.random() * words.length);
+            randomWord2 = words[randomIndex2];
+        } while (randomIndex2 === randomIndex);
+
+        setWord2(randomWord2);
+
+        const imagesAux = [
+            { src: randomWord.image, alt: 'Imagen de Fondo', correct: true },
+            { src: randomWord2.image, alt: 'Imagen Fondo2', correct: false }
+        ];
+
+        const shuffled = [...imagesAux];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+
+        console.log("aleatorio: ", shuffled);
+        setImages(shuffled);
+    };
+
+
 
     const DropTarget = () => {
         const [, ref] = useDrop({
             accept: 'IMAGE',
-            drop: () => handleDrop(),
+            drop: (item) => handleDrop(item),
         });
 
         const backgroundImage = word ? `url('${word.image}')` : 'none';
 
         const borderStyle = {
-            width: '60px', // Establece el ancho
-            height: '60px', // Establece el alto
+            width: '70px',
+            height: '60px',
             border: 'none',
             backgroundImage,
             backgroundSize: 'cover',
@@ -223,17 +288,15 @@ const Game2 = () => {
     };
 
 
-    const images = word
-        ? [{ src: word.image, alt: 'Imagen de Fondo' }]
-        : [];
+
 
     return (
         <DndProvider backend={HTML5Backend}>
             <div className='center'>
-                <div className='image-container'>
 
-                    <ImageContainer images={images} />
-                </div>
+
+                <ImageContainer images={images} />
+
 
                 <DropTarget />
                 {isVictory && <p>¡Has ganado el juego!</p>}
