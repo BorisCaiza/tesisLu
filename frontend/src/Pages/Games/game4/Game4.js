@@ -9,7 +9,9 @@ import { AuthContext } from "../../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
-import { useSpeechSynthesis } from 'speech-synthesis';
+import soundNoMatch from '../../../assets/sounds/no-match.mp3';
+import soundMatch from '../../../assets/sounds/match.wav';
+import soundWin from '../../../assets/sounds/win.wav';
 
 const Game4 = () => {
     const navigator = useNavigate();
@@ -23,7 +25,9 @@ const Game4 = () => {
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
 
-    const synth = window.speechSynthesis;
+    const audioNoMatch = new Audio(soundNoMatch);
+    const audioMatch = new Audio(soundMatch);
+    const audioWin = new Audio(soundWin);
 
     useEffect(() => {
         getScore()
@@ -87,16 +91,10 @@ const Game4 = () => {
         setCards(duplicatedCards);
     }, []);
 
-    const getVoice = (text) => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'es-MX';
-        utterance.name = "Microsoft Sabina - Spanish (Mexico)";
-        utterance.voiceURI = "Microsoft Sabina - Spanish (Mexico)";
-        synth.speak(utterance);
-    }
+    
 
     const handleCardClick = (index, text) => {
-        getVoice(text);
+
         updateCardState(index, true);
         if (selectedCard === null) {
             setSelectedCard(index);
@@ -129,9 +127,13 @@ const Game4 = () => {
             setMatchTime(null);
 
             if (count === 2) {
+                audioWin.play(); 
                 getWin();
+            }else{
+                audioMatch.play();
             }
         } else {
+            audioNoMatch.play();
             setSelectedCard(null);
             setTimeout(() => {
                 updateCardState(index1, false);
