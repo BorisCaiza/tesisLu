@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import YouTube from 'react-youtube';
 import './VideoExplicacion.css';
+
+import fondo9 from '../../assets/images/Fondos/fondo_9.png';
+import fondo10 from '../../assets/images/Fondos/fondo_10.png';
+import fondo11 from '../../assets/images/Fondos/fondo_11.png';
+import fondo12 from '../../assets/images/Fondos/fondo_12.png';
+
+const backgrounds = [fondo9, fondo10, fondo11, fondo12 ];
 
 function VideoExplicacion() {
     const { id } = useParams()
     const videoId = 'dQw4w9WgXcQ';
     const navigate = useNavigate();
+    const [backgroundIndex, setBackgroundIndex] = useState(0);
 
     const videoOptions = {
         height: '390',
@@ -16,6 +24,14 @@ function VideoExplicacion() {
             showinfo: 0,
         },
     };
+    
+
+    useEffect(() => {
+        console.log('Cambiando fondo...');
+        setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
+    }, [id]);
+
+
 
     const juegoTitulos = {
         game1: "Segmentación de sonidos",
@@ -33,7 +49,7 @@ function VideoExplicacion() {
 
     return (
         <div className="video-explicacion">
-            <div className="video-explicacion__background">
+            <div className="video-explicacion__background" style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}>
                 <div className="video-explicacion__content">
                     <h1 className="video-explicacion__title">{titulo}</h1>
                     <div className="video-explicacion__video">

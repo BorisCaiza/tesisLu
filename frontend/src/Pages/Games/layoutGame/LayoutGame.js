@@ -8,20 +8,15 @@ import Game4 from '../game4/Game4';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
-import fondo1 from '../../../assets/images/Fondos/fondo 1.png';
-import fondo2 from '../../../assets/images/Fondos/fondo 2.png';
-import fondo3 from '../../../assets/images/Fondos/fondo 3.png';
-import fondo4 from '../../../assets/images/Fondos/fondo 4.png';
-import fondo5 from '../../../assets/images/Fondos/fondo 5.png';
-import fondo6 from '../../../assets/images/Fondos/fondo 6.png';
-import fondo7 from '../../../assets/images/Fondos/fondo 7.png';
-import fondo8 from '../../../assets/images/Fondos/fondo 8.png';
-import fondo9 from '../../../assets/images/Fondos/fondo 9.png';
-import fondo10 from '../../../assets/images/Fondos/fondo 10.png';
-import fondo11 from '../../../assets/images/Fondos/fondo 11.png';
-import fondo12 from '../../../assets/images/Fondos/fondo 12.png';
 
-const backgrounds = [fondo1, fondo2, fondo3, fondo4, fondo5, fondo6, fondo7, fondo8, fondo9, fondo10, fondo11, fondo12 ];
+import fondo3 from "../../../assets/images/Fondos/fondo_3.png";
+import fondo4 from "../../../assets/images/Fondos/fondo_4.png";
+import fondo5 from "../../../assets/images/Fondos/fondo_5.png";
+import fondo6 from "../../../assets/images/Fondos/fondo_6.png";
+import fondo7 from "../../../assets/images/Fondos/fondo_7.png";
+import fondo8 from '../../../assets/images/Fondos/fondo_8.png';
+
+const backgrounds = [fondo3, fondo4, fondo5, fondo6, fondo7, fondo8 ];
 
 
 const LayoutGame = () => {
@@ -34,7 +29,6 @@ const LayoutGame = () => {
         setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
     }, [id]);
 
-    console.log('background:', backgrounds[backgroundIndex]);
 
     const back = () => {
         navigate('/');
