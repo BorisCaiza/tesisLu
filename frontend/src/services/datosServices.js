@@ -1,23 +1,23 @@
 import gato from "../assets/images/words/gato.png";
 import pato from "../assets/images/words/pato.avif";
-import fresa from "../assets/images/words/fresa.jpg";
-import ojoImage from "../assets/images/words/ojo.jpg";
+import fresa from "../assets/images/words/fresa.png";
+import ojoImage from "../assets/images/words/ojo.png";
 import mesaImage from "../assets/images/words/mesa.webp";
 import bananaImage from "../assets/images/words/banana.avif";
-import rojoImage from "../assets/images/words/rojo.jpg";
+import rojoImage from "../assets/images/words/rojo.png";
 import manzanaImage from "../assets/images/words/manzana.jpg";
-import lunaImage from "../assets/images/words/luna.jpg";
-import cunaImage from "../assets/images/words/cuna.jpg";
+import lunaImage from "../assets/images/words/luna.png";
+import cunaImage from "../assets/images/words/cuna.png";
 import focoImage from "../assets/images/words/foco.png";
-import cocoImage from "../assets/images/words/coco.jpg";
+import cocoImage from "../assets/images/words/coco.png";
 import estrellaImage from "../assets/images/words/estrella.avif";
-import huellaImage from "../assets/images/words/huella.jpg";
+import huellaImage from "../assets/images/words/huella.png";
 import rocaImage from "../assets/images/words/roca.avif";
-import focaImage from "../assets/images/words/foca.jpg";
-import pizarraImage from "../assets/images/words/pizarra.jpg";
-import guitarraImage from "../assets/images/words/guitarra.jpg";
+import focaImage from "../assets/images/words/foca.png";
+import pizarraImage from "../assets/images/words/pizarra.png";
+import guitarraImage from "../assets/images/words/guitarra.png";
 import carameloImage from "../assets/images/words/caramelo.webp";
-import hieloImage from "../assets/images/words/hielo.jpg";
+import hieloImage from "../assets/images/words/hielo.png";
 
 export const wordsDataService = () => {
     return [
