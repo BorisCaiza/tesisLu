@@ -18,56 +18,37 @@ const Game3 = () => {
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(0);
+    const [mouseOverTime, setMouseOverTime] = useState(0);
     const synth = window.speechSynthesis;
 
     const getScore = async () => {
-
         const score = {
-
             token: user.token,
             game: "game3"
-
         }
-
         try {
-
             const response = await api.post('/getScore', score)
-
             if (response.status === 200) {
-
                 console.log("mejor tiempo", response.data.game.bestTime)
-
                 setBestTime(response.data.game.bestTime)
             }
         } catch (error) {
-
+            console.error(error);
         }
-
     }
 
     const saveScore = async () => {
-
-
-
-
         const score = {
             bestTime: time,
             game: "game3",
             token: user.token
         }
-
         try {
-
-            const response = await api.post('/score', score)
-
+            await api.post('/score', score)
         } catch (error) {
-
+            console.error(error);
         }
     }
-
-
-
-
 
     const getDatos = () => {
         const orden = Math.random() < 0.5 ? 1 : 2;
@@ -101,7 +82,16 @@ const Game3 = () => {
         };
     }, [isRunning]);
 
+    const handleMouseEnter = (word) => {
+        const timeoutId = setTimeout(() => {
+            getVoice(word);
+        }, 500);
+        setMouseOverTime(timeoutId);
+    };
 
+    const handleMouseLeave = () => {
+        clearTimeout(mouseOverTime);
+    };
 
     const handleOptionSelect = (selectedOption) => {
         let gano = false;
@@ -138,15 +128,21 @@ const Game3 = () => {
 
     return (
         <div className="board">
-            <div>
-                <img src={targetWord.image} onMouseEnter={() => getVoice(targetWord.word)} alt="Option" style={{ height: 75 }} />
-                <h1>{targetWord && targetWord.name}</h1>
+            <div style={{ textAlign: 'center' }}>
+                <h1 style={{fontWeight: "bold"}}>{targetWord && targetWord.word}</h1>
+                <img
+                    src={targetWord.image}
+                    onMouseEnter={() => handleMouseEnter(targetWord.word)}
+                    onMouseLeave={handleMouseLeave}
+                    alt="Option"
+                    style={{ maxHeight: '150px' }}
+                />
                 <h3>Rima con...</h3>
                 <div className="button-container">
-                    <button onClick={() => handleOptionSelect(option1)} onMouseEnter={() => getVoice(option1.word)}>
+                    <button onClick={() => handleOptionSelect(option1)} onMouseEnter={() => handleMouseEnter(option1.word)}>
                         <img src={option1.image} alt="Option Incorrect" />
                     </button>
-                    <button onClick={() => handleOptionSelect(option2)} onMouseEnter={() => getVoice(option2.word)}>
+                    <button onClick={() => handleOptionSelect(option2)} onMouseEnter={() => handleMouseEnter(option2.word)}>
                         <img src={option2.image} alt="Option Correct" />
                     </button>
                 </div>

@@ -1,15 +1,11 @@
 .board-game4 {
-    width: 500px;
-    height: 400px;
-    background-color: white;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border: 3px solid black; 
 }
 .game-game4 {
     display: grid;
@@ -22,11 +18,9 @@
     margin: 1 auto;
 }
 
-/* Estilos de las tarjetas */
 .card-game4 {
-    width: 100px;
-    height: 150px;
-    border: 2px solid #e0e0e0;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

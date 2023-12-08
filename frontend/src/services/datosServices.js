@@ -3,16 +3,16 @@ import pato from "../assets/images/words/pato.png";
 import fresa from "../assets/images/words/fresa.png";
 import ojoImage from "../assets/images/words/ojo.png";
 import mesaImage from "../assets/images/words/mesa.webp";
-import bananaImage from "../assets/images/words/banana.avif";
+import bananaImage from "../assets/images/words/banana.png";
 import rojoImage from "../assets/images/words/rojo.png";
-import manzanaImage from "../assets/images/words/manzana.jpg";
+import manzanaImage from "../assets/images/words/manzana.png";
 import lunaImage from "../assets/images/words/luna.png";
 import cunaImage from "../assets/images/words/cuna.png";
 import focoImage from "../assets/images/words/foco.png";
 import cocoImage from "../assets/images/words/coco.png";
-import estrellaImage from "../assets/images/words/estrella.avif";
+import estrellaImage from "../assets/images/words/estrella.png";
 import huellaImage from "../assets/images/words/huella.png";
-import rocaImage from "../assets/images/words/roca.avif";
+import rocaImage from "../assets/images/words/roca.png";
 import focaImage from "../assets/images/words/foca.png";
 import pizarraImage from "../assets/images/words/pizarra.png";
 import guitarraImage from "../assets/images/words/guitarra.png";
@@ -25,7 +25,7 @@ export const wordsDataService = () => {
         { id: 2, word: "Pato", rimas: 1, syllable_separation: "pa-to", image: pato },
         { id: 3, word: "Fresa", rimas: 4, syllable_separation: "fre-sa", image: fresa },
         { id: 4, word: "Mesa", rimas: 3, syllable_separation: "me-sa", image: mesaImage },
-        { id: 5, word: "ojo", rimas: 6, syllable_separation: "o-jo", image: ojoImage },
+        { id: 5, word: "Ojo", rimas: 6, syllable_separation: "o-jo", image: ojoImage },
         { id: 6, word: "Rojo", rimas: 5, syllable_separation: "ro-jo", image: rojoImage },
         { id: 7, word: "Banana", rimas: 8, syllable_separation: "ba-na-na", image: bananaImage },
         { id: 8, word: "Manzana", rimas: 7, syllable_separation: "man-za-na", image: manzanaImage },
