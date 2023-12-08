@@ -17,10 +17,9 @@ import {
     IconButton,
     InputAdornment
 } from '@mui/material';
-import avatar from "../Images/avataaars.svg"
+
 import "./login.css"
 import { useNavigate } from "react-router-dom";
-import api from "../api/api"
 import { AuthContext } from "../Context/AuthContext";
 
 

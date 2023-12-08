@@ -1,6 +1,6 @@
 /* Estilo para el fondo de ladrillos */
 .brick-wall {
-    background-image: url('../../../assets/images/bg-zoo.png');
+    background-image: url('../../../assets/images/Fondos/fondo_3.png');
     background-size: cover;
     position: relative;
     width: 100%;

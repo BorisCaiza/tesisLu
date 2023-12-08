@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Games.css"
-import avatar from "../../Images/workoutLLogo.png"
 import juego1 from "../../assets/images/juego1.png"
 import juego2 from "../../assets/images/juego2.png"
 import juego3 from "../../assets/images/juego3.png"
