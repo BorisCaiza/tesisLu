@@ -10,25 +10,25 @@ import Header from '../../Compoments/Header';
 export default function Games() {
     const elementos = [
         {
-            nombre: "Segmentación de sonidos",
-            descripcion: "Arma un rompecabezas",
+            nombre: "SEGMENTACIÓN DE SONIDOS",
+            descripcion: "Reconoce la letra mostrada",
             imagen: juego1,
             game: "game1"
         },
         {
-            nombre: "Conciencia de sílabas",
-            descripcion: "Selecciona la silaba correcta",
+            nombre: "CONCIENCIA DE SILABAS",
+            descripcion: "Reconoce el objeto",
             imagen: juego2,
             game: "game2"
         },
         {
-            nombre: "Conciencia de rima",
+            nombre: "CONCIENCIA DE RIMAS",
             descripcion: "Encuentra la rima correcta",
             imagen: juego3,
             game: "game3"
         },
         {
-            nombre: "Juego de Memoria ",
+            nombre: "SIMILITUDES FONÉTICAS ",
             descripcion: "Encuentra la pareja correcta",
             imagen: juego4,
             game: "game4"

@@ -22,10 +22,10 @@ function VideoExplicacion() {
 
 
     const juegoTitulos = {
-        game1: "Segmentación de sonidos",
-        game2: "Conciencia de sílabas",
-        game3: "Conciencia de rima",
-        game4: "Juego de Memoria"
+        game1: "SEGMENTACIÓN DE SONIDOS",
+        game2: "CONCIENCIA DE SILABAS",
+        game3: "CONCIENCIA DE RIMAS",
+        game4: "SIMILITUDES FONÉTICAS"
     };
 
     const videoUrls = {
