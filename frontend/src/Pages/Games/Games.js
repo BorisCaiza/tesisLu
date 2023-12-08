@@ -43,11 +43,8 @@ export default function Games() {
 
             <Header />
             <div className='container-fluid background-games up'>
-
                 <div className='row justify-content-center'>
-
                     <div className='col-sm center-games'>
-
                         <div className='title-games'>
                             <h1>Escoge un juego</h1>
                         </div>
@@ -57,7 +54,7 @@ export default function Games() {
 
 
                 <div className='row justify-content-center mt-3'>
-                    {elementos.map((elemento, index) => ( // Aquí corregidod
+                    {elementos.map((elemento, index) => ( 
                         <div key={index} className="col-sm-5 mt-2">
                             <div className="card">
                                 <img src={elemento.imagen} alt={elemento.nombre} style={{ height: "400px" }} className='card-img-top img-fluid im-card' />
@@ -70,11 +67,7 @@ export default function Games() {
                         </div>
                     ))}
                 </div>
-
-
             </div>
-
-
         </>
     )
 }

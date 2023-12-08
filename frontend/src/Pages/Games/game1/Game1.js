@@ -85,6 +85,7 @@ function Game1() {
     return (
         <div className="Game1">
             <div>
+                <h1>SEGMENTACIÓN DE SONIDOS</h1>
                 <h2>Puntuación: {score}</h2>
                 <div className="options-container">
                     <div className="options-buttons">
@@ -98,7 +99,7 @@ function Game1() {
                         </div>
                         <button onClick={handleScrollRight}>&#8250;</button>
                     </div>
-                    <h1>Encuentra la letra:</h1>
+                    <h3>Encuentra la letra:</h3>
                     <span id="target-letter">{targetLetter}</span>
                 </div>
             </div>

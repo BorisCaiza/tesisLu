@@ -3,7 +3,6 @@ import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useNavigate } from 'react-router-dom';
 import './game2.css';
-import fondo from '../../../Images/manzana.png';
 import altavoz from "../../../assets/altavoz.png"
 import { wordsDataService } from '../../../services/datosServices';
 import { AuthContext } from '../../../Context/AuthContext';
@@ -22,7 +21,6 @@ const Game2 = () => {
     const [bestTime, setBestTime] = useState(null);
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(true);
-    const [shuffledImages, setShuffledImages] = useState([]);
     const [images, setImages] = useState([])
 
 
@@ -183,11 +181,12 @@ const Game2 = () => {
         });
 
         const imageStyle = {
-            width: '60px',
-            height: '60px',
-            opacity: isDragging ? 0.5 : opacity, // Controla la opacidad
+            width: '75px',
+            height: '75px',
+            opacity: isDragging ? 0.5 : opacity,
             cursor: 'pointer',
         };
+        
 
         return (
             <img
@@ -253,8 +252,6 @@ const Game2 = () => {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-
-        console.log("aleatorio: ", shuffled);
         setImages(shuffled);
     };
 
@@ -269,16 +266,15 @@ const Game2 = () => {
         const backgroundImage = word ? `url('${word.image}')` : 'none';
 
         const borderStyle = {
-            width: '70px',
-            height: '60px',
+            width: '75px',
+            height: '75px',
             border: 'none',
             backgroundImage,
             backgroundSize: 'cover',
-            display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             opacity: 0.4,
-            display: isVictory ? 'none' : 'block', // Oculta el componente cuando se gana el juego
+            display: isVictory ? 'none' : 'block', 
         };
 
         return (
@@ -293,30 +289,21 @@ const Game2 = () => {
     return (
         <DndProvider backend={HTML5Backend}>
             <div className='center'>
-
-
                 <ImageContainer images={images} />
-
-
                 <DropTarget />
                 {isVictory && <p>¡Has ganado el juego!</p>}
-                <div className="title mt-3">
+                <div className="title">
                     {word ? word.word : ''}
                 </div>
                 <div className="speaker-button">
                     <img src={altavoz} className="altavoz-btn" onClick={speak} alt='altavoz' />
-
                 </div>
-
                 <h2>Separación de sílabas</h2>
                 <h5>{word ? word.syllable_separation : ''}</h5>
 
+                <div className='color'>Cronómetro: {time} segundos</div>
+                <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
             </div>
-
-            <div className='color'>Cronómetro: {time} segundos</div>
-
-            <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
-
 
         </DndProvider>
     );

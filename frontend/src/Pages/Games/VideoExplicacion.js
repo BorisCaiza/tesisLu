@@ -7,6 +7,8 @@ import fondo10 from '../../assets/images/Fondos/fondo_10.png';
 import fondo11 from '../../assets/images/Fondos/fondo_11.png';
 import fondo12 from '../../assets/images/Fondos/fondo_12.png';
 
+import Header from '../../Compoments/Header';
+
 const backgrounds = [fondo9, fondo10, fondo11, fondo12];
 
 function VideoExplicacion() {
@@ -45,30 +47,33 @@ function VideoExplicacion() {
     const videoSrc = videoUrls[id] || "";
 
     return (
-        <div className="video-explicacion">
-            <div className="video-explicacion__background" style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}>
-                <div className="video-explicacion__content">
-                    <h1 className="video-explicacion__title">{titulo}</h1>
-                    <div>
-                    <video
-                            title="video"
-                            width="560"
-                            height="315"
-                            src={videoSrc}
-                            autoPlay  
-                            loop
-                            controls
-                            controlsList="nodownload" 
-                        >
-                        </video>
-                    </div>
-                    <div className="video-explicacion__buttons">
-                        <button className="video-explicacion__button" onClick={next}>Regresar</button>
-                        <button className="video-explicacion__button" style={{ backgroundColor: "#e4800e" }} onClick={back}>Continuar</button>
+        <>
+            <Header />
+            <div className="video-explicacion">
+                <div className="video-explicacion__background" style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}>
+                    <div className="video-explicacion__content">
+                        <h1 className="video-explicacion__title">{titulo}</h1>
+                        <div>
+                            <video
+                                title="video"
+                                width="560"
+                                height="315"
+                                src={videoSrc}
+                                autoPlay
+                                loop
+                                controls
+                                controlsList="nodownload"
+                            >
+                            </video>
+                        </div>
+                        <div className="video-explicacion__buttons">
+                            <button className="video-explicacion__button" onClick={next}>Regresar</button>
+                            <button className="video-explicacion__button" style={{ backgroundColor: "#e4800e" }} onClick={back}>Continuar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
