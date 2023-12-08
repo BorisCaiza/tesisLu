@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import YouTube from 'react-youtube';
 import './VideoExplicacion.css';
 
 import fondo9 from '../../assets/images/Fondos/fondo_9.png';
@@ -12,19 +11,8 @@ const backgrounds = [fondo9, fondo10, fondo11, fondo12 ];
 
 function VideoExplicacion() {
     const { id } = useParams()
-    const videoId = 'dQw4w9WgXcQ';
     const navigate = useNavigate();
     const [backgroundIndex, setBackgroundIndex] = useState(0);
-
-    const videoOptions = {
-        height: '390',
-        width: '640',
-        playerVars: {
-            autoplay: 1,
-            showinfo: 0,
-        },
-    };
-    
 
     useEffect(() => {
         console.log('Cambiando fondo...');
@@ -53,7 +41,7 @@ function VideoExplicacion() {
                 <div className="video-explicacion__content">
                     <h1 className="video-explicacion__title">{titulo}</h1>
                     <div className="video-explicacion__video">
-                        <YouTube videoId={videoId} opts={videoOptions} />
+                     
                     </div>
                     <div className="video-explicacion__buttons">
                         <button className="video-explicacion__button" onClick={next}>Regresar</button>
