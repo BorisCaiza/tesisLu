@@ -22,6 +22,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
+    "redux": "^5.0.0",
     "sweetalert2": "^11.4.23",
     "universal-cookie": "^6.1.1"
   },

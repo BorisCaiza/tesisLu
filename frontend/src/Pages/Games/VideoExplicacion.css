@@ -16,6 +16,7 @@
 }
 
 .video-explicacion__content {
+    position: relative;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -27,9 +28,7 @@
     font-weight: bold;
 }
 
-.video-explicacion__video {
-    /* Estilos para el video o reproductor de video */
-}
+
 
 .video-explicacion__buttons {
     margin-top: 20px;
