@@ -24,7 +24,8 @@
     "react-scripts": "5.0.1",
     "redux": "^5.0.0",
     "sweetalert2": "^11.4.23",
-    "universal-cookie": "^6.1.1"
+    "universal-cookie": "^6.1.1",
+    "video-react": "^0.16.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -13,7 +13,7 @@ import VideoExplicacion from './Pages/Games/VideoExplicacion';
 import NewPassword from "./Pages/NewPassword"
 
 import 'bootstrap/dist/css/bootstrap.css';
-
+import 'video-react/dist/video-react.css';
 
 function App() {
 

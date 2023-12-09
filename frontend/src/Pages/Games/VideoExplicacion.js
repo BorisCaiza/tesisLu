@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './VideoExplicacion.css';
+import { Player } from 'video-react';
 
 import fondo9 from '../../assets/images/Fondos/fondo_9.png';
 import fondo10 from '../../assets/images/Fondos/fondo_10.png';
 import fondo11 from '../../assets/images/Fondos/fondo_11.png';
 import fondo12 from '../../assets/images/Fondos/fondo_12.png';
 
-import Header from '../../Compoments/Header';
 
 const backgrounds = [fondo9, fondo10, fondo11, fondo12];
 
@@ -47,20 +47,22 @@ function VideoExplicacion() {
 
     return (
 
-            <div className="video-explicacion">
-                <div className="video-explicacion__background" style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}>
-                    <div className="video-explicacion__content">
-                        <h1 className="video-explicacion__title">{titulo}</h1>
-                        <div>
-            
-                        </div>
-                        <div className="video-explicacion__buttons">
-                            <button className="video-explicacion__button" onClick={next}>Regresar</button>
-                            <button className="video-explicacion__button" style={{ backgroundColor: "#e4800e" }} onClick={back}>Continuar</button>
-                        </div>
+        <div className="video-explicacion">
+            <div className="video-explicacion__background" style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}>
+                <div className="video-explicacion__content">
+                    <h1 className="video-explicacion__title">{titulo}</h1>
+                    <div>
+                        <Player autoPlay>
+                            <source src={videoSrc} />
+                        </Player>
+                    </div>
+                    <div className="video-explicacion__buttons">
+                        <button className="video-explicacion__button" onClick={next}>Regresar</button>
+                        <button className="video-explicacion__button" style={{ backgroundColor: "#e4800e" }} onClick={back}>Continuar</button>
                     </div>
                 </div>
             </div>
+        </div>
 
     );
 }

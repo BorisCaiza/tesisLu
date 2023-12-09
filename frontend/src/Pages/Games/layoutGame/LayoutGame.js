@@ -5,6 +5,7 @@ import Game1 from '../game1/Game1';
 import Game2 from '../game2/Game2';
 import Game3 from '../game3/Game3';
 import Game4 from '../game4/Game4';
+import { Player } from 'video-react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -40,10 +41,10 @@ const LayoutGame = () => {
     };
 
     const videoUrls = {
-        game1: "https://drive.google.com/uc?id=1ImahWVbBxNdKEVHdqT7T8V16phPtMdvA",
-        game2: "https://drive.google.com/uc?id=1vuQsso1vGu9yIp7CvgEROF54TgW5AFO9",
-        game3: "https://drive.google.com/uc?id=1Jt4XXMdrmWmUBm3CjEMX_zbWymovejgg",
-        game4: "https://drive.google.com/uc?id=1ieP3K7S-Va-44JFPPwWAQRz9MFzdDEqk"
+        game1: "https://drive.google.com/uc?id=1qfP2SH5GYpXRxbkKaiJh6SzRFdrGTASp",
+        game2: "https://drive.google.com/uc?id=1dpRl6jffzfgr2VRAvKEHsAvroMPc0m4k",
+        game3: "https://drive.google.com/uc?id=1bQInpK_g01A4avGS7X5uJUN3DMr0TKvP",
+        game4: "https://drive.google.com/uc?id=1PEFG5Fuendhkq6FrlAeig7s01Y72ea96"
     };
 
     const videoSrc = videoUrls[id] || "";
@@ -69,7 +70,9 @@ const LayoutGame = () => {
                     <Modal.Title>Tutorial</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-             
+                    <Player autoPlay>
+                        <source src={videoSrc} />
+                    </Player>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" style={{ background: "orange", border: "none" }} onClick={closeInstructions}>
