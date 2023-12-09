@@ -35,6 +35,15 @@ function VideoExplicacion() {
         game3: "https://drive.google.com/uc?id=1Jt4XXMdrmWmUBm3CjEMX_zbWymovejgg",
         game4: "https://drive.google.com/uc?id=1ieP3K7S-Va-44JFPPwWAQRz9MFzdDEqk"
     };
+
+    const refuersosUtls = {
+        game1: ["https://view.genial.ly/656ebb738ea79a0014c156de/interactive-image-segmentacion-de-sonidos", "https://es.educaplay.com/recursos-educativos/17206617-silabas_con_m.html"],
+        game2: ["https://www.canva.com/design/DAF2QF3FR8U/t4NxuEPpa66BYDXU5rEVzA/edit?utm_content=DAF2QF3FR8U&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", "https://es.educaplay.com/recursos-educativos/17206830-conciencia_de_silabas.html"],
+        game3: ["https://www.canva.com/design/DAF2PnWOF3c/vs0b3MZEGKP6ClTfBDm8ZA/edit?utm_content=DAF2PnWOF3c&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", "https://es.educaplay.com/recursos-educativos/17227670-juego_de_memoria_rim.html"],
+        game4: ["https://www.canva.com/design/DAF2QtiBbWs/4weww45vcZ6GoueenF30JQ/edit?utm_content=DAF2QtiBbWs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", "https://es.educaplay.com/recursos-educativos/17228167-similitudes_foneticas.html "]
+
+    }
+
     const next = () => {
         navigate("/")
     }
@@ -44,6 +53,7 @@ function VideoExplicacion() {
 
     const titulo = juegoTitulos[id] || "Cargando titulo";
     const videoSrc = videoUrls[id] || "";
+    const linksSrc = refuersosUtls[id] || "";
 
     return (
 
