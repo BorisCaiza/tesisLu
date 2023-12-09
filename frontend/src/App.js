@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import React, { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from './Context/AuthContext';
@@ -32,6 +32,10 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/forgot-password' element={<ForgetPassword />} />
           <Route path='/newPassword/:token' element={<NewPassword />} />
+          <Route
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
         </Routes>
       ) : (
         <>
@@ -40,6 +44,10 @@ function App() {
             <Route index element={<Games />} />
             <Route path='/video/:id' element={<VideoExplicacion />} />
             <Route path='/games/:id' element={<LayoutGame />} />
+            <Route
+              path="*"
+              element={<Navigate to="/" replace />}
+            />
           </Routes>
         </>
       )}
