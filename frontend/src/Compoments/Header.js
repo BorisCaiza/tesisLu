@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import "./header.css";
-import android from "../Images/android-chrome-512x512.png";
+import logo from "../assets/images/logo.png"
 import { AuthContext } from '../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -29,7 +29,7 @@ export default function Header() {
         <div className='fixed-top'>
             <nav className="navbar navbar-light custom-bg">
                 <div className="container-fluid">
-                    <a className="navbar-brand"><img className='img-fluid logo' src={android} alt="Logo" /></a>
+                    <a className="navbar-brand"><img className='img-fluid logo' src={logo} alt="Logo" /></a>
                     <form className="d-flex">
                         <button onClick={salir} className="btn btn-outline-success" type="button">Salir</button>
                     </form>
