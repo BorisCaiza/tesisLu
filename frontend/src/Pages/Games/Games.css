@@ -1,0 +1,33 @@
+.background-games {
+  background-image: url("../../assets/images/Fondos/fondo_2.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.title-games {
+  background-color: rgba(0, 150, 136, 0.5);
+  padding: 1rem 1rem;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.title-games h1 {
+  color: white;
+}
+
+.center-games {
+  text-align: center;
+}
+
+.img-card {
+  width: 20rem;
+  height: 10rem;
+}
+
+.title-card {
+  color: #e4800e;
+}
+
+.up {
+  margin-top: 3.5rem;
+}

@@ -1,0 +1,99 @@
+.brick-wall {
+    background-image: url('../../../assets/images/Fondos/fondo_3.png');
+    background-size: cover;
+    padding-top: 15%;
+    width: 100%;
+    height: 100vh;
+}
+
+.center-component {
+    background-color: rgba(255, 255, 255, 0.57);
+    background-size: cover;
+    width: 800px;
+    height: 550px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+    border: 4px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.back-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+}
+
+
+.large-orange-button {
+    background-color: orange;
+    color: black;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 5px;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.large-orange-button:hover {
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.instructions-button {
+    position: absolute;
+    top: 80px;
+    left: 20px;
+}
+
+.large-blue-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.large-blue-button:hover {
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.modal-content {
+    background-color: #f8f9fa;
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.modal-header .close {
+    color: white;
+}
