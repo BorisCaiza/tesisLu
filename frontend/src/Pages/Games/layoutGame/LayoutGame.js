@@ -29,7 +29,7 @@ const LayoutGame = () => {
     }, [id]);
 
     const back = () => {
-        navigate('/');
+        navigate(`/video/${id}`);
     };
 
     const openInstructions = () => {
