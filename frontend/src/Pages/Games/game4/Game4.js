@@ -48,7 +48,7 @@ const Game4 = () => {
         if (selectedCard !== null) {
             setSelectedCardAudio(new Audio(cards[selectedCard].audio));
         }
-    }, [selectedCard]);
+    }, [selectedCard, cards]);
 
     const getScore = async () => {
         const score = {
