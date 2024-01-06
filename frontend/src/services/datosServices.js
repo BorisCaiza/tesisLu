@@ -198,7 +198,7 @@ export const wordsDataService = () => {
         { id: 42, word: "Limón", rimas: 41, syllable_separation: "li-món", image: limonImage, audio: limonAudio, audioSilaba: limonSilaba },
         { id: 43, word: "Sol", rimas: 44, syllable_separation: "sol", image: solImage, audio: solAudio, audioSilaba: solSilaba },
         { id: 44, word: "Girasol", rimas: 43, syllable_separation: "gi-ra-sol", image: girasolImage, audio: girasolAudio, audioSilaba: girasolSilaba },
-        { id: 45, word: "Sopa", rimas: 46, syllable_separation: "so-pa", image: sopaImage, audio: veinteAudio, audioSilaba: veinteSilaba },
+        { id: 45, word: "Sopa", rimas: 46, syllable_separation: "so-pa", image: sopaImage, audio: sopaAudio, audioSilaba: sopaSilaba },
         { id: 46, word: "Ropa", rimas: 45, syllable_separation: "ro-pa", image: ropaImage, audio: ropaAudio, audioSilaba: ropaSilaba },
         { id: 47, word: "Veinte", rimas: 48, syllable_separation: "vien-te", image: vientoImage, audio: veinteAudio, audioSilaba: veinteSilaba },
         { id: 48, word: "Diente", rimas: 47, syllable_separation: "dien-te", image: dienteImage, audio: dienteAudio, audioSilaba: dienteSilaba },
