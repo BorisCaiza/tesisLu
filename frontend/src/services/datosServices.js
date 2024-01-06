@@ -116,7 +116,6 @@ export function getrhymingWords() {
     const palabraAleatoria = palabras[idAleatorio];
 
     const rima = palabras.find(word => word.id === palabraAleatoria.rimas);
-    console.log(rima);
     let idAleatorio2;
     do {
         idAleatorio2 = Math.floor(Math.random() * palabras.length);
