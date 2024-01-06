@@ -21,8 +21,6 @@ const Game3 = () => {
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(0);
-    const [mouseOverTime, setMouseOverTime] = useState(0);
-    const synth = window.speechSynthesis;
 
     const [targetWordAudio, setTargetWordAudio] = useState(null);
     const [option1Audio, setOption1Audio] = useState(null);
@@ -88,17 +86,6 @@ const Game3 = () => {
         };
     }, [isRunning]);
 
-    const handleMouseEnter = (word) => {
-        const timeoutId = setTimeout(() => {
-            getVoice(word);
-        }, 500);
-        setMouseOverTime(timeoutId);
-    };
-
-    const handleMouseLeave = () => {
-        clearTimeout(mouseOverTime);
-    };
-
     useEffect(() => {
         if (targetWord !== null) {
             const audio = new Audio(targetWord.audio);
@@ -117,7 +104,7 @@ const Game3 = () => {
 
     const playAudio = async (word) => {
         if (word) {
-            word.play()
+            word.play();
         }
     };
 
@@ -158,33 +145,27 @@ const Game3 = () => {
         });
     };
 
-    const getVoice = (text) => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'es-MX';
-        utterance.name = "Microsoft Sabina - Spanish (Mexico)";
-        utterance.voiceURI = "Microsoft Sabina - Spanish (Mexico)";
-        synth.speak(utterance);
-    }
-
     return (
         <div className="board">
             <div style={{ textAlign: 'center' }}>
                 <h1 style={{ fontWeight: "bold" }}>{targetWord && targetWord.word}
                     <VolumeUpIcon
                         onClick={() => playAudio(targetWordAudio)}
-                        style={{ cursor: "pointer", color: "yellowgreen", fontSize: "1.5em" }}
+                        style={{ cursor: "pointer", color: "3498db", fontSize: "1.5em" }}
                     />
                 </h1>
                 <img
                     src={targetWord.image}
                     alt="targetWord"
-                    style={{ maxHeight: '150px' }}
+                    style={{ maxHeight: '150px', cursor: "pointer" }}
+                    onClick={() => playAudio(targetWordAudio)}
+
                 />
                 <h3>
                     Rima con...{' '}
 
                 </h3>
-                <div className="button-container">
+                <div className="button-container m-5">
                     <button onClick={() => handleOptionSelect(option1)} onMouseEnter={() => playAudio(option1Audio)}>
                         <img src={option1.image} alt="Option Incorrect" />
                     </button>
