@@ -153,7 +153,6 @@ const Game2 = () => {
 
             const response = await api.post('/score', score)
 
-            console.log("respone", response.data)
 
         } catch (error) {
 
