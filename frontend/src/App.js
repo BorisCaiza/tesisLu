@@ -14,6 +14,7 @@ import NewPassword from "./Pages/NewPassword"
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'video-react/dist/video-react.css';
+import Footer from './Compoments/Footer';
 
 function App() {
 
@@ -27,16 +28,19 @@ function App() {
 
 
       {!user ? (
-        <Routes>
-          <Route index element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password' element={<ForgetPassword />} />
-          <Route path='/newPassword/:token' element={<NewPassword />} />
-          <Route
-            path="*"
-            element={<Navigate to="/" replace />}
-          />
-        </Routes>
+        <>
+          <Routes>
+            <Route index element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/forgot-password' element={<ForgetPassword />} />
+            <Route path='/newPassword/:token' element={<NewPassword />} />
+            <Route
+              path="*"
+              element={<Navigate to="/" replace />}
+            />
+          </Routes>
+          <Footer />
+        </>
       ) : (
         <>
           <Header />
@@ -49,6 +53,7 @@ function App() {
               element={<Navigate to="/" replace />}
             />
           </Routes>
+          <Footer />
         </>
       )}
     </>

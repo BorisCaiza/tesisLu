@@ -1,0 +1,8 @@
+.center-footer {
+  justify-content: center;
+  text-align: center;
+}
+
+.color-footer {
+  background-color: rgba(0, 150, 136, 0.5);
+}
