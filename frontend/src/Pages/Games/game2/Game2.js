@@ -183,6 +183,7 @@ const Game2 = () => {
             item: { src, alt, correct },
         });
 
+        console.log(src);
         const imageStyle = {
             width: '75px',
             height: '75px',
