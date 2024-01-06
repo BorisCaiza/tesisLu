@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Swal from 'sweetalert2';
 import "./Game1.css"
 
@@ -6,16 +6,12 @@ function Game1() {
     const [targetLetter, setTargetLetter] = useState('');
     const [options, setOptions] = useState([]);
     const [score, setScore] = useState(0);
-    const [visibleOptions, setVisibleOptions] = useState(4);
     const [scrollPosition, setScrollPosition] = useState(0);
+    const visibleOptions = 4;
 
     const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-    useEffect(() => {
-        generateRandomOptions();
-    }, [score]);
-
-    const generateRandomOptions = () => {
+    const generateRandomOptions = useCallback(() => {
         const randomOptions = [];
         const randomIndex = Math.floor(Math.random() * letters.length);
         setTargetLetter(letters[randomIndex]);
@@ -30,7 +26,12 @@ function Game1() {
         }
         randomOptions.sort(() => Math.random() - 0.5);
         setOptions(randomOptions);
-    };
+    }, [targetLetter]);
+    
+    useEffect(() => {
+        generateRandomOptions();
+    
+    }, [score, generateRandomOptions]);
 
     const handleOptionClick = (selectedLetter) => {
         if (selectedLetter === targetLetter) {
@@ -89,7 +90,7 @@ function Game1() {
                 <h2>Puntuación: {score}</h2>
                 <div className="options-container">
                     <div className="options-buttons">
-                        <button onClick={handleScrollLeft}>&#8249;</button>
+                        <button style={{background: "#007bff"}} onClick={handleScrollLeft}>&#8249;</button>
                         <div className="options">
                             {visibleOptionList.map((option, index) => (
                                 <button key={index} onClick={() => handleOptionClick(option)}>
@@ -97,7 +98,7 @@ function Game1() {
                                 </button>
                             ))}
                         </div>
-                        <button onClick={handleScrollRight}>&#8250;</button>
+                        <button style={{background: "#007bff"}} onClick={handleScrollRight}>&#8250;</button>
                     </div>
                     <h3>Encuentra la letra:</h3>
                     <span id="target-letter">{targetLetter}</span>
