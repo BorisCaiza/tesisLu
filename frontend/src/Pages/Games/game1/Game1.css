@@ -23,7 +23,7 @@ h2 {
 }
 
 .options-buttons button {
-  background: orange; 
+  background: rgba(0, 150, 136, 0.5); 
   color: white; 
   border: none;
   font-size: 50px;

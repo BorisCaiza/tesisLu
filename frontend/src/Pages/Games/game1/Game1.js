@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Swal from 'sweetalert2';
+import confetti from "canvas-confetti"
 import "./Game1.css"
 
 function Game1() {
@@ -27,10 +28,10 @@ function Game1() {
         randomOptions.sort(() => Math.random() - 0.5);
         setOptions(randomOptions);
     }, [targetLetter]);
-    
+
     useEffect(() => {
         generateRandomOptions();
-    
+
     }, [score, generateRandomOptions]);
 
     const handleOptionClick = (selectedLetter) => {
@@ -57,6 +58,18 @@ function Game1() {
             showCancelButton: true,
             confirmButtonText: 'Sí',
             cancelButtonText: 'No',
+            didOpen: () => {
+                confetti({
+                    particleCount: 100,
+                    startVelocity: 30,
+                    spread: 360,
+                    origin: {
+                        x: 0.5,
+                        y: 0.5,
+                    },
+                    zIndex: 10000,
+                });
+            },
         }).then((result) => {
             if (result.value) {
                 setScore(score + 1);
@@ -90,7 +103,7 @@ function Game1() {
                 <h2>Puntuación: {score}</h2>
                 <div className="options-container">
                     <div className="options-buttons">
-                        <button style={{background: "#007bff"}} onClick={handleScrollLeft}>&#8249;</button>
+                        <button style={{ background: "#007bff" }} onClick={handleScrollLeft}>&#8249;</button>
                         <div className="options">
                             {visibleOptionList.map((option, index) => (
                                 <button key={index} onClick={() => handleOptionClick(option)}>
@@ -98,7 +111,7 @@ function Game1() {
                                 </button>
                             ))}
                         </div>
-                        <button style={{background: "#007bff"}} onClick={handleScrollRight}>&#8250;</button>
+                        <button style={{ background: "#007bff" }} onClick={handleScrollRight}>&#8250;</button>
                     </div>
                     <h3>Encuentra la letra:</h3>
                     <span id="target-letter">{targetLetter}</span>

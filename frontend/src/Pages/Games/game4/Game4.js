@@ -9,6 +9,7 @@ import { AuthContext } from "../../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
+import confetti from "canvas-confetti";
 import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 import soundMatch from '../../../assets/sounds/match.wav';
 import soundWin from '../../../assets/sounds/win.wav';
@@ -35,10 +36,10 @@ const Game4 = () => {
 
 
     const initialCards = [
-        { name: "gato", image: card1, isFlipped: false,  match: false },
-        { name: "jirafa", image: card2, isFlipped: false,  match: false },
-        { name: "perro", image: card3, isFlipped: false,  match: false },
-        { name: "león", image: card4, isFlipped: false,  match: false },
+        { name: "gato", image: card1, isFlipped: false, match: false },
+        { name: "jirafa", image: card2, isFlipped: false, match: false },
+        { name: "perro", image: card3, isFlipped: false, match: false },
+        { name: "león", image: card4, isFlipped: false, match: false },
     ];
 
     const getScore = async () => {
@@ -62,7 +63,7 @@ const Game4 = () => {
             token: user.token
         }
         try {
-             await api.post('/score', score)
+            await api.post('/score', score)
         } catch (error) {
             console.error(error);
         }
@@ -89,10 +90,10 @@ const Game4 = () => {
         setCards(duplicatedCards);
     }, []);
 
-    
+
 
     const handleCardClick = (index, text) => {
-        if(cards[index].isFlipped === false )  {
+        if (cards[index].isFlipped === false) {
             updateCardState(index, true);
             if (selectedCard === null) {
                 setSelectedCard(index);
@@ -126,9 +127,9 @@ const Game4 = () => {
             setMatchTime(null);
 
             if (count === 2) {
-                audioWin.play(); 
+                audioWin.play();
                 getWin();
-            }else{
+            } else {
                 audioMatch.play();
             }
         } else {
@@ -152,7 +153,19 @@ const Game4 = () => {
                 </div>`,
             confirmButtonText: 'Jugar de Nuevo',
             cancelButtonText: 'Salir',
-            showCancelButton: true
+            showCancelButton: true,
+            didOpen: () => {
+                confetti({
+                    particleCount: 100,
+                    startVelocity: 30,
+                    spread: 360,
+                    origin: {
+                        x: 0.5,
+                        y: 0.5,
+                    },
+                    zIndex: 10000,
+                });
+            },
         }).then((result) => {
             saveScore();
             if (result.isConfirmed) {
@@ -177,9 +190,9 @@ const Game4 = () => {
                 ))}
 
             </div>
-            <div style={{fontWeight: "bold"}}>Cronómetro: {time} segundos</div>
-            <div style={{fontWeight: "bold"}}>Mejor puntaje: {score} puntos</div>
-            <div style={{fontWeight: "bold"}}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
+            <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
+            <div style={{ fontWeight: "bold" }}>Mejor puntaje: {score} puntos</div>
+            <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
         </div>
     );
 };

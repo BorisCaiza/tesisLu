@@ -5,6 +5,7 @@ import { getrhymingWords } from '../../../services/datosServices';
 import api from "../../../api/api"
 import { AuthContext } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import confetti from "canvas-confetti"
 
 const Game3 = () => {
 
@@ -106,6 +107,18 @@ const Game3 = () => {
             confirmButtonText: 'Jugar de Nuevo',
             cancelButtonText: 'Salir',
             showCancelButton: true,
+            didOpen: () => {
+                gano && confetti({
+                    particleCount: 100,
+                    startVelocity: 30,
+                    spread: 360,
+                    origin: {
+                        x: 0.5,
+                        y: 0.5,
+                    },
+                    zIndex: 10000,
+                });
+            },
         }).then((result) => {
             if (result.isConfirmed) {
                 getDatos();

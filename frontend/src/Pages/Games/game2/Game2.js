@@ -8,6 +8,8 @@ import { wordsDataService } from '../../../services/datosServices';
 import { AuthContext } from '../../../Context/AuthContext';
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
+import confetti from "canvas-confetti"
+
 
 const Game2 = () => {
 
@@ -27,7 +29,6 @@ const Game2 = () => {
     useEffect(() => {
         getWord();
         getScore();
-
 
     }, []);
 
@@ -60,12 +61,10 @@ const Game2 = () => {
             let html = ``
 
             if (time < 5) {
-
                 html = `<div>
                     <p style="font-size: 40px">⭐⭐⭐</p>
                     <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
                 </div>`
-
             } else if (time < 15) {
                 html = `<div>
                     <p style="font-size: 40px">⭐⭐</p>
@@ -77,18 +76,27 @@ const Game2 = () => {
                     <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
                 </div>`
             }
-
             Swal.fire({
                 html: html,
                 confirmButtonText: 'Jugar de Nuevo',
                 cancelButtonText: 'Salir',
-                showCancelButton: true
+                showCancelButton: true,
+                didOpen: () => {
+                    confetti({
+                        particleCount: 100,
+                        startVelocity: 30,
+                        spread: 360,
+                        origin: {
+                            x: 0.5,
+                            y: 0.5,
+                        },
+                        zIndex: 10000,
+                    });
+                },
             }).then((result) => {
                 saveScore();
                 if (result.isConfirmed) {
                     window.location.reload();
-
-
                 } else {
                     navigator("/")
                 }
@@ -118,16 +126,11 @@ const Game2 = () => {
     const getScore = async () => {
 
         const score = {
-
             token: user.token,
             game: "game2"
-
         }
-
         try {
-
             const response = await api.post('/getScore', score)
-
             if (response.status === 200) {
                 console.log("tiempo", response.data.game.bestTime)
                 setBestTime(response.data.game.bestTime)
@@ -186,7 +189,7 @@ const Game2 = () => {
             opacity: isDragging ? 0.5 : opacity,
             cursor: 'pointer',
         };
-        
+
 
         return (
             <img
@@ -274,7 +277,7 @@ const Game2 = () => {
             justifyContent: 'center',
             alignItems: 'center',
             opacity: 0.4,
-            display: isVictory ? 'none' : 'block', 
+            display: isVictory ? 'none' : 'block',
         };
 
         return (
