@@ -40,8 +40,8 @@ const Game4 = () => {
     const initialCards = [
         { name: "gato", image: card1, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=10tImoK5OooY7zww6zw5DoNZQEgzUoveM" },
         { name: "jirafa", image: card2, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1lqIBBkuwOcA_4AVb1cJSGMLePKxVcPh1" },
-        { name: "perro", image: card3, isFlipped: false, match: false, audio:  "https://drive.google.com/uc?id=1IHtleBn5oEGVtk9_z09YaEHnNgY-1l5M" },
-        { name: "león", image: card4, isFlipped: false, match: false, audio:  "https://drive.google.com/uc?id=1YNzCxNqlioPUoMDdmYQaEIXbNhg-Lgks"},
+        { name: "perro", image: card3, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1YNzCxNqlioPUoMDdmYQaEIXbNhg-Lgks" },
+        { name: "león", image: card4, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1IHtleBn5oEGVtk9_z09YaEHnNgY-1l5M" },
     ];
 
     useEffect(() => {
