@@ -25,6 +25,8 @@ const Game4 = () => {
     const [count, setCount] = useState(null);
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
+    const [selectedCardAudio, setSelectedCardAudio] = useState(null);
+
 
     const audioNoMatch = new Audio(soundNoMatch);
     const audioMatch = new Audio(soundMatch);
@@ -36,11 +38,17 @@ const Game4 = () => {
 
 
     const initialCards = [
-        { name: "gato", image: card1, isFlipped: false, match: false },
-        { name: "jirafa", image: card2, isFlipped: false, match: false },
-        { name: "perro", image: card3, isFlipped: false, match: false },
-        { name: "león", image: card4, isFlipped: false, match: false },
+        { name: "gato", image: card1, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=10tImoK5OooY7zww6zw5DoNZQEgzUoveM" },
+        { name: "jirafa", image: card2, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1lqIBBkuwOcA_4AVb1cJSGMLePKxVcPh1" },
+        { name: "perro", image: card3, isFlipped: false, match: false, audio:  "https://drive.google.com/uc?id=1IHtleBn5oEGVtk9_z09YaEHnNgY-1l5M" },
+        { name: "león", image: card4, isFlipped: false, match: false, audio:  "https://drive.google.com/uc?id=1YNzCxNqlioPUoMDdmYQaEIXbNhg-Lgks"},
     ];
+
+    useEffect(() => {
+        if (selectedCard !== null) {
+            setSelectedCardAudio(new Audio(cards[selectedCard].audio));
+        }
+    }, [selectedCard]);
 
     const getScore = async () => {
         const score = {
@@ -131,6 +139,10 @@ const Game4 = () => {
                 getWin();
             } else {
                 audioMatch.play();
+            }
+
+            if (selectedCardAudio) {
+                selectedCardAudio.play();
             }
         } else {
             audioNoMatch.play();
