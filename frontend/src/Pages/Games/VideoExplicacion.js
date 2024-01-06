@@ -69,10 +69,10 @@ function VideoExplicacion() {
                     <div className="video-explicacion__buttons">
                         <button className="video-explicacion__button" onClick={next}>Regresar</button>
                         <button className="video-explicacion__button" style={{ backgroundColor: "#e4800e" }} onClick={back}>Continuar</button>
-                        <a href={linksSrc[0]} target="_blank"> <button className='video-explicacion__button' >Refuerzo Genially</button> </a>
+                        <a href={linksSrc[0]} target="_blank"> <button className='video-explicacion__button' >Recurso</button> </a>
                         <a href={linksSrc[1]} target="_blank">
                             <button className="video-explicacion__button" style={{ backgroundColor: "#e4800e" }}>
-                                Refuerzo EducaPlay
+                                Refuerzo
                             </button>
                         </a>
                     </div>
