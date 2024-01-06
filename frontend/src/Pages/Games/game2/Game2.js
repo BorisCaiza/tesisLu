@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef, useMemo, useCallback } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useNavigate } from 'react-router-dom';
@@ -160,10 +160,19 @@ const Game2 = () => {
     }
 
     const ImageContainer = ({ images }) => {
+
+        const handlemouseEnter = (image) => {
+            console.log("entreeeeeeeee", image.audioPalabra)
+
+            console.log("entre al iff")
+            const audio = new Audio(image.audio);
+            audio.play();
+
+        };
         return (
             <div>
                 {images.map((image, index) => (
-                    <Image
+                    <Image onMouseEnter={handlemouseEnter(image)}
                         className="imageDraw"
                         key={index}
                         src={image.src}
@@ -176,19 +185,19 @@ const Game2 = () => {
         );
     };
 
-    const Image = ({ src, alt, isDragging, opacity, correct }) => {
+    const Image = ({ src, alt, isDragging, opacity, correct, audioPalabra }) => {
         const [, ref] = useDrag({
             type: 'IMAGE',
-            item: { src, alt, correct },
+            item: { src, alt, correct, audioPalabra },
         });
 
-        console.log(src);
         const imageStyle = {
             width: '75px',
             height: '75px',
             opacity: isDragging ? 0.5 : opacity,
             cursor: 'pointer',
         };
+
 
 
         return (
@@ -201,31 +210,13 @@ const Game2 = () => {
         );
     };
 
+
+
+
     const speak = () => {
         if (word) {
-            const syllables = word.word.split('-'); // Divide la palabra en sílabas
-
-            // Obtén la lista de voces disponibles
-            const voices = window.speechSynthesis.getVoices();
-
-            console.log("voices", voices)
-
-            // Selecciona una voz específica (por ejemplo, la primera voz disponible)
-            const femaleVoice = voices.find(voice => voice.voiceURI.includes('female'));
-
-            // Crea una instancia de SpeechSynthesisUtterance y configúrala con la voz seleccionada
-            syllables.forEach((syllable, index) => {
-                const utterance = new SpeechSynthesisUtterance(syllable);
-                utterance.lang = 'es-ES'; // Configura el idioma (puede variar según el idioma que desees)
-                utterance.rate = 0.7; // Ajusta la velocidad de pronunciación según tu preferencia
-                utterance.voice = femaleVoice;
-                utterance.onend = () => {
-                    if (index < syllables.length - 1) {
-                        window.speechSynthesis.speak(syllables[index + 1]); // Reproduce la siguiente sílaba
-                    }
-                };
-                window.speechSynthesis.speak(utterance); // Reproduce la primera sílaba
-            });
+            const audio = new Audio(word.audioSilaba);
+            audio.play();
         }
     };
 
@@ -235,19 +226,11 @@ const Game2 = () => {
         const randomWord = words[randomIndex];
         setWord(randomWord);
 
-        let randomIndex2;
-        let randomWord2;
 
-        do {
-            randomIndex2 = Math.floor(Math.random() * words.length);
-            randomWord2 = words[randomIndex2];
-        } while (randomIndex2 === randomIndex);
-
-        setWord2(randomWord2);
 
         const imagesAux = [
-            { src: randomWord.image, alt: 'Imagen de Fondo', correct: true },
-            { src: randomWord2.image, alt: 'Imagen Fondo2', correct: false }
+            { src: randomWord.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: randomWord.audio },
+            { src: words[randomWord.rimas - 1].image, alt: 'Imagen Fondo2', correct: false, audioPalabra: words[randomWord.rimas - 1].audio }
         ];
 
         const shuffled = [...imagesAux];
@@ -259,33 +242,34 @@ const Game2 = () => {
     };
 
 
-
+    // Dentro del componente DropTarget o directamente en game2.css
     const DropTarget = () => {
+        const imgRef = useRef(null);
+
         const [, ref] = useDrop({
             accept: 'IMAGE',
             drop: (item) => handleDrop(item),
         });
 
-        const backgroundImage = word ? `url('${word.image}')` : 'none';
 
-        const borderStyle = {
-            width: '100px',
-            height: '100px',
-            border: 'none',
-            backgroundImage,
-            backgroundSize: 'cover',
-            justifyContent: 'center',
-            alignItems: 'center',
-            opacity: 0.4,
-            display: isVictory ? 'none' : 'block',
-        };
 
         return (
-            <div ref={ref} style={borderStyle}>
+            <div ref={ref}>
+                {word && (
+                    <img
+                        className='mt-3'
+                        width="100px"
+                        height="100px"
+                        style={{ opacity: 0.5 }}
+                        ref={imgRef}
+                        src={word.image}
+                        alt="Imagen de Fondo"
+
+                    />
+                )}
             </div>
         );
     };
-
 
 
 
@@ -293,8 +277,8 @@ const Game2 = () => {
         <DndProvider backend={HTML5Backend}>
             <div className='center-game2'>
                 <ImageContainer images={images} />
-                <DropTarget />
                 {isVictory && <p>¡Has ganado el juego!</p>}
+                <DropTarget />
                 <div className="title">
                     {word ? word.word : ''}
                 </div>
@@ -303,11 +287,9 @@ const Game2 = () => {
                 </div>
                 <h2>Separación de sílabas</h2>
                 <h5>{word ? word.syllable_separation : ''}</h5>
-
                 <div className='color'>Cronómetro: {time} segundos</div>
                 <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
             </div>
-
         </DndProvider>
     );
 };
