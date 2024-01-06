@@ -32,9 +32,24 @@ const Game4 = () => {
     const audioMatch = new Audio(soundMatch);
     const audioWin = new Audio(soundWin);
 
+
+
     useEffect(() => {
+        const getScore = async () => {
+            const score = {
+                token: user.token,
+                game: "game4"
+            }
+            try {
+                const response = await api.post('/getScore', score)
+                if (response.status === 200) {
+                    setBestTime(response.data.game.bestTime)
+                }
+            } catch (error) {
+            }
+        }
         getScore()
-    }, []);
+    }, [user]);
 
 
     const initialCards = [
@@ -50,19 +65,7 @@ const Game4 = () => {
         }
     }, [selectedCard, cards]);
 
-    const getScore = async () => {
-        const score = {
-            token: user.token,
-            game: "game4"
-        }
-        try {
-            const response = await api.post('/getScore', score)
-            if (response.status === 200) {
-                setBestTime(response.data.game.bestTime)
-            }
-        } catch (error) {
-        }
-    }
+
 
     const saveScore = async () => {
         const score = {
