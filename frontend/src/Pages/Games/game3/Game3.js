@@ -6,6 +6,9 @@ import api from "../../../api/api"
 import { AuthContext } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import confetti from "canvas-confetti"
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+
+const rimaCon = new Audio("https://drive.google.com/uc?id=14oQ4MJOZnrN-o7I94QJHesZSokaGILlF");
 
 const Game3 = () => {
 
@@ -15,12 +18,15 @@ const Game3 = () => {
     const [targetWord, setTargetWord] = useState({});
     const [option1, setOption1] = useState({});
     const [option2, setOption2] = useState({});
-    const [gameResult, setGameResult] = useState(null);
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(0);
     const [mouseOverTime, setMouseOverTime] = useState(0);
     const synth = window.speechSynthesis;
+
+    const [targetWordAudio, setTargetWordAudio] = useState(null);
+    const [option1Audio, setOption1Audio] = useState(null);
+    const [option2Audio, setOption2Audio] = useState(null);
 
     const getScore = async () => {
         const score = {
@@ -30,7 +36,6 @@ const Game3 = () => {
         try {
             const response = await api.post('/getScore', score)
             if (response.status === 200) {
-                console.log("mejor tiempo", response.data.game.bestTime)
                 setBestTime(response.data.game.bestTime)
             }
         } catch (error) {
@@ -94,6 +99,28 @@ const Game3 = () => {
         clearTimeout(mouseOverTime);
     };
 
+    useEffect(() => {
+        if (targetWord !== null) {
+            const audio = new Audio(targetWord.audio);
+            audio.addEventListener('ended', () => {
+                rimaCon.play();
+            });
+            setTargetWordAudio(audio);
+        }
+        if (option1 !== null) {
+            setOption1Audio(new Audio(option1.audio));
+        }
+        if (option2 !== null) {
+            setOption2Audio(new Audio(option2.audio));
+        }
+    }, [targetWord, option1, option2 ]);
+
+    const playAudio = async (word) => {
+        if (word) {
+            word.play()
+        }
+    };
+
     const handleOptionSelect = (selectedOption) => {
         let gano = false;
         if (targetWord.rimas === selectedOption.id) {
@@ -142,20 +169,26 @@ const Game3 = () => {
     return (
         <div className="board">
             <div style={{ textAlign: 'center' }}>
-                <h1 style={{fontWeight: "bold"}}>{targetWord && targetWord.word}</h1>
+                <h1 style={{ fontWeight: "bold" }}>{targetWord && targetWord.word}
+                    <VolumeUpIcon
+                        onClick={() => playAudio(targetWordAudio)}
+                        style={{ cursor: "pointer", color: "yellowgreen", fontSize: "1.5em" }}
+                    />
+                </h1>
                 <img
                     src={targetWord.image}
-                    onMouseEnter={() => handleMouseEnter(targetWord.word)}
-                    onMouseLeave={handleMouseLeave}
-                    alt="Option"
+                    alt="targetWord"
                     style={{ maxHeight: '150px' }}
                 />
-                <h3>Rima con...</h3>
+                <h3>
+                    Rima con...{' '}
+
+                </h3>
                 <div className="button-container">
-                    <button onClick={() => handleOptionSelect(option1)} onMouseEnter={() => handleMouseEnter(option1.word)}>
+                    <button onClick={() => handleOptionSelect(option1)} onMouseEnter={() => playAudio(option1Audio)}>
                         <img src={option1.image} alt="Option Incorrect" />
                     </button>
-                    <button onClick={() => handleOptionSelect(option2)} onMouseEnter={() => handleMouseEnter(option2.word)}>
+                    <button onClick={() => handleOptionSelect(option2)} onMouseEnter={() => playAudio(option2Audio)}>
                         <img src={option2.image} alt="Option Correct" />
                     </button>
                 </div>
