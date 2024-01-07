@@ -74,3 +74,22 @@ export function getrhymingWords() {
 }
 
 
+export const getWord = () => {
+    const allWords = wordsDataService();
+    const randomIndex = Math.floor(Math.random() * allWords.length);
+    const selectedWord = allWords[randomIndex];
+    const rhymingWordIndex = selectedWord.rimas - 1;
+    const rhymingWord = allWords[rhymingWordIndex];
+    const imagesWords = [
+        { src: selectedWord.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: selectedWord.audio },
+        { src: rhymingWord.image, alt: 'Imagen Fondo2', correct: false, audioPalabra: rhymingWord.audio }
+    ];
+
+    for (let i = imagesWords.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [imagesWords[i], imagesWords[j]] = [imagesWords[j], imagesWords[i]];
+    }
+
+    return {selectedWord, imagesWords};
+};
+

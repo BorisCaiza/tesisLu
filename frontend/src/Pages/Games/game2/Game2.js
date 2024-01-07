@@ -4,7 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useNavigate } from 'react-router-dom';
 import './game2.css';
 import altavoz from "../../../assets/altavoz.png"
-import { wordsDataService } from '../../../services/datosServices';
+import { getWord, wordsDataService } from '../../../services/datosServices';
 import { AuthContext } from '../../../Context/AuthContext';
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
@@ -25,8 +25,9 @@ const Game2 = () => {
 
 
     useEffect(() => {
-        getWord();
-        getScore();
+        const {selectedWord, imagesWords} = getWord();
+        setWord(selectedWord);
+        setImages(imagesWords);
     }, []);
 
     useEffect(() => {
@@ -46,10 +47,8 @@ const Game2 = () => {
     const handleDrop = (item) => {
         if (!isVictory && item.correct) {
             setIsVictory(true);
-            setImageOpacity(0); // Establece la opacidad en 0 (completamente transparente)
-            speak();
+            setImageOpacity(0); 
             saveScore()
-            getScore()
             let html = ``
             if (time < 5) {
                 html = `<div>
@@ -111,21 +110,24 @@ const Game2 = () => {
         }
     };
 
-    const getScore = async () => {
-        const score = {
-            token: user.token,
-            game: "game2"
-        }
-        try {
-            const response = await api.post('/getScore', score)
-            if (response.status === 200) {
-                setBestTime(response.data.game.bestTime)
-            }
-        } catch (error) {
-            console.error(error);
-        }
 
-    }
+    useEffect(() => {
+        const getScore = async () => {
+            const score = {
+                token: user.token,
+                game: "game2"
+            }
+            try {
+                const response = await api.post('/getScore', score)
+                if (response.status === 200) {
+                    setBestTime(response.data.game.bestTime)
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getScore();
+    }, [user]);
 
     const saveScore = async () => {
         const score = {
@@ -141,7 +143,6 @@ const Game2 = () => {
     }
 
     const ImageContainer = ({ images }) => {
-
         return (
             <div>
                 {images.map((image, index) => (
@@ -164,72 +165,54 @@ const Game2 = () => {
             type: 'IMAGE',
             item: { src, alt, correct, audioPalabra },
         });
-
+    
+        const [audioPlaying, setAudioPlaying] = useState(false);
+    
         const imageStyle = {
             cursor: 'pointer',
             width: '75px',
             height: '75px',
             opacity: isDragging ? 0.5 : opacity,
         };
-
-        const playAudio = () => {
-            if (audio) {
-                const wordAudio = new Audio(audio);
-                wordAudio.play();
+    
+        const playAudioOnce = () => {
+            if (!audioPlaying) {
+                playAudio(audio);
+                setAudioPlaying(true);
             }
         };
-
+    
+        const handleMouseLeave = () => {
+            setAudioPlaying(false);
+        };
+    
         return (
             <img
                 ref={ref}
                 src={src}
                 alt={alt}
-                onMouseEnter={() => playAudio()}
+                onMouseEnter={playAudioOnce}
+                onMouseLeave={handleMouseLeave}
                 style={imageStyle}
             />
         );
     };
+    
 
-
-    const speak = () => {
-        if (word) {
-            const audio = new Audio(word.audioSilaba);
-            audio.play();
+    const playAudio = (audio) => {
+        if (audio) {
+            const wordAudio = new Audio(audio);
+            wordAudio.play();
         }
     };
 
-    const getWord = () => {
-        const words = wordsDataService();
-        const randomIndex = Math.floor(Math.random() * words.length);
-        const randomWord = words[randomIndex];
-        setWord(randomWord);
-
-
-
-        const imagesAux = [
-            { src: randomWord.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: randomWord.audio },
-            { src: words[randomWord.rimas - 1].image, alt: 'Imagen Fondo2', correct: false, audioPalabra: words[randomWord.rimas - 1].audio }
-        ];
-
-        const shuffled = [...imagesAux];
-        for (let i = shuffled.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-        }
-        setImages(shuffled);
-    };
-
-
-    // Dentro del componente DropTarget o directamente en game2.css
+    
     const DropTarget = () => {
         const imgRef = useRef(null);
-
         const [, ref] = useDrop({
             accept: 'IMAGE',
             drop: (item) => handleDrop(item),
         });
-
-
 
         return (
             <div ref={ref}>
@@ -261,7 +244,7 @@ const Game2 = () => {
                     {word ? word.word : ''}
                 </div>
                 <div className="speaker-button">
-                    <img src={altavoz} className="altavoz-btn" onClick={speak} alt='altavoz' />
+                    <img src={altavoz} className="altavoz-btn" onClick={() => playAudio(word.audioSilaba)} alt='altavoz' />
                 </div>
                 <h2>Separación de sílabas</h2>
                 <h5>{word ? word.syllable_separation : ''}</h5>
