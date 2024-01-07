@@ -93,3 +93,60 @@ export const getWord = () => {
     return {selectedWord, imagesWords};
 };
 
+export const lettersDataService = () => {
+    return [
+        { id: 1, letter: "A", image: "a", audio: "https://drive.google.com/uc?id=1bvYzM5jd-FIAoeDQ1cWbjQFO7o0XnD8_" },
+        { id: 2, letter: "B", image: "b", audio: "https://drive.google.com/uc?id=1lAlHLWT6B5_yynDkckt1Dh1loDoLlafC" },
+        { id: 3, letter: "C", image: "c", audio: "https://drive.google.com/uc?id=19di5QPkswHfmZ8_fHeJKGMtvgeJ4eVbb" },
+        { id: 4, letter: "D", image: "d", audio: "https://drive.google.com/uc?id=12ZBToFh7hNQz0jGYp3AclnP9twO9JyR6" },
+        { id: 5, letter: "E", image: "e", audio: "https://drive.google.com/uc?id=1E3o5tMp0XHNIeWkH8V59G7ij2VN6l33Q" },
+        { id: 6, letter: "F", image: "f", audio: "https://drive.google.com/uc?id=1a9DGfJOdTWoD_PLfxPYeGEwqzPXsvsW1" },
+        { id: 7, letter: "G", image: "g", audio: "https://drive.google.com/uc?id=1adh4QmfcHHrRv02B5yrp82XvS3c7qd4w" },
+        { id: 8, letter: "H", image: "h", audio: "https://drive.google.com/uc?id=19AtvjYwgug_6MYmC1h1HRfuuFTM4Aw0R" },
+        { id: 9, letter: "I", image: "i", audio: "https://drive.google.com/uc?id=1e8G8HnACIM2H57yGR7vsf2Mh3ruq2DEm" },
+        { id: 10, letter: "J", image: "j", audio: "https://drive.google.com/uc?id=1qvu8sTt68dcSK0EEojRYD7KPzLHtEZzy" },
+        { id: 11, letter: "K", image: "k", audio: "https://drive.google.com/uc?id=1VaPBWrywdHODoTpcYhWu2gGw7q6aorZy" },
+        { id: 12, letter: "L", image: "l", audio: "https://drive.google.com/uc?id=1nsj5C79lrRsz7SrjvRgY9x6lFjAiN5Cw" },
+        { id: 13, letter: "M", image: "m", audio: "https://drive.google.com/uc?id=1cVllHcmdmK31faoTAbhewMHzbEC8q36y" },
+        { id: 14, letter: "N", image: "n", audio: "https://drive.google.com/uc?id=1GYG5ohHRl567RTRMPSRT0nDuoNbKhFpg" },
+        { id: 15, letter: "O", image: "o", audio: "https://drive.google.com/uc?id=1eWlvjBjSH9-GMf0Da4qHsIdIjT1q0iDd" },
+        { id: 16, letter: "P", image: "p", audio: "https://drive.google.com/uc?id=1Anv8CEhODVtnI7wxQii31jRg-RtkJWqL" },
+        { id: 17, letter: "Q", image: "q", audio: "https://drive.google.com/uc?id=1uyDPCq_eLleivJ-Mv2gApUDvUx5ew83L" },
+        { id: 18, letter: "R", image: "r", audio: "https://drive.google.com/uc?id=10GZNpV8wb-z8Z1guE0SpZHu9fAbAkmYX" },
+        { id: 19, letter: "S", image: "s", audio: "https://drive.google.com/uc?id=1DIqzSNdrcDJigJqyY4W_Jt0ZbaNM6S9m" },
+        { id: 20, letter: "T", image: "t", audio: "https://drive.google.com/uc?id=1nPJTWTs_fVcprX4ntczQsLrgdo0XO9Mk" },
+        { id: 21, letter: "U", image: "u", audio: "https://drive.google.com/uc?id=1SHrVnJ4ijddJ9tGgWXLZb5UkgD23Swbc" },
+        { id: 22, letter: "V", image: "v", audio: "https://drive.google.com/uc?id=1oPW60RjqyMVRzkyNAPoicS4JjLxQNQF8" },
+        { id: 23, letter: "W", image: "w", audio: "https://drive.google.com/uc?id=1wTYHFiTksR17fq7NNraAGCMZeVBAHei0" },
+        { id: 24, letter: "X", image: "x", audio: "https://drive.google.com/uc?id=1TnxPy_oLEahcH1GDG8k55EzVVGrd_7mx" },
+        { id: 25, letter: "Y", image: "y", audio: "https://drive.google.com/uc?id=1BmyB8SSi2JsUe5JTgGkJTVwvcDqzFOxE" },
+        { id: 26, letter: "Z", image: "z", audio: "https://drive.google.com/uc?id=12yeL-FNL_p-V-yL2QmmXie-S1Ipwan6p" },
+    ];
+};
+
+
+export const generateRandomOptions = () => {
+    const letters = lettersDataService();
+    const randomOptions = [];
+    const randomIndex = Math.floor(Math.random() * letters.length);
+    const target = letters[randomIndex];
+    randomOptions.push(letters[randomIndex]);
+
+    while (randomOptions.length < 10) {
+        const randomIndex = Math.floor(Math.random() * letters.length);
+        const randomLetter = letters[randomIndex];
+        if (!randomOptions.includes(randomLetter) && randomLetter !== target) {
+            randomOptions.push(randomLetter);
+        }
+    }
+    randomOptions.sort(() => Math.random() - 0.5);
+    return {target, randomOptions};
+};
+
+
+export const playAudio = (audio) => {
+    if (audio) {
+        const wordAudio = new Audio(audio);
+        wordAudio.play();
+    }
+};

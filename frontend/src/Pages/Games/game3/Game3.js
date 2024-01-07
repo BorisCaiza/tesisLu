@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
 import './game3.css';
-import { getrhymingWords } from '../../../services/datosServices';
+import { getrhymingWords, playAudio } from '../../../services/datosServices';
 import api from "../../../api/api"
 import { AuthContext } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -101,12 +101,6 @@ const Game3 = () => {
             setOption2Audio(new Audio(option2.audio));
         }
     }, [targetWord, option1, option2 ]);
-
-    const playAudio = async (word) => {
-        if (word) {
-            word.play();
-        }
-    };
 
     const handleOptionSelect = (selectedOption) => {
         let gano = false;

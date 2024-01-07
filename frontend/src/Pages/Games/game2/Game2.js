@@ -4,7 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useNavigate } from 'react-router-dom';
 import './game2.css';
 import altavoz from "../../../assets/altavoz.png"
-import { getWord, wordsDataService } from '../../../services/datosServices';
+import { getWord, playAudio, wordsDataService } from '../../../services/datosServices';
 import { AuthContext } from '../../../Context/AuthContext';
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
@@ -25,7 +25,7 @@ const Game2 = () => {
 
 
     useEffect(() => {
-        const {selectedWord, imagesWords} = getWord();
+        const { selectedWord, imagesWords } = getWord();
         setWord(selectedWord);
         setImages(imagesWords);
     }, []);
@@ -47,7 +47,7 @@ const Game2 = () => {
     const handleDrop = (item) => {
         if (!isVictory && item.correct) {
             setIsVictory(true);
-            setImageOpacity(0); 
+            setImageOpacity(0);
             saveScore()
             let html = ``
             if (time < 5) {
@@ -165,48 +165,28 @@ const Game2 = () => {
             type: 'IMAGE',
             item: { src, alt, correct, audioPalabra },
         });
-    
-        const [audioPlaying, setAudioPlaying] = useState(false);
-    
+
         const imageStyle = {
             cursor: 'pointer',
             width: '75px',
             height: '75px',
             opacity: isDragging ? 0.5 : opacity,
         };
-    
-        const playAudioOnce = () => {
-            if (!audioPlaying) {
-                playAudio(audio);
-                setAudioPlaying(true);
-            }
-        };
-    
-        const handleMouseLeave = () => {
-            setAudioPlaying(false);
-        };
-    
+
         return (
             <img
                 ref={ref}
                 src={src}
                 alt={alt}
-                onMouseEnter={playAudioOnce}
-                onMouseLeave={handleMouseLeave}
+                onClick={() => playAudio(audio) }
                 style={imageStyle}
             />
         );
     };
-    
 
-    const playAudio = (audio) => {
-        if (audio) {
-            const wordAudio = new Audio(audio);
-            wordAudio.play();
-        }
-    };
 
-    
+
+
     const DropTarget = () => {
         const imgRef = useRef(null);
         const [, ref] = useDrop({

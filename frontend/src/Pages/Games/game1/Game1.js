@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Swal from 'sweetalert2';
 import confetti from "canvas-confetti"
 import "./Game1.css"
+import { generateRandomOptions, playAudio } from '../../../services/datosServices';
 
 function Game1() {
     const [targetLetter, setTargetLetter] = useState('');
@@ -10,29 +11,12 @@ function Game1() {
     const [scrollPosition, setScrollPosition] = useState(0);
     const visibleOptions = 4;
 
-    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-    const generateRandomOptions = useCallback(() => {
-        const randomOptions = [];
-        const randomIndex = Math.floor(Math.random() * letters.length);
-        setTargetLetter(letters[randomIndex]);
-        randomOptions.push(letters[randomIndex]);
-
-        while (randomOptions.length < 10) {
-            const randomIndex = Math.floor(Math.random() * letters.length);
-            const randomLetter = letters[randomIndex];
-            if (!randomOptions.includes(randomLetter) && randomLetter !== targetLetter) {
-                randomOptions.push(randomLetter);
-            }
-        }
-        randomOptions.sort(() => Math.random() - 0.5);
-        setOptions(randomOptions);
-    }, [targetLetter]);
-
+    
     useEffect(() => {
-        generateRandomOptions();
-
-    }, [score, generateRandomOptions]);
+        const {target, randomOptions} = generateRandomOptions();
+        setTargetLetter(target);
+        setOptions(randomOptions)
+    }, [score]);
 
     const handleOptionClick = (selectedLetter) => {
         if (selectedLetter === targetLetter) {
@@ -94,6 +78,7 @@ function Game1() {
         });
     };
 
+
     const visibleOptionList = options.slice(scrollPosition, scrollPosition + visibleOptions);
 
     return (
@@ -106,15 +91,15 @@ function Game1() {
                         <button style={{ background: "#007bff" }} onClick={handleScrollLeft}>&#8249;</button>
                         <div className="options">
                             {visibleOptionList.map((option, index) => (
-                                <button key={index} onClick={() => handleOptionClick(option)}>
-                                    {option}
+                                <button key={option.id} onClick={() => handleOptionClick(option)} onMouseEnter={() =>playAudio(option.audio)}>
+                                    {option.letter}
                                 </button>
                             ))}
                         </div>
                         <button style={{ background: "#007bff" }} onClick={handleScrollRight}>&#8250;</button>
                     </div>
                     <h3>Encuentra la letra:</h3>
-                    <span id="target-letter">{targetLetter}</span>
+                    <span id="target-letter">{targetLetter.letter}</span>
                 </div>
             </div>
         </div>

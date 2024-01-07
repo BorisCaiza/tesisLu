@@ -13,6 +13,7 @@ import confetti from "canvas-confetti";
 import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 import soundMatch from '../../../assets/sounds/match.wav';
 import soundWin from '../../../assets/sounds/win.wav';
+import { playAudio } from "../../../services/datosServices";
 
 const Game4 = () => {
     const navigator = useNavigate();
@@ -25,8 +26,6 @@ const Game4 = () => {
     const [count, setCount] = useState(null);
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
-    const [selectedCardAudio, setSelectedCardAudio] = useState(null);
-
 
     const audioNoMatch = new Audio(soundNoMatch);
     const audioMatch = new Audio(soundMatch);
@@ -59,11 +58,6 @@ const Game4 = () => {
         { name: "león", image: card4, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1IHtleBn5oEGVtk9_z09YaEHnNgY-1l5M" },
     ];
 
-    useEffect(() => {
-        if (selectedCard !== null) {
-            setSelectedCardAudio(new Audio(cards[selectedCard].audio));
-        }
-    }, [selectedCard, cards]);
 
 
 
@@ -143,10 +137,7 @@ const Game4 = () => {
             } else {
                 audioMatch.play();
             }
-
-            if (selectedCardAudio) {
-                selectedCardAudio.play();
-            }
+            playAudio(cards[selectedCard].audio)
         } else {
             audioNoMatch.play();
             setSelectedCard(null);
