@@ -12,12 +12,10 @@ import confetti from "canvas-confetti"
 
 
 const Game2 = () => {
-
     const navigator = useNavigate();
-
     const { user } = useContext(AuthContext);
     const [isVictory, setIsVictory] = useState(false);
-    const [imageOpacity, setImageOpacity] = useState(1); // Establece la opacidad inicial en 1 (sin transparencia)
+    const [imageOpacity, setImageOpacity] = useState(1);
     const [word, setWord] = useState(null);
     const [word2, setWord2] = useState(null);
     const [bestTime, setBestTime] = useState(null);
@@ -29,12 +27,7 @@ const Game2 = () => {
     useEffect(() => {
         getWord();
         getScore();
-
     }, []);
-
-
-
-
 
     useEffect(() => {
         let interval;
@@ -57,9 +50,7 @@ const Game2 = () => {
             speak();
             saveScore()
             getScore()
-
             let html = ``
-
             if (time < 5) {
                 html = `<div>
                     <p style="font-size: 40px">⭐⭐⭐</p>
@@ -113,18 +104,14 @@ const Game2 = () => {
                 saveScore();
                 if (result.isConfirmed) {
                     window.location.reload();
-
-
                 } else {
                     navigator("/")
                 }
-
             })
         }
     };
 
     const getScore = async () => {
-
         const score = {
             token: user.token,
             game: "game2"
@@ -132,47 +119,34 @@ const Game2 = () => {
         try {
             const response = await api.post('/getScore', score)
             if (response.status === 200) {
-                console.log("tiempo", response.data.game.bestTime)
                 setBestTime(response.data.game.bestTime)
             }
         } catch (error) {
-
+            console.error(error);
         }
 
     }
 
     const saveScore = async () => {
-
         const score = {
             bestTime: time,
             game: "game2",
             token: user.token
         }
-
         try {
-
-            const response = await api.post('/score', score)
-
-
+            await api.post('/score', score)
         } catch (error) {
-
+            console.log(error);
         }
     }
 
     const ImageContainer = ({ images }) => {
 
-        const handlemouseEnter = (image) => {
-            console.log("entreeeeeeeee", image.audioPalabra)
-
-            console.log("entre al iff")
-            const audio = new Audio(image.audio);
-            audio.play();
-
-        };
         return (
             <div>
                 {images.map((image, index) => (
-                    <Image onMouseEnter={handlemouseEnter(image)}
+                    <Image
+                        audio={image.audioPalabra}
                         className="imageDraw"
                         key={index}
                         src={image.src}
@@ -185,32 +159,36 @@ const Game2 = () => {
         );
     };
 
-    const Image = ({ src, alt, isDragging, opacity, correct, audioPalabra }) => {
+    const Image = ({ src, alt, audio, isDragging, opacity, correct, audioPalabra }) => {
         const [, ref] = useDrag({
             type: 'IMAGE',
             item: { src, alt, correct, audioPalabra },
         });
 
         const imageStyle = {
+            cursor: 'pointer',
             width: '75px',
             height: '75px',
             opacity: isDragging ? 0.5 : opacity,
-            cursor: 'pointer',
         };
 
-
+        const playAudio = () => {
+            if (audio) {
+                const wordAudio = new Audio(audio);
+                wordAudio.play();
+            }
+        };
 
         return (
             <img
                 ref={ref}
                 src={src}
                 alt={alt}
+                onMouseEnter={() => playAudio()}
                 style={imageStyle}
             />
         );
     };
-
-
 
 
     const speak = () => {
