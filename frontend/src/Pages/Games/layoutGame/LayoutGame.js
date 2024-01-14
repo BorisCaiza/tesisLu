@@ -6,6 +6,11 @@ import Game2 from '../game2/Game2';
 import Game3 from '../game3/Game3';
 import Game4 from '../game4/Game4';
 import { Player } from 'video-react';
+import tuto1 from "../../../assets/tutoriales/Tutorial_1_Segmentación de sonidos.mp4"
+import tuto2 from "../../../assets/tutoriales/Tutorial_2_Conciencia de sílabas.mp4"
+import tuto3 from "../../../assets/tutoriales/Tutorial_3_Conciencia de Rimas.mp4"
+import tuto4 from "../../../assets/tutoriales/Tutorial_4_Similitudes Fonéticas.mp4"
+
 
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -41,10 +46,10 @@ const LayoutGame = () => {
     };
 
     const videoUrls = {
-        game1: "https://drive.google.com/uc?id=1qfP2SH5GYpXRxbkKaiJh6SzRFdrGTASp",
-        game2: "https://drive.google.com/uc?id=1dpRl6jffzfgr2VRAvKEHsAvroMPc0m4k",
-        game3: "https://drive.google.com/uc?id=1bQInpK_g01A4avGS7X5uJUN3DMr0TKvP",
-        game4: "https://drive.google.com/uc?id=1PEFG5Fuendhkq6FrlAeig7s01Y72ea96"
+        game1: tuto1,
+        game2: tuto2,
+        game3: tuto3,
+        game4: tuto4
     };
 
     const videoSrc = videoUrls[id] || "";

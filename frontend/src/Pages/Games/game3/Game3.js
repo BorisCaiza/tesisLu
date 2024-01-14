@@ -7,8 +7,9 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import confetti from "canvas-confetti"
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import audio from "../../../assets/sounds/rima con.mp3"
 
-const rimaCon = new Audio("https://drive.google.com/uc?id=14oQ4MJOZnrN-o7I94QJHesZSokaGILlF");
+const rimaCon = new Audio(audio);
 
 const Game3 = () => {
 
@@ -100,7 +101,7 @@ const Game3 = () => {
         if (option2 !== null) {
             setOption2Audio(new Audio(option2.audio));
         }
-    }, [targetWord, option1, option2 ]);
+    }, [targetWord, option1, option2]);
 
     const handleOptionSelect = (selectedOption) => {
         let gano = false;

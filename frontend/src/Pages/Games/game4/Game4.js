@@ -14,6 +14,10 @@ import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 import soundMatch from '../../../assets/sounds/match.wav';
 import soundWin from '../../../assets/sounds/win.wav';
 import { playAudio } from "../../../services/datosServices";
+import perro from "../../../assets/sounds4/perro.mp3"
+import gato from "../../../assets/sounds4/gato.mp3"
+import jirafa from "../../../assets/sounds4/jirafa.mp3"
+import leon from "../../../assets/sounds4/leon.mp3"
 
 const Game4 = () => {
     const navigator = useNavigate();
@@ -52,10 +56,10 @@ const Game4 = () => {
 
 
     const initialCards = [
-        { name: "gato", image: card1, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=10tImoK5OooY7zww6zw5DoNZQEgzUoveM" },
-        { name: "jirafa", image: card2, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1lqIBBkuwOcA_4AVb1cJSGMLePKxVcPh1" },
-        { name: "perro", image: card3, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1YNzCxNqlioPUoMDdmYQaEIXbNhg-Lgks" },
-        { name: "león", image: card4, isFlipped: false, match: false, audio: "https://drive.google.com/uc?id=1IHtleBn5oEGVtk9_z09YaEHnNgY-1l5M" },
+        { name: "gato", image: card1, isFlipped: false, match: false, audio: gato },
+        { name: "jirafa", image: card2, isFlipped: false, match: false, audio: jirafa },
+        { name: "perro", image: card3, isFlipped: false, match: false, audio: perro },
+        { name: "león", image: card4, isFlipped: false, match: false, audio: leon },
     ];
 
 

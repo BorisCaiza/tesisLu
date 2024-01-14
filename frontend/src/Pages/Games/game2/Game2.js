@@ -178,7 +178,7 @@ const Game2 = () => {
                 ref={ref}
                 src={src}
                 alt={alt}
-                onClick={() => playAudio(audio) }
+                onMouseEnter={() => playAudio(audio)}
                 style={imageStyle}
             />
         );
@@ -224,7 +224,7 @@ const Game2 = () => {
                     {word ? word.word : ''}
                 </div>
                 <div className="speaker-button">
-                    <img src={altavoz} className="altavoz-btn" onClick={() => playAudio(word.audioSilaba)} alt='altavoz' />
+                    <img src={altavoz} className="altavoz-btn" onMouseEnter={() => playAudio(word.audioSilaba)} alt='altavoz' />
                 </div>
                 <h2>Separación de sílabas</h2>
                 <h5>{word ? word.syllable_separation : ''}</h5>

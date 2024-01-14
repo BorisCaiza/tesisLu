@@ -8,6 +8,11 @@ import fondo10 from '../../assets/images/Fondos/fondo_10.png';
 import fondo11 from '../../assets/images/Fondos/fondo_11.png';
 import fondo12 from '../../assets/images/Fondos/fondo_12.png';
 
+import video1 from "../../assets/tutoriales/1_Segmentación de sonidos.mp4"
+import video2 from "../../assets/tutoriales/2_Conciencia de sílabas .mp4"
+import video3 from "../../assets/tutoriales/3_Conciencia de rimas.mp4"
+import video4 from "../../assets/tutoriales/4_Similitudes Fonéticas.mp4"
+
 
 const backgrounds = [fondo9, fondo10, fondo11, fondo12];
 
@@ -30,10 +35,10 @@ function VideoExplicacion() {
     };
 
     const videoUrls = {
-        game1: "https://drive.google.com/uc?id=1ImahWVbBxNdKEVHdqT7T8V16phPtMdvA",
-        game2: "https://drive.google.com/uc?id=1vuQsso1vGu9yIp7CvgEROF54TgW5AFO9",
-        game3: "https://drive.google.com/uc?id=1Jt4XXMdrmWmUBm3CjEMX_zbWymovejgg",
-        game4: "https://drive.google.com/uc?id=1ieP3K7S-Va-44JFPPwWAQRz9MFzdDEqk"
+        game1: video1,
+        game2: video2,
+        game3: video3,
+        game4: video4
     };
 
     const refuersosUtls = {
