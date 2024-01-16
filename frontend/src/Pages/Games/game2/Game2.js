@@ -229,14 +229,14 @@ const Game2 = () => {
                 <ImageContainer images={images} />
                 {isVictory && <p>¡Has ganado el juego!</p>}
                 <DropTarget />
-                <div className="title">
-                    {word ? word.word : ''}
-                </div>
+                <h2>Separación de sílabas</h2>
                 <div className="speaker-button">
                     <img src={altavoz} className="altavoz-btn" onMouseEnter={() => playAudio(word.audioSilaba)} alt='altavoz' />
                 </div>
-                <h2>Separación de sílabas</h2>
-                <h5>{word ? word.syllable_separation : ''}</h5>
+                <div className="title">
+                    {word ? word.word : ''}
+                </div>
+                <h3>{word ? word.syllable_separation : ''}</h3>
                 <div className='color'>Cronómetro: {time} segundos</div>
                 <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
             </div>
