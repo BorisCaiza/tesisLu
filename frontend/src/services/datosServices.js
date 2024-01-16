@@ -181,6 +181,10 @@ import y from "../assets/audios/Y.mp3";
 import z from "../assets/audios/Z.mp3";
 
 
+import audioRimocon from "../assets/sounds/rimaCon.mp3"
+
+
+
 export const wordsDataService = () => {
     return [
         { id: 1, word: "Anillo", rimas: 2, syllable_separation: "a-ni-llo", image: anilloImagen, audio: anilloAudio, audioSilaba: anilloSilaba },
@@ -329,7 +333,32 @@ export const generateRandomOptions = () => {
 
 export const playAudio = (audio) => {
     if (audio) {
-        const wordAudio = new Audio(audio);
-        wordAudio.play();
+        try {
+            const wordAudio = new Audio(audio);
+            wordAudio.play();
+        } catch (error) {
+            console.log(audio);
+            console.log(error);
+        }
+
+    }
+};
+export const playAudioRimaCon = (targetWord) => {
+    if (targetWord) {
+        try {
+            const rimaCon = new Audio(audioRimocon);
+            if (targetWord !== null) {
+                const audio = new Audio(targetWord);
+                audio.addEventListener('ended', () => {
+                    rimaCon.play();
+                });
+                audio.play()
+            }
+            
+        } catch (error) {
+            console.log(targetWord);
+            console.log(error);
+        }
+
     }
 };

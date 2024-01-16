@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Swal from 'sweetalert2';
 import './game3.css';
-import { getrhymingWords, playAudio } from '../../../services/datosServices';
+import { getrhymingWords, playAudio, playAudioRimaCon } from '../../../services/datosServices';
 import api from "../../../api/api"
 import { AuthContext } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import confetti from "canvas-confetti"
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
-import audio from "../../../assets/sounds/rima con.mp3"
 
-const rimaCon = new Audio(audio);
 
 const Game3 = () => {
 
@@ -22,10 +20,6 @@ const Game3 = () => {
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(0);
-
-    const [targetWordAudio, setTargetWordAudio] = useState(null);
-    const [option1Audio, setOption1Audio] = useState(null);
-    const [option2Audio, setOption2Audio] = useState(null);
 
     const getScore = async () => {
         const score = {
@@ -58,6 +52,7 @@ const Game3 = () => {
     const getDatos = () => {
         const orden = Math.random() < 0.5 ? 1 : 2;
         const { palabra, rima, seleccionAleatoria } = getrhymingWords();
+        console.log(palabra);
         setTargetWord(palabra);
         if (orden === 1) {
             setOption1(rima)
@@ -67,7 +62,7 @@ const Game3 = () => {
             setOption2(rima);
         }
     };
-
+    
     useEffect(() => {
         getDatos();
         getScore();
@@ -87,21 +82,7 @@ const Game3 = () => {
         };
     }, [isRunning]);
 
-    useEffect(() => {
-        if (targetWord !== null) {
-            const audio = new Audio(targetWord.audio);
-            audio.addEventListener('ended', () => {
-                rimaCon.play();
-            });
-            setTargetWordAudio(audio);
-        }
-        if (option1 !== null) {
-            setOption1Audio(new Audio(option1.audio));
-        }
-        if (option2 !== null) {
-            setOption2Audio(new Audio(option2.audio));
-        }
-    }, [targetWord, option1, option2]);
+
 
     const handleOptionSelect = (selectedOption) => {
         let gano = false;
@@ -145,7 +126,7 @@ const Game3 = () => {
             <div style={{ textAlign: 'center' }}>
                 <h1 style={{ fontWeight: "bold" }}>{targetWord && targetWord.word}
                     <VolumeUpIcon
-                        onClick={() => playAudio(targetWordAudio)}
+                        onClick={() => playAudioRimaCon(targetWord.audio)}
                         style={{ cursor: "pointer", color: "3498db", fontSize: "1.5em" }}
                     />
                 </h1>
@@ -153,7 +134,7 @@ const Game3 = () => {
                     src={targetWord.image}
                     alt="targetWord"
                     style={{ maxHeight: '150px', cursor: "pointer" }}
-                    onClick={() => playAudio(targetWordAudio)}
+                    onMouseEnter={() => playAudioRimaCon(targetWord.audio)}
 
                 />
                 <h3>
@@ -161,10 +142,14 @@ const Game3 = () => {
 
                 </h3>
                 <div className="button-container m-5">
-                    <button onClick={() => handleOptionSelect(option1)} onMouseEnter={() => playAudio(option1Audio)}>
+                    <button onClick={() => handleOptionSelect(option1)}
+                        onMouseEnter={() => playAudio(option1.audio)}
+                    >
                         <img src={option1.image} alt="Option Incorrect" />
                     </button>
-                    <button onClick={() => handleOptionSelect(option2)} onMouseEnter={() => playAudio(option2Audio)}>
+                    <button onClick={() => handleOptionSelect(option2)}
+                        onMouseEnter={() => playAudio(option2.audio)}
+                    >
                         <img src={option2.image} alt="Option Correct" />
                     </button>
                 </div>
