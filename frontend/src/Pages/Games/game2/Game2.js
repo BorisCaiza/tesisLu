@@ -9,6 +9,8 @@ import { AuthContext } from '../../../Context/AuthContext';
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
 import confetti from "canvas-confetti"
+import soundNoMatch from '../../../assets/sounds/no-match.mp3';
+import soundWin from '../../../assets/sounds/win.wav';
 
 
 const Game2 = () => {
@@ -22,6 +24,10 @@ const Game2 = () => {
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(true);
     const [images, setImages] = useState([])
+
+
+    const audioLose = new Audio(soundNoMatch);
+    const audioWin = new Audio(soundWin);
 
 
     useEffect(() => {
@@ -66,6 +72,8 @@ const Game2 = () => {
                     <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
                 </div>`
             }
+
+            audioWin.play();
             Swal.fire({
                 html: html,
                 confirmButtonText: 'Jugar de Nuevo',
@@ -93,6 +101,7 @@ const Game2 = () => {
 
             })
         } else {
+            audioLose.play();
             Swal.fire({
                 text: "Perdiste !!!",
                 icon: 'error',
@@ -178,7 +187,7 @@ const Game2 = () => {
                 ref={ref}
                 src={src}
                 alt={alt}
-                onMouseEnter={() => playAudio(audio)}
+                onClick={() => playAudio(audio)}
                 style={imageStyle}
             />
         );

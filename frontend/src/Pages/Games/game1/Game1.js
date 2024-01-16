@@ -3,6 +3,8 @@ import Swal from 'sweetalert2';
 import confetti from "canvas-confetti"
 import "./Game1.css"
 import { generateRandomOptions, playAudio } from '../../../services/datosServices';
+import soundNoMatch from '../../../assets/sounds/no-match.mp3';
+import soundWin from '../../../assets/sounds/win.wav';
 
 function Game1() {
     const [targetLetter, setTargetLetter] = useState('');
@@ -11,9 +13,12 @@ function Game1() {
     const [scrollPosition, setScrollPosition] = useState(0);
     const visibleOptions = 4;
 
-    
+    const audioLose = new Audio(soundNoMatch);
+    const audioWin = new Audio(soundWin);
+
+
     useEffect(() => {
-        const {target, randomOptions} = generateRandomOptions();
+        const { target, randomOptions } = generateRandomOptions();
         setTargetLetter(target);
         setOptions(randomOptions)
     }, [score]);
@@ -35,6 +40,7 @@ function Game1() {
     };
 
     const showWinAlert = () => {
+        audioWin.play();
         Swal.fire({
             title: '¡Ganaste!',
             text: '¿Quieres jugar de nuevo?',
@@ -63,6 +69,7 @@ function Game1() {
     };
 
     const showLoseAlert = () => {
+        audioWin.lose();
         Swal.fire({
             title: '¡Perdiste!',
             text: '¿Quieres jugar de nuevo?',
@@ -91,7 +98,7 @@ function Game1() {
                         <button style={{ background: "#007bff" }} onClick={handleScrollLeft}>&#8249;</button>
                         <div className="options">
                             {visibleOptionList.map((option, index) => (
-                                <button key={option.id} onClick={() => handleOptionClick(option)} onMouseEnter={() =>playAudio(option.audio)}>
+                                <button key={option.id} onClick={() => handleOptionClick(option)} onMouseEnter={() => playAudio(option.audio)}>
                                     {option.letter}
                                 </button>
                             ))}
