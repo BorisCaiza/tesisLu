@@ -180,6 +180,7 @@ const Game2 = () => {
             width: '75px',
             height: '75px',
             opacity: isDragging ? 0.5 : opacity,
+            margin: '5px'
         };
 
         return (
@@ -231,7 +232,7 @@ const Game2 = () => {
                 <DropTarget />
                 <h2>Separación de sílabas</h2>
                 <div className="speaker-button">
-                    <img src={altavoz} className="altavoz-btn" onMouseEnter={() => playAudio(word.audioSilaba)} alt='altavoz' />
+                    <button onClick={() => playAudio(word.audioSilaba)} ><img src={altavoz} className="altavoz-btn" alt='altavoz' /></button>
                 </div>
                 <div className="title">
                     {word ? word.word : ''}
