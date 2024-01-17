@@ -19,10 +19,10 @@ const Game2 = () => {
     const [isVictory, setIsVictory] = useState(false);
     const [imageOpacity, setImageOpacity] = useState(1);
     const [word, setWord] = useState(null);
-    const [word2, setWord2] = useState(null);
     const [bestTime, setBestTime] = useState(null);
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(true);
+    const [audioTarget, setaudioTarget] = useState(null)
     const [images, setImages] = useState([])
 
 
@@ -32,6 +32,7 @@ const Game2 = () => {
 
     useEffect(() => {
         const { selectedWord, imagesWords } = getWord();
+        setaudioTarget( new Audio(selectedWord.audioSilaba));
         setWord(selectedWord);
         setImages(imagesWords);
     }, []);
@@ -232,7 +233,7 @@ const Game2 = () => {
                 <DropTarget />
                 <h2>Separación de sílabas</h2>
                 <div className="speaker-button">
-                    <button onClick={() => playAudio(word.audioSilaba)} ><img src={altavoz} className="altavoz-btn" alt='altavoz' /></button>
+                    <button onMouseEnter={() => audioTarget.play()} ><img src={altavoz} className="altavoz-btn" alt='altavoz' /></button>
                 </div>
                 <div className="title">
                     {word ? word.word : ''}

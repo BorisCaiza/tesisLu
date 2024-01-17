@@ -334,6 +334,7 @@ export const generateRandomOptions = () => {
 export const playAudio = (audio) => {
     if (audio) {
         try {
+            console.log(audio);
             const wordAudio = new Audio(audio);
             wordAudio.play();
         } catch (error) {
