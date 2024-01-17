@@ -125,10 +125,6 @@ const Game3 = () => {
         <div className="board">
             <div style={{ textAlign: 'center' }}>
                 <h1 style={{ fontWeight: "bold" }}>{targetWord && targetWord.word}
-                    <VolumeUpIcon
-                        onClick={() => playAudioRimaCon(targetWord.audio)}
-                        style={{ cursor: "pointer", color: "3498db", fontSize: "1.5em" }}
-                    />
                 </h1>
                 <img
                     src={targetWord.image}
