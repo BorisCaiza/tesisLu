@@ -31,6 +31,11 @@ const Game4 = () => {
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
 
+
+
+
+
+
     const audioNoMatch = new Audio(soundNoMatch);
     const audioMatch = new Audio(soundMatch);
     const audioWin = new Audio(soundWin);
@@ -55,14 +60,34 @@ const Game4 = () => {
     }, [user]);
 
 
-    const initialCards = [
-        { name: "gato", image: card1, isFlipped: false, match: false, audio: gato },
-        { name: "jirafa", image: card2, isFlipped: false, match: false, audio: jirafa },
-        { name: "perro", image: card3, isFlipped: false, match: false, audio: perro },
-        { name: "león", image: card4, isFlipped: false, match: false, audio: leon },
-    ];
 
 
+    useEffect(() => {
+        const initialCards = [
+            { name: "gato", image: card1, isFlipped: true, match: false, audio: gato },
+            { name: "jirafa", image: card2, isFlipped: true, match: false, audio: jirafa },
+            { name: "perro", image: card3, isFlipped: true, match: false, audio: perro },
+            { name: "león", image: card4, isFlipped: true, match: false, audio: leon },
+        ];
+
+        const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
+        duplicatedCards.sort(() => Math.random() - 0.5);
+        setCount(duplicatedCards.length)
+        setCards(duplicatedCards);
+    }, []);
+
+    useEffect(() => {
+        if (cards) {
+            setIsRunning(false)
+            const timer = setTimeout(() => {
+                setCards(prevCards => prevCards.map(card => ({ ...card, isFlipped: false })).sort(() => Math.random() - 0.5));
+            }, 2500);
+            setIsRunning(true)
+            return () => {
+                clearTimeout(timer);
+            };
+        }
+    }, [cards]);
 
 
     const saveScore = async () => {
@@ -92,12 +117,6 @@ const Game4 = () => {
         };
     }, [isRunning]);
 
-    useEffect(() => {
-        const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
-        duplicatedCards.sort(() => Math.random() - 0.5);
-        setCount(duplicatedCards.length)
-        setCards(duplicatedCards);
-    }, []);
 
 
 

@@ -184,7 +184,7 @@ UserCtrl.token = async (req, res) => {
 
     const user = await userModel.findOne({ refreshTokens: refreshToken })
     try {
-        if (!user.refreshTokens.includes(refreshToken)) {
+        if (user && !user.refreshTokens.includes(refreshToken)) {
             return res.status(403).json("Refresh token is not valid!")
 
         }
@@ -199,7 +199,7 @@ UserCtrl.token = async (req, res) => {
     JWT.verify(refreshToken, process.env.JWT_SECRET_REFRESH, async (err, user) => {
         err && console.log(err);
         const user2 = await userModel.findOne({ refreshTokens: refreshToken })
-        if (!user2 && !user2.refreshTokens) {
+        if (!user2 && !user2?.refreshTokens) {
             return res.status(403).json({
                 status: "false",
                 message: "No se encuentra refreshTokens"
