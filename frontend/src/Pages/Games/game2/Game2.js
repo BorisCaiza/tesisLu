@@ -21,11 +21,9 @@ const Game2 = () => {
     const [word, setWord] = useState(null);
     const [bestTime, setBestTime] = useState(null);
     const [time, setTime] = useState(0);
-    const [isRunning, setIsRunning] = useState(true);
+    const [isRunning, setIsRunning] = useState(false);
     const [audioTarget, setaudioTarget] = useState(null)
-    const [otherAudio, setOtherAudio] = useState(null)
     const [images, setImages] = useState([])
-    const [audioMain, setAudioMain] = useState(null)
 
 
     const audioLose = new Audio(soundNoMatch);
@@ -35,10 +33,9 @@ const Game2 = () => {
     useEffect(() => {
         const { selectedWord, imagesWords } = getWord();
         setaudioTarget(new Audio(selectedWord.audioSilaba));
-        //setOtherAudio(new Audio(imagesWords[1].audio))
-        //setAudioMain(new Audio(selectedWord.audio))
         setWord(selectedWord);
         setImages(imagesWords);
+        setIsRunning(true)
     }, []);
 
     useEffect(() => {
@@ -161,7 +158,7 @@ const Game2 = () => {
             <div>
                 {images.map((image, index) => (
                     <Image
-                        audio={image.audioPalabra}
+                        audio={new Audio(image.audioPalabra)}
                         className="imageDraw"
                         key={index}
                         src={image.src}
@@ -194,11 +191,6 @@ const Game2 = () => {
                 src={src}
                 alt={alt}
                 onMouseEnter={() => {
-                    /*if (correct) {
-                        audioMain.play();
-                    } else {
-                        otherAudio.play();
-                    }*/
                 }}
                 style={imageStyle}
             />
