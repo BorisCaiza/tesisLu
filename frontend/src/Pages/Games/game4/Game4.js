@@ -40,10 +40,17 @@ const Game4 = () => {
     const audioWin = new Audio(soundWin);
 
     useEffect(() => {
-        const bestTime = getScore(user);
-        setBestTime(bestTime)
+        const fetchBestTime = async () => {
+            try {
+                const bestTime = await getScore(user);
+                setBestTime(bestTime);
+            } catch (error) {
+                console.error("Error fetching best time:", error);
+            }
+        };
+        fetchBestTime();
     }, [user]);
-
+    
 
     const getInitalCards = () => {
         const initialCards = [
@@ -68,18 +75,15 @@ const Game4 = () => {
         setIsRunning(false);
 
         const displayTimer = setTimeout(() => {
-            setShowCards(false);  // Hide the cards after the display duration
+            setShowCards(false);  
             setCards(getInitalCards());
-            setIsRunning(true);   // Start the timer for the game after the display phase
+            setIsRunning(true); 
         }, displayDuration);
 
         return () => {
             clearTimeout(displayTimer);
         };
     }, []);
-
-
-
 
     useEffect(() => {
         let interval;
@@ -94,9 +98,6 @@ const Game4 = () => {
             clearInterval(interval);
         };
     }, [isRunning]);
-
-
-
 
     const handleCardClick = (index, text) => {
         if (!showCards && cards[index].isFlipped === false) {
