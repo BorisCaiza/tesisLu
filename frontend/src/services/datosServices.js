@@ -265,6 +265,7 @@ export const getWord = () => {
     const allWords = wordsDataService();
     const randomIndex = Math.floor(Math.random() * allWords.length);
     const selectedWord = allWords[randomIndex];
+    const otherWord = allWords[selectedWord.rimas]
     const rhymingWordIndex = selectedWord.rimas - 1;
     const rhymingWord = allWords[rhymingWordIndex];
     const imagesWords = [
@@ -277,7 +278,7 @@ export const getWord = () => {
         [imagesWords[i], imagesWords[j]] = [imagesWords[j], imagesWords[i]];
     }
 
-    return { selectedWord, imagesWords };
+    return { selectedWord, imagesWords, otherWord };
 };
 
 export const lettersDataService = () => {
@@ -353,7 +354,7 @@ export const playAudioRimaCon = (targetWord) => {
                 });
                 audio.play()
             }
-            
+
         } catch (error) {
             console.log(error);
         }

@@ -23,7 +23,9 @@ const Game2 = () => {
     const [time, setTime] = useState(0);
     const [isRunning, setIsRunning] = useState(true);
     const [audioTarget, setaudioTarget] = useState(null)
+    const [otherAudio, setOtherAudio] = useState(null)
     const [images, setImages] = useState([])
+    const [audioMain, setAudioMain] = useState(null)
 
 
     const audioLose = new Audio(soundNoMatch);
@@ -31,8 +33,10 @@ const Game2 = () => {
 
 
     useEffect(() => {
-        const { selectedWord, imagesWords } = getWord();
-        setaudioTarget( new Audio(selectedWord.audioSilaba));
+        const { selectedWord, imagesWords, otherWord } = getWord();
+        setaudioTarget(new Audio(selectedWord.audioSilaba));
+        setOtherAudio(new Audio(imagesWords[1].audio))
+        setAudioMain(new Audio(selectedWord.audio))
         setWord(selectedWord);
         setImages(imagesWords);
     }, []);
@@ -181,7 +185,7 @@ const Game2 = () => {
             width: '75px',
             height: '75px',
             opacity: isDragging ? 0.5 : opacity,
-            margin: '5px'
+            margin: '30px'
         };
 
         return (
@@ -189,7 +193,13 @@ const Game2 = () => {
                 ref={ref}
                 src={src}
                 alt={alt}
-                onClick={() => playAudio(audio)}
+                onMouseEnter={() => {
+                    if (correct) {
+                        audioMain.play();
+                    } else {
+                        otherAudio.play();
+                    }
+                }}
                 style={imageStyle}
             />
         );
