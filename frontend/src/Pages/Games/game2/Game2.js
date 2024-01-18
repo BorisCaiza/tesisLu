@@ -158,7 +158,7 @@ const Game2 = () => {
             <div>
                 {images.map((image, index) => (
                     <Image
-                        audio={new Audio(image.audioPalabra)}
+                        audio={image.audioPlay}
                         className="imageDraw"
                         key={index}
                         src={image.src}
@@ -191,6 +191,7 @@ const Game2 = () => {
                 src={src}
                 alt={alt}
                 onMouseEnter={() => {
+                    audio.play()
                 }}
                 style={imageStyle}
             />

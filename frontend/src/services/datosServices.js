@@ -187,56 +187,56 @@ import audioRimocon from "../assets/sounds/rimaCon.mp3"
 
 export const wordsDataService = () => {
     return [
-        { id: 1, word: "Anillo", rimas: 2, syllable_separation: "a-ni-llo", image: anilloImagen, audio: anilloAudio, audioSilaba: anilloSilaba },
-        { id: 2, word: "Martillo", rimas: 1, syllable_separation: "mar-ti-llo", image: martilloImagen, audio: martilloAudio, audioSilaba: martilloSilaba },
-        { id: 3, word: "Araña", rimas: 4, syllable_separation: "a-ra-ña", image: arañaImagen, audio: arañaAudio, audioSilaba: arañaSilaba },
-        { id: 4, word: "Montaña", rimas: 3, syllable_separation: "mon-ta-ña", image: montañaImagen, audio: montañaAudio, audioSilaba: montañaSilaba },
-        { id: 5, word: "Ardilla", rimas: 6, syllable_separation: "ar-di-lla", image: ardillaImagen, audio: ardillaAudio, audioSilaba: ardillaSilaba },
-        { id: 6, word: "Silla", rimas: 5, syllable_separation: "si-lla", image: sillaImagen, audio: sillaAudio, audioSilaba: sillaSilaba },
-        { id: 7, word: "Ballena", rimas: 8, syllable_separation: "ba-lle-na", image: ballenaImagen, audio: ballenaAudio, audioSilaba: ballenaSilaba },
-        { id: 8, word: "Sirena", rimas: 7, syllable_separation: "si-re-na", image: sirenaImagen, audio: sirenaAudio, audioSilaba: sirenaSilaba },
-        { id: 9, word: "Botella", rimas: 10, syllable_separation: "bo-te-lla", image: botellaImagen, audio: botellaAudio, audioSilaba: botellaSilaba },
-        { id: 10, word: "Estrella", rimas: 9, syllable_separation: "es-tre-lla", image: estrellaImagen, audio: estrellaAudio, audioSilaba: estrellaSilaba },
-        { id: 11, word: "Casa", rimas: 12, syllable_separation: "ca-sa", image: casaImagen, audio: casaAudio, audioSilaba: casaSilaba },
-        { id: 12, word: "Masa", rimas: 11, syllable_separation: "ma-sa", image: masaImagen, audio: masaAudio, audioSilaba: masaSilaba },
-        { id: 13, word: "Conejo", rimas: 14, syllable_separation: "co-ne-jo", image: conejoImagen, audio: conejoAudio, audioSilaba: conejoSilaba },
-        { id: 14, word: "Cangrejo", rimas: 13, syllable_separation: "can-gre-jo", image: cangrejoImagen, audio: cangrejoAudio, audioSilaba: cangrejoSilaba },
-        { id: 15, word: "Cuna", rimas: 16, syllable_separation: "cu-na", image: cunaImagen, audio: cunaAudio, audioSilaba: cunaSilaba },
-        { id: 16, word: "Luna", rimas: 15, syllable_separation: "lu-na", image: lunaImagen, audio: lunaAudio, audioSilaba: lunaSilaba },
-        { id: 17, word: "Gato", rimas: 18, syllable_separation: "ga-to", image: gatoImagen, audio: gatoAudio, audioSilaba: gatoSilaba },
-        { id: 18, word: "Zapato", rimas: 17, syllable_separation: "za-pa-to", image: zapatoImagen, audio: zapatoAudio, audioSilaba: zapatoSilaba },
-        { id: 19, word: "León", rimas: 20, syllable_separation: "le-ón", image: leonImagen, audio: leonAudio, audioSilaba: leonSilaba },
-        { id: 20, word: "Avión", rimas: 19, syllable_separation: "a-vión", image: avionImagen, audio: avionAudio, audioSilaba: avionSilaba },
-        { id: 21, word: "Mago", rimas: 22, syllable_separation: "ma-go", image: magoImagen, audio: magoAudio, audioSilaba: magoSilaba },
-        { id: 22, word: "Lago", rimas: 21, syllable_separation: "la-go", image: lagoImagen, audio: lagoAudio, audioSilaba: lagoSilaba },
-        { id: 23, word: "Maleta", rimas: 24, syllable_separation: "ma-le-ta", image: maletaImagen, audio: maletaAudio, audioSilaba: maletaSilaba },
-        { id: 24, word: "Paleta", rimas: 23, syllable_separation: "pa-le-ta", image: paletaImagen, audio: paletaAudio, audioSilaba: paletaSilaba },
-        { id: 25, word: "Marcador", rimas: 26, syllable_separation: "mar-ca-dor", image: marcadorImagen, audio: marcadorAudio, audioSilaba: marcadorSilaba },
-        { id: 26, word: "Borrador", rimas: 25, syllable_separation: "bor-ra-dor", image: borradorImagen, audio: borradorAudio, audioSilaba: borradorSilaba },
-        { id: 27, word: "Muela", rimas: 28, syllable_separation: "mue-la", image: muelaImagen, audio: muelaAudio, audioSilaba: muelaSilaba },
-        { id: 28, word: "Escuela", rimas: 27, syllable_separation: "es-cue-la", image: escuelaImagen, audio: escuelaAudio, audioSilaba: escuelaSilaba },
-        { id: 29, word: "Oruga", rimas: 30, syllable_separation: "o-ru-ga", image: orugaImagen, audio: orugaAudio, audioSilaba: orugaSilaba },
-        { id: 30, word: "Tortuga", rimas: 29, syllable_separation: "tor-tu-ga", image: tortugaImagen, audio: tortugaAudio, audioSilaba: tortugaSilaba },
-        { id: 31, word: "Oveja", rimas: 32, syllable_separation: "o-ve-ja", image: ovejaImagen, audio: ovejaAudio, audioSilaba: ovejaSilaba },
-        { id: 32, word: "Abeja", rimas: 31, syllable_separation: "a-be-ja", image: abejaImagen, audio: abejaAudio, audioSilaba: abejaSilaba },
-        { id: 33, word: "Piña", rimas: 34, syllable_separation: "pi-ña", image: piñaImagen, audio: piñaAudio, audioSilaba: piñaSilaba },
-        { id: 34, word: "Niña", rimas: 33, syllable_separation: "ni-ña", image: niñaImagen, audio: niñaAudio, audioSilaba: niñaSilaba },
-        { id: 35, word: "Plato", rimas: 36, syllable_separation: "pla-to", image: paltoImagen, audio: platoAudio, audioSilaba: platoSilaba },
-        { id: 36, word: "Pato", rimas: 35, syllable_separation: "pa-to", image: patoImagen, audio: patoAudio, audioSilaba: patoSilaba },
-        { id: 37, word: "Queso", rimas: 38, syllable_separation: "que-so", image: quesoImagen, audio: quesoAudio, audioSilaba: quesoSilaba },
-        { id: 38, word: "Hueso", rimas: 37, syllable_separation: "hue-so", image: huesoImagen, audio: huesoAudio, audioSilaba: huesoSilaba },
-        { id: 39, word: "Rana", rimas: 40, syllable_separation: "ra-na", image: ranaImagen, audio: ranaAudio, audioSilaba: ranaSilaba },
-        { id: 40, word: "Banana", rimas: 39, syllable_separation: "ba-na-na", image: bananaImagen, audio: bananaAudio, audioSilaba: bananaSilaba },
-        { id: 41, word: "Ratón", rimas: 42, syllable_separation: "ra-tón", image: ratonImagen, audio: ratonAudio, audioSilaba: ratonSilaba },
-        { id: 42, word: "Limón", rimas: 41, syllable_separation: "li-món", image: limonImagen, audio: limonAudio, audioSilaba: limonSilaba },
-        { id: 43, word: "Sol", rimas: 44, syllable_separation: "sol", image: solImagen, audio: solAudio, audioSilaba: solSilaba },
-        { id: 44, word: "Girasol", rimas: 43, syllable_separation: "gi-ra-sol", image: girasolImagen, audio: girasolAudio, audioSilaba: girasolSilaba },
-        { id: 45, word: "Sopa", rimas: 46, syllable_separation: "so-pa", image: sopaImagen, audio: sopaAudio, audioSilaba: sopaSilaba },
-        { id: 46, word: "Ropa", rimas: 45, syllable_separation: "ro-pa", image: ropaImagen, audio: ropaAudio, audioSilaba: ropaSilaba },
-        { id: 47, word: "Veinte", rimas: 48, syllable_separation: "vein-te", image: veinteImagen, audio: veinteAudio, audioSilaba: veinteSilaba },
-        { id: 48, word: "Diente", rimas: 47, syllable_separation: "dien-te", image: dienteImagen, audio: dienteAudio, audioSilaba: dienteSilaba },
-        { id: 49, word: "Ventana", rimas: 50, syllable_separation: "ven-ta-na", image: ventanaImagen, audio: ventanaAudio, audioSilaba: ventanaSilaba },
-        { id: 50, word: "Iguana", rimas: 49, syllable_separation: "i-gua-na", image: iguanaImagen, audio: iguanaAudio, audioSilaba: iguanaSilaba },
+        { id: 1, word: "Anillo", rimas: 2, syllable_separation: "a-ni-llo", image: anilloImagen, audio: anilloAudio, audioPlay: (anilloAudio), audioSilaba: anilloSilaba },
+        { id: 2, word: "Martillo", rimas: 1, syllable_separation: "mar-ti-llo", image: martilloImagen, audio: martilloAudio, audioPlay: (martilloAudio), audioSilaba: martilloSilaba },
+        { id: 3, word: "Araña", rimas: 4, syllable_separation: "a-ra-ña", image: arañaImagen, audio: arañaAudio, audioPlay: (montañaAudio), audioSilaba: arañaSilaba },
+        { id: 4, word: "Montaña", rimas: 3, syllable_separation: "mon-ta-ña", image: montañaImagen, audio: montañaAudio, audioPlay: (ardillaAudio), audioSilaba: montañaSilaba },
+        { id: 5, word: "Ardilla", rimas: 6, syllable_separation: "ar-di-lla", image: ardillaImagen, audio: ardillaAudio, audioPlay: (ardillaAudio), audioSilaba: ardillaSilaba },
+        { id: 6, word: "Silla", rimas: 5, syllable_separation: "si-lla", image: sillaImagen, audio: sillaAudio, audioPlay: (sillaAudio), audioSilaba: sillaSilaba },
+        { id: 7, word: "Ballena", rimas: 8, syllable_separation: "ba-lle-na", image: ballenaImagen, audio: ballenaAudio, audioPlay: (ballenaAudio), audioSilaba: ballenaSilaba },
+        { id: 8, word: "Sirena", rimas: 7, syllable_separation: "si-re-na", image: sirenaImagen, audio: sirenaAudio, audioPlay: (sirenaAudio), audioSilaba: sirenaSilaba },
+        { id: 9, word: "Botella", rimas: 10, syllable_separation: "bo-te-lla", image: botellaImagen, audio: botellaAudio, audioPlay: (botellaAudio), audioSilaba: botellaSilaba },
+        { id: 10, word: "Estrella", rimas: 9, syllable_separation: "es-tre-lla", image: estrellaImagen, audio: estrellaAudio, audioPlay: (estrellaAudio), audioSilaba: estrellaSilaba },
+        { id: 11, word: "Casa", rimas: 12, syllable_separation: "ca-sa", image: casaImagen, audio: casaAudio, audioPlay: (casaAudio), audioSilaba: casaSilaba },
+        { id: 12, word: "Masa", rimas: 11, syllable_separation: "ma-sa", image: masaImagen, audio: masaAudio, audioPlay: (masaAudio), audioSilaba: masaSilaba },
+        { id: 13, word: "Conejo", rimas: 14, syllable_separation: "co-ne-jo", image: conejoImagen, audio: conejoAudio, audioPlay: (masaAudio), audioSilaba: conejoSilaba },
+        { id: 14, word: "Cangrejo", rimas: 13, syllable_separation: "can-gre-jo", image: cangrejoImagen, audio: cangrejoAudio, audioPlay: (masaAudio), audioSilaba: cangrejoSilaba },
+        { id: 15, word: "Cuna", rimas: 16, syllable_separation: "cu-na", image: cunaImagen, audio: cunaAudio, audioPlay: (masaAudio), audioSilaba: cunaSilaba },
+        { id: 16, word: "Luna", rimas: 15, syllable_separation: "lu-na", image: lunaImagen, audio: lunaAudio, audioPlay: (masaAudio), audioSilaba: lunaSilaba },
+        { id: 17, word: "Gato", rimas: 18, syllable_separation: "ga-to", image: gatoImagen, audio: gatoAudio, audioPlay: (masaAudio), audioSilaba: gatoSilaba },
+        { id: 18, word: "Zapato", rimas: 17, syllable_separation: "za-pa-to", image: zapatoImagen, audio: zapatoAudio, audioPlay: (masaAudio), audioSilaba: zapatoSilaba },
+        { id: 19, word: "León", rimas: 20, syllable_separation: "le-ón", image: leonImagen, audio: leonAudio, audioPlay: (masaAudio), audioSilaba: leonSilaba },
+        { id: 20, word: "Avión", rimas: 19, syllable_separation: "a-vión", image: avionImagen, audio: avionAudio, audioPlay: (masaAudio), audioSilaba: avionSilaba },
+        { id: 21, word: "Mago", rimas: 22, syllable_separation: "ma-go", image: magoImagen, audio: magoAudio, audioPlay: (masaAudio), audioSilaba: magoSilaba },
+        { id: 22, word: "Lago", rimas: 21, syllable_separation: "la-go", image: lagoImagen, audio: lagoAudio, audioPlay: (masaAudio), audioSilaba: lagoSilaba },
+        { id: 23, word: "Maleta", rimas: 24, syllable_separation: "ma-le-ta", image: maletaImagen, audio: maletaAudio, audioPlay: (masaAudio), audioSilaba: maletaSilaba },
+        { id: 24, word: "Paleta", rimas: 23, syllable_separation: "pa-le-ta", image: paletaImagen, audio: paletaAudio, audioPlay: (masaAudio), audioSilaba: paletaSilaba },
+        { id: 25, word: "Marcador", rimas: 26, syllable_separation: "mar-ca-dor", image: marcadorImagen, audio: marcadorAudio, audioPlay: (masaAudio), audioSilaba: marcadorSilaba },
+        { id: 26, word: "Borrador", rimas: 25, syllable_separation: "bor-ra-dor", image: borradorImagen, audio: borradorAudio, audioPlay: (masaAudio), audioSilaba: borradorSilaba },
+        { id: 27, word: "Muela", rimas: 28, syllable_separation: "mue-la", image: muelaImagen, audio: muelaAudio, audioPlay: (masaAudio), audioSilaba: muelaSilaba },
+        { id: 28, word: "Escuela", rimas: 27, syllable_separation: "es-cue-la", image: escuelaImagen, audio: escuelaAudio, audioPlay: (masaAudio), audioSilaba: escuelaSilaba },
+        { id: 29, word: "Oruga", rimas: 30, syllable_separation: "o-ru-ga", image: orugaImagen, audio: orugaAudio, audioPlay: (masaAudio), audioSilaba: orugaSilaba },
+        { id: 30, word: "Tortuga", rimas: 29, syllable_separation: "tor-tu-ga", image: tortugaImagen, audio: tortugaAudio, audioPlay: (masaAudio), audioSilaba: tortugaSilaba },
+        { id: 31, word: "Oveja", rimas: 32, syllable_separation: "o-ve-ja", image: ovejaImagen, audio: ovejaAudio, audioPlay: (masaAudio), audioSilaba: ovejaSilaba },
+        { id: 32, word: "Abeja", rimas: 31, syllable_separation: "a-be-ja", image: abejaImagen, audio: abejaAudio, audioPlay: (masaAudio), audioSilaba: abejaSilaba },
+        { id: 33, word: "Piña", rimas: 34, syllable_separation: "pi-ña", image: piñaImagen, audio: piñaAudio, audioPlay: (masaAudio), audioSilaba: piñaSilaba },
+        { id: 34, word: "Niña", rimas: 33, syllable_separation: "ni-ña", image: niñaImagen, audio: niñaAudio, audioPlay: (masaAudio), audioSilaba: niñaSilaba },
+        { id: 35, word: "Plato", rimas: 36, syllable_separation: "pla-to", image: paltoImagen, audio: platoAudio, audioPlay: (masaAudio), audioSilaba: platoSilaba },
+        { id: 36, word: "Pato", rimas: 35, syllable_separation: "pa-to", image: patoImagen, audio: patoAudio, audioPlay: (masaAudio), audioSilaba: patoSilaba },
+        { id: 37, word: "Queso", rimas: 38, syllable_separation: "que-so", image: quesoImagen, audio: quesoAudio, audioPlay: (masaAudio), audioSilaba: quesoSilaba },
+        { id: 38, word: "Hueso", rimas: 37, syllable_separation: "hue-so", image: huesoImagen, audio: huesoAudio, audioPlay: (masaAudio), audioSilaba: huesoSilaba },
+        { id: 39, word: "Rana", rimas: 40, syllable_separation: "ra-na", image: ranaImagen, audio: ranaAudio, audioPlay: (masaAudio), audioSilaba: ranaSilaba },
+        { id: 40, word: "Banana", rimas: 39, syllable_separation: "ba-na-na", image: bananaImagen, audio: bananaAudio, audioPlay: (masaAudio), audioSilaba: bananaSilaba },
+        { id: 41, word: "Ratón", rimas: 42, syllable_separation: "ra-tón", image: ratonImagen, audio: ratonAudio, audioPlay: (masaAudio), audioSilaba: ratonSilaba },
+        { id: 42, word: "Limón", rimas: 41, syllable_separation: "li-món", image: limonImagen, audio: limonAudio, audioPlay: (masaAudio), audioSilaba: limonSilaba },
+        { id: 43, word: "Sol", rimas: 44, syllable_separation: "sol", image: solImagen, audio: solAudio, audioPlay: (masaAudio), audioSilaba: solSilaba },
+        { id: 44, word: "Girasol", rimas: 43, syllable_separation: "gi-ra-sol", image: girasolImagen, audio: girasolAudio, audioPlay: (masaAudio), audioSilaba: girasolSilaba },
+        { id: 45, word: "Sopa", rimas: 46, syllable_separation: "so-pa", image: sopaImagen, audio: sopaAudio, audioPlay: (masaAudio), audioSilaba: sopaSilaba },
+        { id: 46, word: "Ropa", rimas: 45, syllable_separation: "ro-pa", image: ropaImagen, audio: ropaAudio, audioPlay: (masaAudio), audioSilaba: ropaSilaba },
+        { id: 47, word: "Veinte", rimas: 48, syllable_separation: "vein-te", image: veinteImagen, audio: veinteAudio, audioPlay: (masaAudio), audioSilaba: veinteSilaba },
+        { id: 48, word: "Diente", rimas: 47, syllable_separation: "dien-te", image: dienteImagen, audio: dienteAudio, audioPlay: (masaAudio), audioSilaba: dienteSilaba },
+        { id: 49, word: "Ventana", rimas: 50, syllable_separation: "ven-ta-na", image: ventanaImagen, audio: ventanaAudio, audioPlay: (masaAudio), audioSilaba: ventanaSilaba },
+        { id: 50, word: "Iguana", rimas: 49, syllable_separation: "i-gua-na", image: iguanaImagen, audio: iguanaAudio, audioPlay: (masaAudio), audioSilaba: iguanaSilaba },
     ];
 };
 
@@ -269,8 +269,8 @@ export const getWord = () => {
     const rhymingWordIndex = selectedWord.rimas - 1;
     const rhymingWord = allWords[rhymingWordIndex];
     const imagesWords = [
-        { src: selectedWord.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: selectedWord.audio },
-        { src: rhymingWord.image, alt: 'Imagen Fondo2', correct: false, audioPalabra: rhymingWord.audio }
+        { src: selectedWord.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: selectedWord.audio, audioPlay: new Audio(selectedWord.audio,) },
+        { src: rhymingWord.image, alt: 'Imagen Fondo2', correct: false, audioPalabra: rhymingWord.audio, audioPlay: new Audio(rhymingWord.audio,) }
     ];
 
     for (let i = imagesWords.length - 1; i > 0; i--) {
@@ -348,7 +348,7 @@ export const playAudioRimaCon = (targetWord) => {
         try {
             const rimaCon = new Audio(audioRimocon);
             if (targetWord !== null) {
-                const audio = new Audio(targetWord);
+                const audio = new Audio(masaAudio);
                 audio.addEventListener('ended', () => {
                     rimaCon.play();
                 });
