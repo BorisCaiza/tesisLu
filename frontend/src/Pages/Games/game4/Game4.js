@@ -31,10 +31,7 @@ const Game4 = () => {
     const [count, setCount] = useState(null);
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
-
-
-
-
+    const [showCards, setShowCards] = useState(true);  // New state variable
 
 
     const audioNoMatch = new Audio(soundNoMatch);
@@ -61,33 +58,39 @@ const Game4 = () => {
     }, [user]);
 
 
-
-
-    useEffect(() => {
+    const getInitalCards = () => {
         const initialCards = [
-            { name: "gato", image: card1, isFlipped: true, match: false, audio: gato },
-            { name: "jirafa", image: card2, isFlipped: true, match: false, audio: jirafa },
-            { name: "perro", image: card3, isFlipped: true, match: false, audio: perro },
-            { name: "león", image: card4, isFlipped: true, match: false, audio: leon },
+            { name: "gato", image: card1, isFlipped: false, match: false, audio: gato },
+            { name: "jirafa", image: card2, isFlipped: false, match: false, audio: jirafa },
+            { name: "perro", image: card3, isFlipped: false, match: false, audio: perro },
+            { name: "león", image: card4, isFlipped: false, match: false, audio: leon },
         ];
         const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
         duplicatedCards.sort(() => Math.random() - 0.5);
-        setCount(duplicatedCards.length)
-        setCards(duplicatedCards);
-    }, []);
+        return duplicatedCards;
+    }
+
 
     useEffect(() => {
-        if (cards) {
-            setIsRunning(false)
-            const timer = setTimeout(() => {
-                setCards(prevCards => prevCards.map(card => ({ ...card, isFlipped: false })).sort(() => Math.random() - 0.5));
-            }, 2500);
-            setIsRunning(true)
-            return () => {
-                clearTimeout(timer);
-            };
-        }
-    }, [cards]);
+        const initialCards = getInitalCards();
+        setCount(initialCards.length);
+        setCards(initialCards);
+
+        // Display the cards for 5 seconds (adjust the duration as needed)
+        const displayDuration = 5000;
+
+        setIsRunning(false);  // Pause the game during the display phase
+
+        const displayTimer = setTimeout(() => {
+            setShowCards(false);  // Hide the cards after the display duration
+            setCards(getInitalCards());
+            setIsRunning(true);   // Start the timer for the game after the display phase
+        }, displayDuration);
+
+        return () => {
+            clearTimeout(displayTimer);
+        };
+    }, []);
 
 
     const saveScore = async () => {
@@ -121,7 +124,7 @@ const Game4 = () => {
 
 
     const handleCardClick = (index, text) => {
-        if (cards[index].isFlipped === false) {
+        if (!showCards && cards[index].isFlipped === false) {
             playAudioFlipcard();
             updateCardState(index, true);
             if (selectedCard === null) {
@@ -214,11 +217,10 @@ const Game4 = () => {
                     <Card
                         key={index}
                         card={card}
-                        isFlipped={card.isFlipped}
+                        isFlipped={showCards || card.isFlipped}  // Show cards if showCards is true
                         handleClick={() => handleCardClick(index, card.name)}
                     />
                 ))}
-
             </div>
             <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
             <div style={{ fontWeight: "bold" }}>Mejor puntaje: {score} puntos</div>
