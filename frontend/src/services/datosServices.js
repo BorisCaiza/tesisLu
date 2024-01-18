@@ -348,7 +348,7 @@ export const playAudioRimaCon = (targetWord) => {
         try {
             const rimaCon = new Audio(audioRimocon);
             if (targetWord !== null) {
-                const audio = new Audio(masaAudio);
+                const audio = new Audio(targetWord);
                 audio.addEventListener('ended', () => {
                     rimaCon.play();
                 });
