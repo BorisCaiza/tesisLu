@@ -5,6 +5,7 @@ import "./Game1.css"
 import { generateRandomOptions, playAudio } from '../../../services/datosServices';
 import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 import soundWin from '../../../assets/sounds/win.wav';
+import soundClick from "../../../assets/sounds/click.mp3"
 
 function Game1() {
     const [targetLetter, setTargetLetter] = useState('');
@@ -15,6 +16,7 @@ function Game1() {
 
     const audioLose = new Audio(soundNoMatch);
     const audioWin = new Audio(soundWin);
+    const audioClick = new Audio(soundClick);
 
 
     useEffect(() => {
@@ -32,10 +34,12 @@ function Game1() {
     };
 
     const handleScrollLeft = () => {
+        audioClick.play();
         setScrollPosition(scrollPosition > 0 ? scrollPosition - 1 : options.length - visibleOptions);
     };
 
     const handleScrollRight = () => {
+        audioClick.play();
         setScrollPosition((scrollPosition + 1) % (options.length - visibleOptions + 1));
     };
 
@@ -69,7 +73,7 @@ function Game1() {
     };
 
     const showLoseAlert = () => {
-        audioWin.lose();
+        audioLose.play();
         Swal.fire({
             title: '¡Perdiste!',
             text: '¿Quieres jugar de nuevo?',
