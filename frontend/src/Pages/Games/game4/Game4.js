@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../../Context/AuthContext";
 import Card from "./Card";
 import card1 from "../../../assets/images/card1.png";
 import card2 from "../../../assets/images/card2.png";
 import card3 from "../../../assets/images/card3.png";
 import card4 from "../../../assets/images/card4.png";
 import "./game4.css";
-import { AuthContext } from "../../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import api from "../../../api/api"
 import Swal from 'sweetalert2';
 import confetti from "canvas-confetti";
 import soundNoMatch from '../../../assets/sounds/no-match.mp3';
@@ -19,6 +18,7 @@ import gato from "../../../assets/sounds4/gato.mp3"
 import jirafa from "../../../assets/sounds4/jirafa.mp3"
 import leon from "../../../assets/sounds4/leon.mp3"
 import { playAudioFlipcard } from "../../../util/util";
+import { getScore, saveScore } from "../../../services/service";
 
 const Game4 = () => {
     const navigator = useNavigate();
@@ -27,36 +27,29 @@ const Game4 = () => {
     const [selectedCard, setSelectedCard] = useState(null);
     const [time, setTime] = useState(0);
     const [bestTime, setBestTime] = useState(null);
-    const [isRunning, setIsRunning] = useState(true);
+    const [isRunning, setIsRunning] = useState(false);
     const [count, setCount] = useState(null);
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
-    const [showCards, setShowCards] = useState(true);  
+    const [showCards, setShowCards] = useState(true);
 
 
     const audioNoMatch = new Audio(soundNoMatch);
     const audioMatch = new Audio(soundMatch);
     const audioWin = new Audio(soundWin);
 
-
-
     useEffect(() => {
-        const getScore = async () => {
-            const score = {
-                token: user.token,
-                game: "game4"
-            }
+        const fetchBestTime = async () => {
             try {
-                const response = await api.post('/getScore', score)
-                if (response.status === 200) {
-                    setBestTime(response.data.game.bestTime)
-                }
+                const bestTime = await getScore(user);
+                setBestTime(bestTime);
             } catch (error) {
+                console.error("Error fetching best time:", error);
             }
-        }
-        getScore()
+        };
+        fetchBestTime();
     }, [user]);
-
+    
 
     const getInitalCards = () => {
         const initialCards = [
@@ -76,35 +69,20 @@ const Game4 = () => {
         setCount(initialCards.length);
         setCards(initialCards);
 
-        // Display the cards for 5 seconds (adjust the duration as needed)
         const displayDuration = 5000;
 
-        setIsRunning(false);  // Pause the game during the display phase
+        setIsRunning(false);
 
         const displayTimer = setTimeout(() => {
-            setShowCards(false);  // Hide the cards after the display duration
+            setShowCards(false);  
             setCards(getInitalCards());
-            setIsRunning(true);   // Start the timer for the game after the display phase
+            setIsRunning(true); 
         }, displayDuration);
 
         return () => {
             clearTimeout(displayTimer);
         };
     }, []);
-
-
-    const saveScore = async () => {
-        const score = {
-            bestTime: time,
-            game: "game4",
-            token: user.token
-        }
-        try {
-            await api.post('/score', score)
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     useEffect(() => {
         let interval;
@@ -119,9 +97,6 @@ const Game4 = () => {
             clearInterval(interval);
         };
     }, [isRunning]);
-
-
-
 
     const handleCardClick = (index, text) => {
         if (!showCards && cards[index].isFlipped === false) {
@@ -200,14 +175,13 @@ const Game4 = () => {
                 });
             },
         }).then((result) => {
-            saveScore();
+            saveScore(time, "game4",  user.token)
             if (result.isConfirmed) {
                 window.location.reload();
             } else {
                 navigator("/")
             }
         })
-
     }
 
     return (
@@ -217,7 +191,7 @@ const Game4 = () => {
                     <Card
                         key={index}
                         card={card}
-                        isFlipped={showCards || card.isFlipped}  
+                        isFlipped={showCards || card.isFlipped}
                         handleClick={() => handleCardClick(index, card.name)}
                     />
                 ))}
