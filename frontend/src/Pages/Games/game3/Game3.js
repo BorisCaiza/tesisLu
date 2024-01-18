@@ -62,7 +62,7 @@ const Game3 = () => {
             setOption2(rima);
         }
     };
-    
+
     useEffect(() => {
         getDatos();
         getScore();
@@ -143,6 +143,10 @@ const Game3 = () => {
                     >
                         <img src={option1.image} alt="Option Incorrect" />
                     </button>
+
+                    <div className='letter'>
+                        o
+                    </div>
                     <button onClick={() => handleOptionSelect(option2)}
                         onMouseEnter={() => playAudio(option2.audio)}
                     >
