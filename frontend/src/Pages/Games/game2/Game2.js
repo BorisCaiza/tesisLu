@@ -33,10 +33,10 @@ const Game2 = () => {
 
 
     useEffect(() => {
-        const { selectedWord, imagesWords, otherWord } = getWord();
+        const { selectedWord, imagesWords } = getWord();
         setaudioTarget(new Audio(selectedWord.audioSilaba));
-        setOtherAudio(new Audio(imagesWords[1].audio))
-        setAudioMain(new Audio(selectedWord.audio))
+        //setOtherAudio(new Audio(imagesWords[1].audio))
+        //setAudioMain(new Audio(selectedWord.audio))
         setWord(selectedWord);
         setImages(imagesWords);
     }, []);
@@ -194,11 +194,11 @@ const Game2 = () => {
                 src={src}
                 alt={alt}
                 onMouseEnter={() => {
-                    if (correct) {
+                    /*if (correct) {
                         audioMain.play();
                     } else {
                         otherAudio.play();
-                    }
+                    }*/
                 }}
                 style={imageStyle}
             />
