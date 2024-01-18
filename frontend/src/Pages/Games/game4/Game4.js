@@ -7,7 +7,6 @@ import card3 from "../../../assets/images/card3.png";
 import card4 from "../../../assets/images/card4.png";
 import "./game4.css";
 import { useNavigate } from "react-router-dom";
-import api from "../../../api/api"
 import Swal from 'sweetalert2';
 import confetti from "canvas-confetti";
 import soundNoMatch from '../../../assets/sounds/no-match.mp3';
