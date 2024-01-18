@@ -31,7 +31,7 @@ const Game4 = () => {
     const [count, setCount] = useState(null);
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
-    const [showCards, setShowCards] = useState(true);  // New state variable
+    const [showCards, setShowCards] = useState(true);  
 
 
     const audioNoMatch = new Audio(soundNoMatch);
@@ -217,7 +217,7 @@ const Game4 = () => {
                     <Card
                         key={index}
                         card={card}
-                        isFlipped={showCards || card.isFlipped}  // Show cards if showCards is true
+                        isFlipped={showCards || card.isFlipped}  
                         handleClick={() => handleCardClick(index, card.name)}
                     />
                 ))}
