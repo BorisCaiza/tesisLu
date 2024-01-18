@@ -18,6 +18,7 @@ import perro from "../../../assets/sounds4/perro.mp3"
 import gato from "../../../assets/sounds4/gato.mp3"
 import jirafa from "../../../assets/sounds4/jirafa.mp3"
 import leon from "../../../assets/sounds4/leon.mp3"
+import { playAudioFlipcard } from "../../../util/util";
 
 const Game4 = () => {
     const navigator = useNavigate();
@@ -69,7 +70,6 @@ const Game4 = () => {
             { name: "perro", image: card3, isFlipped: true, match: false, audio: perro },
             { name: "león", image: card4, isFlipped: true, match: false, audio: leon },
         ];
-
         const duplicatedCards = [...initialCards, ...initialCards].map((card) => ({ ...card }));
         duplicatedCards.sort(() => Math.random() - 0.5);
         setCount(duplicatedCards.length)
@@ -122,6 +122,7 @@ const Game4 = () => {
 
     const handleCardClick = (index, text) => {
         if (cards[index].isFlipped === false) {
+            playAudioFlipcard();
             updateCardState(index, true);
             if (selectedCard === null) {
                 setSelectedCard(index);
