@@ -5,9 +5,11 @@ import "./Game1.css"
 import { generateRandomOptions, playAudio } from '../../../services/datosServices';
 import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 import soundWin from '../../../assets/sounds/win.wav';
-import soundClick from "../../../assets/sounds/click.mp3"
+import soundClick from "../../../assets/sounds/click.wav"
+import { useNavigate } from 'react-router-dom';
 
 function Game1() {
+    const navigator = useNavigate();
     const [targetLetter, setTargetLetter] = useState('');
     const [options, setOptions] = useState([]);
     const [score, setScore] = useState(0);
@@ -45,13 +47,18 @@ function Game1() {
 
     const showWinAlert = () => {
         audioWin.play();
+        const html = `<div>
+        <p style="font-size: 40px">⭐⭐⭐</p>
+        <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste con ${score} puntos .</p>
+        </div>`
         Swal.fire({
+            html: html,
             title: '¡Ganaste!',
             text: '¿Quieres jugar de nuevo?',
             icon: 'success',
             showCancelButton: true,
-            confirmButtonText: 'Sí',
-            cancelButtonText: 'No',
+            confirmButtonText: 'Continuar',
+            cancelButtonText: 'Salir',
             didOpen: () => {
                 confetti({
                     particleCount: 100,
@@ -68,6 +75,8 @@ function Game1() {
             if (result.value) {
                 setScore(score + 1);
                 generateRandomOptions();
+            }else{
+                navigator("/")
             }
         });
     };

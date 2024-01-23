@@ -49,7 +49,7 @@ const Game4 = () => {
         };
         fetchBestTime();
     }, [user]);
-    
+
 
     const getInitalCards = () => {
         const initialCards = [
@@ -74,9 +74,9 @@ const Game4 = () => {
         setIsRunning(false);
 
         const displayTimer = setTimeout(() => {
-            setShowCards(false);  
+            setShowCards(false);
             setCards(getInitalCards());
-            setIsRunning(true); 
+            setIsRunning(true);
         }, displayDuration);
 
         return () => {
@@ -157,9 +157,10 @@ const Game4 = () => {
         setCount(0)
         Swal.fire({
             html: `<div>
-                    <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
-                </div>`,
-            confirmButtonText: 'Jugar de Nuevo',
+            <p style="font-size: 40px">⭐⭐⭐</p>
+            <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
+            </div>`,
+            confirmButtonText: 'Continuar',
             cancelButtonText: 'Salir',
             showCancelButton: true,
             didOpen: () => {
@@ -175,7 +176,7 @@ const Game4 = () => {
                 });
             },
         }).then((result) => {
-            saveScore(time, "game4",  user.token)
+            saveScore(time, "game4", user.token)
             if (result.isConfirmed) {
                 window.location.reload();
             } else {

@@ -78,7 +78,7 @@ const Game2 = () => {
             audioWin.play();
             Swal.fire({
                 html: html,
-                confirmButtonText: 'Jugar de Nuevo',
+                confirmButtonText: 'Continuar',
                 cancelButtonText: 'Salir',
                 showCancelButton: true,
                 didOpen: () => {

@@ -90,11 +90,16 @@ const Game3 = () => {
             gano = true;
             saveScore();
         }
+        const html = `<div>
+        <p style="font-size: 40px">⭐⭐⭐</p>
+        <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
+        </div>`
         Swal.fire({
             title: gano ? '¡Ganaste!' : 'Perdiste',
             text: gano ? '¡Bien hecho! La palabra rima correctamente.' : 'La palabra seleccionada no rima correctamente.',
             icon: gano ? 'success' : 'error',
-            confirmButtonText: 'Jugar de Nuevo',
+            html: gano && html,
+            confirmButtonText: 'Continuar',
             cancelButtonText: 'Salir',
             showCancelButton: true,
             didOpen: () => {
