@@ -20,6 +20,7 @@ export default function Header() {
             confirmButtonText: 'OK',
         }).then((result) => {
             if (result.isConfirmed) {
+                localStorage.clear();
                 navigate("/");
             }
         });

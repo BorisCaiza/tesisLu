@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useNavigate } from 'react-router-dom';
 import './game2.css';
 import altavoz from "../../../assets/altavoz.png"
-import { getWord, playAudio, wordsDataService } from '../../../services/datosServices';
+import { getWord } from '../../../services/datosServices';
 import { AuthContext } from '../../../Context/AuthContext';
 import api from "../../../api/api"
 import Swal from 'sweetalert2';
@@ -24,19 +24,20 @@ const Game2 = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [audioTarget, setaudioTarget] = useState(null)
     const [images, setImages] = useState([])
-
+    const [indexWord, setIndexWord] = useState(localStorage.getItem("indexWord") || 0)
 
     const audioLose = new Audio(soundNoMatch);
     const audioWin = new Audio(soundWin);
 
 
     useEffect(() => {
-        const { selectedWord, imagesWords } = getWord();
+        const { selectedWord, imagesWords, targetIndex } = getWord(indexWord);
+        setIndexWord(targetIndex)
         setaudioTarget(new Audio(selectedWord.audioSilaba));
         setWord(selectedWord);
         setImages(imagesWords);
         setIsRunning(true)
-    }, []);
+    }, [indexWord]);
 
     useEffect(() => {
         let interval;
@@ -96,6 +97,7 @@ const Game2 = () => {
             }).then((result) => {
                 saveScore();
                 if (result.isConfirmed) {
+                    localStorage.setItem("indexWord", indexWord + 1)
                     window.location.reload();
                 } else {
                     navigator("/")

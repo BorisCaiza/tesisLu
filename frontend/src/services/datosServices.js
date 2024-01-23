@@ -261,24 +261,28 @@ export function getrhymingWords() {
 }
 
 
-export const getWord = () => {
+export const getWord = (index) => {
     const allWords = wordsDataService();
-    const randomIndex = Math.floor(Math.random() * allWords.length);
-    const selectedWord = allWords[randomIndex];
-    const otherWord = allWords[selectedWord.rimas]
-    const rhymingWordIndex = selectedWord.rimas - 1;
-    const rhymingWord = allWords[rhymingWordIndex];
+    let targetIndex = index;
+    if(index >  (allWords.length - 1)){
+        targetIndex = allWords.length - 1
+    }
+    
+    const selectedWord = allWords[targetIndex];
+    let randomIndex = index;
+    while(randomIndex === index) {
+        randomIndex = Math.floor(Math.random() * allWords.length);
+    }
+    const rhymingWord = allWords[randomIndex];
     const imagesWords = [
         { src: selectedWord.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: selectedWord.audio, audioPlay: new Audio(selectedWord.audio,) },
         { src: rhymingWord.image, alt: 'Imagen Fondo2', correct: false, audioPalabra: rhymingWord.audio, audioPlay: new Audio(rhymingWord.audio,) }
     ];
-
     for (let i = imagesWords.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [imagesWords[i], imagesWords[j]] = [imagesWords[j], imagesWords[i]];
     }
-
-    return { selectedWord, imagesWords, otherWord };
+    return { selectedWord, imagesWords, targetIndex};
 };
 
 export const lettersDataService = () => {
