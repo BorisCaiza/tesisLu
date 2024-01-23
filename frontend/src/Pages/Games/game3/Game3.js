@@ -6,7 +6,6 @@ import api from "../../../api/api"
 import { AuthContext } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import confetti from "canvas-confetti"
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 
 
 const Game3 = () => {
@@ -51,14 +50,13 @@ const Game3 = () => {
 
     const getDatos = () => {
         const orden = Math.random() < 0.5 ? 1 : 2;
-        const { palabra, rima, seleccionAleatoria } = getrhymingWords();
-        console.log(palabra);
+        const { palabra, rima, palabraAleatoria } = getrhymingWords(localStorage.getItem("indexWordRhyming") || 0);
         setTargetWord(palabra);
         if (orden === 1) {
             setOption1(rima)
-            setOption2(seleccionAleatoria);
+            setOption2(palabraAleatoria);
         } else {
-            setOption1(seleccionAleatoria)
+            setOption1(palabraAleatoria)
             setOption2(rima);
         }
     };
@@ -116,6 +114,7 @@ const Game3 = () => {
             },
         }).then((result) => {
             if (result.isConfirmed) {
+                localStorage.setItem("indexWordRhyming", localStorage.getItem("indexWordRhyming") ? localStorage.getItem("indexWordRhyming") + 1 : 0)
                 getDatos();
                 getScore();
                 setIsRunning(true);

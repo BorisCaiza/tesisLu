@@ -240,23 +240,28 @@ export const wordsDataService = () => {
     ];
 };
 
-export function getrhymingWords() {
+export function getrhymingWords(index) {
     const palabras = wordsDataService();
-    const idAleatorio = Math.floor(Math.random() * palabras.length);
+    let targetIndex = index;
+    if(index >  (palabras.length - 1)){
+        targetIndex = palabras.length - 1
+    }
+
+    const palabra = palabras[targetIndex];
+
+    const rima = palabras.find(word => word.id === palabra.rimas);
+
+    let idAleatorio = index;
+    while(idAleatorio === index || rima.id === idAleatorio) {
+        idAleatorio = Math.floor(Math.random() * palabras.length);
+    }
+
     const palabraAleatoria = palabras[idAleatorio];
 
-    const rima = palabras.find(word => word.id === palabraAleatoria.rimas);
-    let idAleatorio2;
-    do {
-        idAleatorio2 = Math.floor(Math.random() * palabras.length);
-    } while (idAleatorio2 === palabraAleatoria.rimas || idAleatorio2 === idAleatorio);
-
-    const seleccionAleatoria = palabras[idAleatorio2];
-
     return {
-        palabra: palabraAleatoria,
+        palabra,
         rima,
-        seleccionAleatoria,
+        palabraAleatoria
     };
 }
 

@@ -24,20 +24,18 @@ const Game2 = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [audioTarget, setaudioTarget] = useState(null)
     const [images, setImages] = useState([])
-    const [indexWord, setIndexWord] = useState(localStorage.getItem("indexWord") || 0)
 
     const audioLose = new Audio(soundNoMatch);
     const audioWin = new Audio(soundWin);
 
 
     useEffect(() => {
-        const { selectedWord, imagesWords, targetIndex } = getWord(indexWord);
-        setIndexWord(targetIndex)
+        const { selectedWord, imagesWords } = getWord(localStorage.getItem("indexWord") || 0);
         setaudioTarget(new Audio(selectedWord.audioSilaba));
         setWord(selectedWord);
         setImages(imagesWords);
         setIsRunning(true)
-    }, [indexWord]);
+    }, []);
 
     useEffect(() => {
         let interval;
@@ -97,7 +95,13 @@ const Game2 = () => {
             }).then((result) => {
                 saveScore();
                 if (result.isConfirmed) {
-                    localStorage.setItem("indexWord", indexWord + 1)
+                    localStorage.setItem(
+                        "indexWord",
+                        localStorage.getItem("indexWord")
+                            ? parseInt(localStorage.getItem("indexWord")) + 1
+                            : 0
+                    );
+
                     window.location.reload();
                 } else {
                     navigator("/")
