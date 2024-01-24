@@ -36,7 +36,7 @@ export default function Games() {
 
 
     return (
-            <div className='container-fluid background-games up'>
+            <div className='container-fluid background-games up p-5'>
                 <div className='row justify-content-center'>
                     <div className='col-sm center-games'>
                         <div className='title-games'>

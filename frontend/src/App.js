@@ -20,7 +20,6 @@ function App() {
 
 
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate();
 
 
   return (
