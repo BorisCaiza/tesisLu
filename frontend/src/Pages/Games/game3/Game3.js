@@ -6,6 +6,8 @@ import api from "../../../api/api"
 import { AuthContext } from '../../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import confetti from "canvas-confetti"
+import soundWin from '../../../assets/sounds/win.wav';
+import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 
 
 const Game3 = () => {
@@ -20,6 +22,9 @@ const Game3 = () => {
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(0);
     const [indexWord, setIndexWord] = useState('');
+
+    const audioLose = new Audio(soundNoMatch);
+    const audioWin = new Audio(soundWin);
 
     const getScore = async () => {
         const storedIndexWord = localStorage.getItem('indexWordRhyming');
@@ -93,6 +98,12 @@ const Game3 = () => {
             gano = true;
             saveScore();
         }
+        if (gano) {
+            audioWin.play();
+        } else {
+            audioLose.play();
+        }
+
         const html = `<div>
         <p style="font-size: 40px">⭐⭐⭐</p>
         <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>

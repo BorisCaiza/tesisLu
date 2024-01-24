@@ -159,10 +159,12 @@ const Game4 = () => {
     const getWin = () => {
         setCount(0)
         Swal.fire({
+            title: '¡Ganaste!',
             html: `<div>
             <p style="font-size: 40px">⭐⭐⭐</p>
             <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
             </div>`,
+            icon: 'success' ,
             confirmButtonText: 'Continuar',
             cancelButtonText: 'Salir',
             showCancelButton: true,
