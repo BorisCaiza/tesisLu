@@ -174,9 +174,9 @@ const Game3 = () => {
                     </button>
                 </div>
             </div>
-            <div className='mt-3'>Cronómetro: {time} segundos</div>
-            <div>Mejor tiempo: {bestTime}</div>
-            <div className='color'>Aciertos: {indexWord}/25</div>
+            <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
+            <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime}</div>
+            <div style={{ fontWeight: "bold" }}>Aciertos: {indexWord}/25</div>
         </div>
     );
 };

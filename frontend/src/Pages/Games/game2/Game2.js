@@ -245,7 +245,6 @@ const Game2 = () => {
         <DndProvider backend={HTML5Backend}>
             <div className='center-game2'>
                 <ImageContainer images={images} />
-                {isVictory && <p>¡Has ganado el juego!</p>}
                 <DropTarget />
                 <h2>Separación de sílabas</h2>
                 <div className="speaker-button">
@@ -255,9 +254,9 @@ const Game2 = () => {
                     {word ? word.word : ''}
                 </div>
                 <h3>{word ? word.syllable_separation : ''}</h3>
-                <div className='color'>Cronómetro: {time} segundos</div>
-                <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
-                <div className='color'>Aciertos: {indexWord}/25</div>
+                <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
+                <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
+                <div style={{ fontWeight: "bold" }}>Aciertos: {indexWord}/25</div>
             </div>
         </DndProvider>
     );

@@ -186,9 +186,9 @@ function Game1() {
                     </div>
                     <h3>Encuentra la letra:</h3>
                     <span id="target-letter">{targetLetter.letter}</span>
-                    <div className='color'>Cronómetro: {time} segundos</div>
-                    <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
-                    <div className='color'>Aciertos: {aciertos === null ? 'N/A' : `${aciertos} `}</div>
+                    <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
+                    <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
+                    <div style={{ fontWeight: "bold" }}>Aciertos: {aciertos === null ? 'N/A' : `${aciertos} `}</div>
                 </div>
             </div>
         </div>
