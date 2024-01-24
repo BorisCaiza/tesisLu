@@ -28,10 +28,29 @@ function Game1() {
     const audioClick = new Audio(soundClick);
 
     useEffect(() => {
+        console.log('isRunning:', isRunning);
+        let interval;
+        if (isRunning) {
+            interval = setInterval(() => {
+                setTime((prevTime) => prevTime + 1);
+            }, 1000);
+        } else {
+            clearInterval(interval);
+        }
+        return () => {
+            clearInterval(interval);
+        };
+    }, [isRunning]);
+
+
+
+
+    useEffect(() => {
+        setIsRunning(true);
         const getScore = async () => {
             const score = {
                 token: user.token,
-                game: "game2"
+                game: "game1"
             }
             try {
                 const response = await api.post('/getScore', score)
@@ -48,7 +67,7 @@ function Game1() {
     const saveScore = async () => {
         const score = {
             bestTime: time,
-            game: "game2",
+            game: "game1",
             token: user.token
         }
         try {
@@ -57,22 +76,6 @@ function Game1() {
             console.log(error);
         }
     }
-
-    useEffect(() => {
-        let interval;
-        if (isRunning) {
-            interval = setInterval(() => {
-                setTime((prevTime) => prevTime + 1);
-            }, 1000);
-        } else {
-            clearInterval(interval);
-        }
-        return () => {
-            clearInterval(interval);
-        };
-    }, [isRunning]);
-
-
 
 
     useEffect(() => {
@@ -104,7 +107,7 @@ function Game1() {
         saveScore()
         const html = `<div>
         <p style="font-size: 40px">⭐⭐⭐</p>
-        <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste con ${score} puntos .</p>
+        <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
         </div>`
         Swal.fire({
             html: html,
@@ -128,6 +131,7 @@ function Game1() {
             },
         }).then((result) => {
             if (result.value) {
+                window.location.reload();
                 setScore(score + 1);
                 generateRandomOptions();
             } else {
@@ -160,7 +164,6 @@ function Game1() {
         <div className="Game1">
             <div>
                 <h1>SEGMENTACIÓN DE SONIDOS</h1>
-                <h2>Puntuación: {score}</h2>
                 <div className="options-container">
                     <div className="options-buttons">
                         <button style={{ background: "#007bff" }} onClick={handleScrollLeft}>&#8249;</button>
@@ -175,9 +178,9 @@ function Game1() {
                     </div>
                     <h3>Encuentra la letra:</h3>
                     <span id="target-letter">{targetLetter.letter}</span>
+                    <div className='color'>Cronómetro: {time} segundos</div>
+                    <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
                 </div>
-                <div className='color'>Cronómetro: {time} segundos</div>
-                <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
             </div>
         </div>
     );

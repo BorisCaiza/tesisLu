@@ -22,6 +22,8 @@ const Game3 = () => {
     const [indexWord, setIndexWord] = useState('');
 
     const getScore = async () => {
+        const storedIndexWord = localStorage.getItem('indexWordRhyming');
+        setIndexWord(storedIndexWord);
         const score = {
             token: user.token,
             game: "game3"
@@ -61,8 +63,7 @@ const Game3 = () => {
             setOption2(rima);
         }
 
-        const storedIndexWord = localStorage.getItem('indexWord');
-        setIndexWord(storedIndexWord);
+
     };
 
     useEffect(() => {
