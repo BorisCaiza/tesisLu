@@ -5,7 +5,7 @@
 
 h2 {
   color: black;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .options-container {
@@ -19,16 +19,16 @@ h2 {
 .options-buttons {
   display: flex;
   align-items: center;
-  margin: 15px 15px;
+  margin: 10px 10px;
 }
 
 .options-buttons button {
-  background: rgba(0, 150, 136, 0.5); 
-  color: white; 
+  background: rgba(0, 150, 136, 0.5);
+  color: white;
   border: none;
   font-size: 50px;
   cursor: pointer;
-  padding: 15px 15px; 
+  padding: 10px 10px;
 }
 
 .options {
@@ -39,14 +39,14 @@ h2 {
 }
 
 .options button {
-  background: orange; 
-  color: white; 
+  background: orange;
+  color: white;
   border: none;
   font-size: 50px;
   opacity: 0.9;
   cursor: pointer;
-  margin: 0 30px ;
-  padding: 15px 40px; 
+  margin: 0 30px;
+  padding: 15px 40px;
 }
 
 .options-buttons button:hover,
@@ -60,7 +60,7 @@ h1 {
 }
 
 #target-letter {
-  font-size: 150px;
+  font-size: 125px;
   margin: 0;
   padding: 0;
 }

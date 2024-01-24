@@ -19,6 +19,7 @@ const Game3 = () => {
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(0);
+    const [indexWord, setIndexWord] = useState('');
 
     const getScore = async () => {
         const score = {
@@ -59,6 +60,9 @@ const Game3 = () => {
             setOption1(palabraAleatoria)
             setOption2(rima);
         }
+
+        const storedIndexWord = localStorage.getItem('indexWord');
+        setIndexWord(storedIndexWord);
     };
 
     useEffect(() => {
@@ -160,6 +164,7 @@ const Game3 = () => {
             </div>
             <div className='mt-3'>Cronómetro: {time} segundos</div>
             <div>Mejor tiempo: {bestTime}</div>
+            <div className='color'>Aciertos: {indexWord}/25</div>
         </div>
     );
 };

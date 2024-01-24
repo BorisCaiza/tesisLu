@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import Swal from 'sweetalert2';
 import confetti from "canvas-confetti"
 import "./Game1.css"
@@ -7,18 +7,72 @@ import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 import soundWin from '../../../assets/sounds/win.wav';
 import soundClick from "../../../assets/sounds/click.wav"
 import { useNavigate } from 'react-router-dom';
+import api from "../../../api/api"
+import { AuthContext } from '../../../Context/AuthContext';
 
 function Game1() {
     const navigator = useNavigate();
+    const { user } = useContext(AuthContext);
     const [targetLetter, setTargetLetter] = useState('');
     const [options, setOptions] = useState([]);
     const [score, setScore] = useState(0);
     const [scrollPosition, setScrollPosition] = useState(0);
     const visibleOptions = 4;
+    const [isRunning, setIsRunning] = useState(false);
+
+    const [bestTime, setBestTime] = useState(null);
+    const [time, setTime] = useState(0);
 
     const audioLose = new Audio(soundNoMatch);
     const audioWin = new Audio(soundWin);
     const audioClick = new Audio(soundClick);
+
+    useEffect(() => {
+        const getScore = async () => {
+            const score = {
+                token: user.token,
+                game: "game2"
+            }
+            try {
+                const response = await api.post('/getScore', score)
+                if (response.status === 200) {
+                    setBestTime(response.data.game.bestTime)
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getScore();
+    }, [user]);
+
+    const saveScore = async () => {
+        const score = {
+            bestTime: time,
+            game: "game2",
+            token: user.token
+        }
+        try {
+            await api.post('/score', score)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        let interval;
+        if (isRunning) {
+            interval = setInterval(() => {
+                setTime((prevTime) => prevTime + 1);
+            }, 1000);
+        } else {
+            clearInterval(interval);
+        }
+        return () => {
+            clearInterval(interval);
+        };
+    }, [isRunning]);
+
+
 
 
     useEffect(() => {
@@ -47,6 +101,7 @@ function Game1() {
 
     const showWinAlert = () => {
         audioWin.play();
+        saveScore()
         const html = `<div>
         <p style="font-size: 40px">⭐⭐⭐</p>
         <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste con ${score} puntos .</p>
@@ -75,7 +130,7 @@ function Game1() {
             if (result.value) {
                 setScore(score + 1);
                 generateRandomOptions();
-            }else{
+            } else {
                 navigator("/")
             }
         });
@@ -121,6 +176,8 @@ function Game1() {
                     <h3>Encuentra la letra:</h3>
                     <span id="target-letter">{targetLetter.letter}</span>
                 </div>
+                <div className='color'>Cronómetro: {time} segundos</div>
+                <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
             </div>
         </div>
     );

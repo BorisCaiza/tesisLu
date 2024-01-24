@@ -24,6 +24,8 @@ const Game2 = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [audioTarget, setaudioTarget] = useState(null)
     const [images, setImages] = useState([])
+    const [aciertos, setAciertos] = useState(0);
+    const [indexWord, setIndexWord] = useState('');
 
     const audioLose = new Audio(soundNoMatch);
     const audioWin = new Audio(soundWin);
@@ -35,6 +37,8 @@ const Game2 = () => {
         setWord(selectedWord);
         setImages(imagesWords);
         setIsRunning(true)
+        const storedIndexWord = localStorage.getItem('indexWord');
+        setIndexWord(storedIndexWord);
     }, []);
 
     useEffect(() => {
@@ -53,6 +57,7 @@ const Game2 = () => {
 
     const handleDrop = (item) => {
         if (!isVictory && item.correct) {
+            //setAciertos(aciertos + 1)
             setIsVictory(true);
             setImageOpacity(0);
             saveScore()
@@ -185,8 +190,8 @@ const Game2 = () => {
 
         const imageStyle = {
             cursor: 'pointer',
-            width: '75px',
-            height: '75px',
+            width: '60px',
+            height: '60px',
             opacity: isDragging ? 0.5 : opacity,
             margin: '30px'
         };
@@ -250,6 +255,7 @@ const Game2 = () => {
                 <h3>{word ? word.syllable_separation : ''}</h3>
                 <div className='color'>Cronómetro: {time} segundos</div>
                 <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
+                <div className='color'>Aciertos: {indexWord}/25</div>
             </div>
         </DndProvider>
     );
