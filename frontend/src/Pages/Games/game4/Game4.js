@@ -29,7 +29,6 @@ const Game4 = () => {
     const [bestTime, setBestTime] = useState(null);
     const [isRunning, setIsRunning] = useState(false);
     const [count, setCount] = useState(null);
-    const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
     const [showCards, setShowCards] = useState(true);
     const [aciertos, setAciertos] = useState(0);
@@ -43,7 +42,6 @@ const Game4 = () => {
         const fetchBestTime = async () => {
             try {
                 const bestTime = await getScore(user);
-                console.log(bestTime);
                 setBestTime(bestTime);
             } catch (error) {
                 console.error("Error fetching best time:", error);
@@ -127,15 +125,8 @@ const Game4 = () => {
             updatedCards[index2].match = true;
             setCards(updatedCards);
             setCount(count - 2);
-
-            const matchDuration = time - matchTime;
-            const quickMatchThreshold = 5;
-            const additionalPoints = matchDuration < quickMatchThreshold ? 10 : 0;
-            const newScore = time + additionalPoints;
             setAciertos(aciertos + 1)
-            setScore(newScore)
             setMatchTime(null);
-
             if (count === 2) {
                 audioWin.play();
                 getWin();
@@ -203,7 +194,6 @@ const Game4 = () => {
                 ))}
             </div>
             <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
-            <div style={{ fontWeight: "bold" }}>Mejor puntaje: {score} puntos</div>
             <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
             <div style={{ fontWeight: "bold" }}>Aciertos: {aciertos === null ? 'N/A' : `${aciertos} `}</div>
         </div>
