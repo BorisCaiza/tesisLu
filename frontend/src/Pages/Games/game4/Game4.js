@@ -75,7 +75,7 @@ const Game4 = () => {
 
         const displayTimer = setTimeout(() => {
             setShowCards(false);
-            setCards(getInitalCards());
+            setCards(initialCards);//            setCards( getInitalCards()); //si quieren para que sea aleatorio al momento de mostrar las cartas
             setIsRunning(true);
         }, displayDuration);
 
