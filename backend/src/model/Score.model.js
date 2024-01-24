@@ -9,14 +9,9 @@ const ScoreSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-
     game: { type: String },
-    bestTime: { type: Number, default: 0 }
-
-
-
-
-
+    bestTime: { type: Number, default: 0 },
+    hit: { type: Number, default: 0 }
 })
 
 module.exports = mongoose.model('Score', ScoreSchema);

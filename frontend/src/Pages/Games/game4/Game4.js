@@ -32,6 +32,7 @@ const Game4 = () => {
     const [score, setScore] = useState(null)
     const [matchTime, setMatchTime] = useState(null);
     const [showCards, setShowCards] = useState(true);
+    const [aciertos, setAciertos] = useState(0);
 
 
     const audioNoMatch = new Audio(soundNoMatch);
@@ -42,6 +43,7 @@ const Game4 = () => {
         const fetchBestTime = async () => {
             try {
                 const bestTime = await getScore(user);
+                console.log(bestTime);
                 setBestTime(bestTime);
             } catch (error) {
                 console.error("Error fetching best time:", error);
@@ -130,6 +132,7 @@ const Game4 = () => {
             const quickMatchThreshold = 5;
             const additionalPoints = matchDuration < quickMatchThreshold ? 10 : 0;
             const newScore = time + additionalPoints;
+            setAciertos(aciertos + 1)
             setScore(newScore)
             setMatchTime(null);
 
@@ -158,7 +161,7 @@ const Game4 = () => {
         Swal.fire({
             html: `<div>
             <p style="font-size: 40px">⭐⭐⭐</p>
-            <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
+            <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
             </div>`,
             confirmButtonText: 'Continuar',
             cancelButtonText: 'Salir',
@@ -200,6 +203,7 @@ const Game4 = () => {
             <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
             <div style={{ fontWeight: "bold" }}>Mejor puntaje: {score} puntos</div>
             <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
+            <div style={{ fontWeight: "bold" }}>Aciertos: {aciertos === null ? 'N/A' : `${aciertos} `}</div>
         </div>
     );
 };

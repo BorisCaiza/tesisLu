@@ -95,7 +95,7 @@ const Game3 = () => {
         }
         const html = `<div>
         <p style="font-size: 40px">⭐⭐⭐</p>
-        <p style="font-weight: bold; font-size: 20px">¡Felicidades! Ganaste en ${time} segundos.</p>
+        <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
         </div>`
         Swal.fire({
             title: gano ? '¡Ganaste!' : 'Perdiste',

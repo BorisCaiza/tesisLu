@@ -19,6 +19,7 @@ function Game1() {
     const [scrollPosition, setScrollPosition] = useState(0);
     const visibleOptions = 4;
     const [isRunning, setIsRunning] = useState(false);
+    const [aciertos, setAciertos] = useState(parseInt(localStorage.getItem("aciertosGame1")) || 0);
 
     const [bestTime, setBestTime] = useState(null);
     const [time, setTime] = useState(0);
@@ -131,8 +132,15 @@ function Game1() {
             },
         }).then((result) => {
             if (result.value) {
+                localStorage.setItem(
+                    "aciertosGame1",
+                    localStorage.getItem("aciertosGame1")
+                        ? parseInt(localStorage.getItem("aciertosGame1")) + 1
+                        : 0
+                );
                 window.location.reload();
                 setScore(score + 1);
+                setAciertos(aciertos + 1)
                 generateRandomOptions();
             } else {
                 navigator("/")
@@ -180,6 +188,7 @@ function Game1() {
                     <span id="target-letter">{targetLetter.letter}</span>
                     <div className='color'>Cronómetro: {time} segundos</div>
                     <div className='color'>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
+                    <div className='color'>Aciertos: {aciertos === null ? 'N/A' : `${aciertos} `}</div>
                 </div>
             </div>
         </div>
