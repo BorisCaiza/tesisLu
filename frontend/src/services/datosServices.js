@@ -246,10 +246,12 @@ export function getrhymingWords(index) {
     if(index >  (palabras.length - 1)){
         targetIndex = palabras.length - 1
     }
+    console.log(typeof index);
 
     const palabra = palabras[targetIndex];
+    console.log(palabra);
 
-    const rima = palabras.find(word => word.id === palabra.rimas);
+    const rima = palabras.find(word => word.id === palabra?.rimas);
 
     let idAleatorio = index;
     while(idAleatorio === index || rima.id === idAleatorio) {

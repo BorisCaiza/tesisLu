@@ -32,7 +32,7 @@ const Game2 = () => {
 
 
     useEffect(() => {
-        const { selectedWord, imagesWords } = getWord(localStorage.getItem("indexWord") || 0);
+        const { selectedWord, imagesWords } = getWord(parseInt(localStorage.getItem("indexWord")) || 0);
         setaudioTarget(new Audio(selectedWord.audioSilaba));
         setWord(selectedWord);
         setImages(imagesWords);
