@@ -84,7 +84,7 @@ const Game2 = () => {
                 html: html,
                 title: '¡Ganaste!',
                 confirmButtonText: 'Continuar',
-                icon: 'success' ,
+                icon: 'success',
                 cancelButtonText: 'Salir',
                 showCancelButton: true,
                 didOpen: () => {
@@ -192,8 +192,8 @@ const Game2 = () => {
 
         const imageStyle = {
             cursor: 'pointer',
-            width: '60px',
-            height: '60px',
+            width: '120px',
+            height: '120px',
             opacity: isDragging ? 0.5 : opacity,
             margin: '30px'
         };
@@ -226,8 +226,8 @@ const Game2 = () => {
                 {word && (
                     <img
                         className='mt-3'
-                        width="100px"
-                        height="100px"
+                        width="120px"
+                        height="120px"
                         style={{ opacity: 0.5 }}
                         ref={imgRef}
                         src={word.image}
@@ -246,14 +246,14 @@ const Game2 = () => {
             <div className='center-game2'>
                 <ImageContainer images={images} />
                 <DropTarget />
-                <h2>Separación de sílabas</h2>
-                <div className="speaker-button">
-                    <button onMouseEnter={() => audioTarget.play()} ><img src={altavoz} className="altavoz-btn" alt='altavoz' /></button>
+                <h2 className='color'>Separación de sílabas</h2>
+                <div className='title'>
+                    {word ? word.word : ''} &nbsp; |
+                    &nbsp; {word ? word.syllable_separation : ''} &nbsp; |
+                    &nbsp; <button onMouseEnter={() => audioTarget.play()} ><img src={altavoz} className="altavoz-btn" alt='altavoz' /></button>
+
                 </div>
-                <div className="title">
-                    {word ? word.word : ''}
-                </div>
-                <h3>{word ? word.syllable_separation : ''}</h3>
+
                 <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
                 <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
                 <div style={{ fontWeight: "bold" }}>Aciertos: {indexWord}/25</div>

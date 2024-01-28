@@ -153,32 +153,32 @@ import dienteImagen from "../assets/images-games/diente.png"
 import ventanaImagen from "../assets/images-games/ventana.png"
 import iguanaImagen from "../assets/images-games/iguana.png"
 
-import a from "../assets/audios/A.mp3"
-import b from "../assets/audios/B.mp3";
-import c from "../assets/audios/C.mp3";
-import d from "../assets/audios/D.mp3";
-import e from "../assets/audios/E.mp3";
-import f from "../assets/audios/F.mp3";
-import g from "../assets/audios/G.mp3";
-import h from "../assets/audios/H.mp3";
-import i from "../assets/audios/I.mp3";
-import j from "../assets/audios/J.mp3";
-import k from "../assets/audios/K.mp3";
-import l from "../assets/audios/L.mp3";
-import m from "../assets/audios/M.mp3";
-import n from "../assets/audios/N.mp3";
-import o from "../assets/audios/O.mp3";
-import p from "../assets/audios/P.mp3";
-import q from "../assets/audios/Q.mp3";
-import r from "../assets/audios/R.mp3";
-import s from "../assets/audios/S.mp3";
-import t from "../assets/audios/T.mp3";
-import u from "../assets/audios/U.mp3";
-import v from "../assets/audios/V.mp3";
-import w from "../assets/audios/W.mp3";
-import x from "../assets/audios/X.mp3";
-import y from "../assets/audios/Y.mp3";
-import z from "../assets/audios/Z.mp3";
+import a from "../assets/audiosFiles/a.mp3"
+import b from "../assets/audiosFiles/b.mp3";
+import c from "../assets/audiosFiles/c.mp3";
+import d from "../assets/audiosFiles/d.mp3";
+import e from "../assets/audiosFiles/e.mp3";
+import f from "../assets/audiosFiles/f.mp3";
+import g from "../assets/audiosFiles/g.mp3";
+import h from "../assets/audiosFiles/h.mp3";
+import i from "../assets/audiosFiles/i.mp3";
+import j from "../assets/audiosFiles/j.mp3";
+import k from "../assets/audiosFiles/k.mp3";
+import l from "../assets/audiosFiles/l.mp3";
+import m from "../assets/audiosFiles/m.mp3";
+import n from "../assets/audiosFiles/n.mp3";
+import o from "../assets/audiosFiles/o.mp3";
+import p from "../assets/audiosFiles/p.mp3";
+import q from "../assets/audiosFiles/q.mp3";
+import r from "../assets/audiosFiles/r.mp3";
+import s from "../assets/audiosFiles/s.mp3";
+import t from "../assets/audiosFiles/t.mp3";
+import u from "../assets/audiosFiles/u.mp3";
+import v from "../assets/audiosFiles/v.mp3";
+import w from "../assets/audiosFiles/w.mp3";
+import x from "../assets/audiosFiles/x.mp3";
+import y from "../assets/audiosFiles/y.mp3";
+import z from "../assets/audiosFiles/z.mp3";
 
 
 import audioRimocon from "../assets/sounds/rimaCon.mp3"
@@ -243,7 +243,7 @@ export const wordsDataService = () => {
 export function getrhymingWords(index) {
     const palabras = wordsDataService();
     let targetIndex = index;
-    if(index >  (palabras.length - 1)){
+    if (index > (palabras.length - 1)) {
         targetIndex = palabras.length - 1
     }
     console.log(typeof index);
@@ -254,7 +254,7 @@ export function getrhymingWords(index) {
     const rima = palabras.find(word => word.id === palabra?.rimas);
 
     let idAleatorio = index;
-    while(idAleatorio === index || rima.id === idAleatorio) {
+    while (idAleatorio === index || rima.id === idAleatorio) {
         idAleatorio = Math.floor(Math.random() * palabras.length);
     }
 
@@ -271,13 +271,13 @@ export function getrhymingWords(index) {
 export const getWord = (index) => {
     const allWords = wordsDataService();
     let targetIndex = index;
-    if(index >  (allWords.length - 1)){
+    if (index > (allWords.length - 1)) {
         targetIndex = allWords.length - 1
     }
-    
+
     const selectedWord = allWords[targetIndex];
     let randomIndex = index;
-    while(randomIndex === index) {
+    while (randomIndex === index) {
         randomIndex = Math.floor(Math.random() * allWords.length);
     }
     const rhymingWord = allWords[randomIndex];
@@ -289,7 +289,7 @@ export const getWord = (index) => {
         const j = Math.floor(Math.random() * (i + 1));
         [imagesWords[i], imagesWords[j]] = [imagesWords[j], imagesWords[i]];
     }
-    return { selectedWord, imagesWords, targetIndex};
+    return { selectedWord, imagesWords, targetIndex };
 };
 
 export const lettersDataService = () => {
