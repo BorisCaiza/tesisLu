@@ -136,7 +136,7 @@ function Game1() {
                     "aciertosGame1",
                     localStorage.getItem("aciertosGame1")
                         ? parseInt(localStorage.getItem("aciertosGame1")) + 1
-                        : 0
+                        : 1
                 );
                 window.location.reload();
                 setScore(score + 1);

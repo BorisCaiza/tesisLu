@@ -101,7 +101,7 @@ const Game3 = () => {
             saveScore();
         }
         if (gano) {
-            localStorage.setItem("indexWordRhyming", localStorage.getItem("indexWordRhyming") ? parseInt(localStorage.getItem("indexWordRhyming")) + 1 : 0)
+            localStorage.setItem("indexWordRhyming", localStorage.getItem("indexWordRhyming") ? parseInt(localStorage.getItem("indexWordRhyming")) + 1 : 1)
             audioWin.play();
         } else {
             audioLose.play();

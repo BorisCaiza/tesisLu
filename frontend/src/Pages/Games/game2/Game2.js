@@ -106,7 +106,7 @@ const Game2 = () => {
                         "indexWord",
                         localStorage.getItem("indexWord")
                             ? parseInt(localStorage.getItem("indexWord")) + 1
-                            : 0
+                            : 1
                     );
 
                     window.location.reload();

@@ -1,10 +1,10 @@
 import React from 'react'
 import "./Games.css"
+import PlayCircleSharpIcon from '@mui/icons-material/PlayCircleSharp';
 import juego1 from "../../assets/images/juego1.png"
 import juego2 from "../../assets/images/juego2.png"
 import juego3 from "../../assets/images/juego3.png"
 import juego4 from "../../assets/images/juego4.png"
-import Header from '../../Compoments/Header';
 
 export default function Games() {
     const elementos = [
@@ -52,7 +52,7 @@ export default function Games() {
                                 <div className="card-body">
                                     <h5 className="card-title title-card">{elemento.nombre}</h5>
                                     <p className="card-text">{elemento.descripcion}</p>
-                                    <a href={`/video/${elemento.game}`}>  <button className="main-button">Jugar</button> </a>
+                                    <a href={`/video/${elemento.game}`}><button type="button" className="main-button"><PlayCircleSharpIcon /> Jugar</button> </a>
                                 </div>
                             </div>
                         </div>
