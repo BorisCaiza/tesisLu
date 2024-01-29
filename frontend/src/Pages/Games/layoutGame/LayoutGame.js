@@ -28,8 +28,6 @@ import VideogameAssetSharpIcon from '@mui/icons-material/VideogameAssetSharp';
 import DoubleArrowSharpIcon from '@mui/icons-material/DoubleArrowSharp';
 
 
-import soundClick from "../../../assets/sounds/click.wav"
-
 const backgrounds = [fondo3, fondo4, fondo5, fondo6, fondo7, fondo8];
 
 const LayoutGame = () => {
