@@ -109,7 +109,7 @@ function Game1() {
         const html = `<div>
         <p style="font-size: 40px">⭐⭐⭐</p>
         <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
-        </div>`
+        </div>` 
         Swal.fire({
             html: html,
             title: '¡Ganaste!',

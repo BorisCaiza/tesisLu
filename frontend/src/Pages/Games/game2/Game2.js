@@ -60,25 +60,11 @@ const Game2 = () => {
             //setAciertos(aciertos + 1)
             setIsVictory(true);
             setImageOpacity(0);
-            saveScore()
-            let html = ``
-            if (time < 5) {
-                html = `<div>
-                    <p style="font-size: 40px">⭐⭐⭐</p>
-                    <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
-                </div>`
-            } else if (time < 15) {
-                html = `<div>
-                    <p style="font-size: 40px">⭐⭐</p>
-                    <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
-                </div>`
-            } else {
-                html = `<div>
-                    <p style="font-size: 40px">⭐</p>
-                    <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
-                </div>`
-            }
-
+            saveScore();
+            const html = `<div>
+            <p style="font-size: 40px">⭐⭐⭐</p>
+            <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
+            </div>`
             audioWin.play();
             Swal.fire({
                 html: html,

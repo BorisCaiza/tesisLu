@@ -1,10 +1,13 @@
 import React from 'react'
 import "./Games.css"
-import PlayCircleSharpIcon from '@mui/icons-material/PlayCircleSharp';
+import DoubleArrowSharpIcon from '@mui/icons-material/DoubleArrowSharp';
 import juego1 from "../../assets/images/juego1.png"
 import juego2 from "../../assets/images/juego2.png"
 import juego3 from "../../assets/images/juego3.png"
 import juego4 from "../../assets/images/juego4.png"
+
+import soundClick from "../../assets/sounds/click.wav"
+
 
 export default function Games() {
     const elementos = [
@@ -33,7 +36,7 @@ export default function Games() {
             game: "game4"
         }
     ];
-
+    const audioClick = new Audio(soundClick);
 
     return (
             <div className='container-fluid background-games up p-5'>
@@ -52,7 +55,7 @@ export default function Games() {
                                 <div className="card-body">
                                     <h5 className="card-title title-card">{elemento.nombre}</h5>
                                     <p className="card-text">{elemento.descripcion}</p>
-                                    <a href={`/video/${elemento.game}`}><button type="button" className="main-button"><PlayCircleSharpIcon /> Jugar</button> </a>
+                                    <a href={`/video/${elemento.game}`} onClick={() => audioClick.play()}><button type="button"  className="main-button"><DoubleArrowSharpIcon /> Jugar</button> </a>
                                 </div>
                             </div>
                         </div>

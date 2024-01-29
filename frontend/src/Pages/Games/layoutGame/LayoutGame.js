@@ -21,6 +21,14 @@ import fondo6 from "../../../assets/images/Fondos/fondo_6.png";
 import fondo7 from "../../../assets/images/Fondos/fondo_7.png";
 import fondo8 from '../../../assets/images/Fondos/fondo_8.png';
 
+import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
+import VideogameAssetSharpIcon from '@mui/icons-material/VideogameAssetSharp';
+
+import DoubleArrowSharpIcon from '@mui/icons-material/DoubleArrowSharp';
+
+
+import soundClick from "../../../assets/sounds/click.wav"
+
 const backgrounds = [fondo3, fondo4, fondo5, fondo6, fondo7, fondo8];
 
 const LayoutGame = () => {
@@ -28,6 +36,9 @@ const LayoutGame = () => {
     const navigate = useNavigate();
     const [backgroundIndex, setBackgroundIndex] = useState(0);
     const [showInstructions, setShowInstructions] = useState(false);
+
+    const audioClick = new Audio(soundClick);
+
 
     useEffect(() => {
         setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
@@ -38,10 +49,12 @@ const LayoutGame = () => {
     };
 
     const openInstructions = () => {
+        audioClick.play();
         setShowInstructions(true);
     };
 
     const closeInstructions = () => {
+        audioClick.play();
         setShowInstructions(false);
     };
 
@@ -61,11 +74,14 @@ const LayoutGame = () => {
             </div>
             <div className="back-button">
                 <button className="large-orange-button" onClick={back}>
+                    <ArrowBackIosNewSharpIcon style={{ fontSize: 50 }} />
                     Regresar
                 </button>
             </div>
             <div className="instructions-button">
                 <button className="large-blue-button" onClick={openInstructions}>
+                    <VideogameAssetSharpIcon style={{ fontSize: 50 }} />
+
                     ¿Cómo jugar?
                 </button>
             </div>
@@ -76,6 +92,7 @@ const LayoutGame = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Player autoPlay>
+                        <DoubleArrowSharpIcon />
                         <source src={videoSrc} />
                     </Player>
                 </Modal.Body>

@@ -13,10 +13,13 @@ import video2 from "../../assets/tutoriales/2_Conciencia de sílabas .mp4"
 import video3 from "../../assets/tutoriales/3_Conciencia de rimas.mp4"
 import video4 from "../../assets/tutoriales/4_Similitudes Fonéticas.mp4"
 
-import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
-import ArrowForwardSharpIcon from '@mui/icons-material/ArrowForwardSharp';
-import LibraryBooksSharpIcon from '@mui/icons-material/LibraryBooksSharp';
-import GamepadSharpIcon from '@mui/icons-material/GamepadSharp';
+import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import PlayLessonSharpIcon from '@mui/icons-material/PlayLessonSharp';
+import SendTimeExtensionSharpIcon from '@mui/icons-material/SendTimeExtensionSharp';
+
+import soundClick from "../../assets/sounds/click.wav"
+
 
 const backgrounds = [fondo9, fondo10, fondo11, fondo12];
 
@@ -24,6 +27,9 @@ function VideoExplicacion() {
     const { id } = useParams()
     const navigate = useNavigate();
     const [backgroundIndex, setBackgroundIndex] = useState(0);
+
+    const audioClick = new Audio(soundClick);
+
 
     useEffect(() => {
         setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
@@ -54,9 +60,11 @@ function VideoExplicacion() {
     }
 
     const next = () => {
+        audioClick.play();
         navigate("/")
     }
     const back = () => {
+        audioClick.play();
         navigate("/games/" + id)
     }
 
@@ -76,12 +84,12 @@ function VideoExplicacion() {
                         </Player>
                     </div>
                     <div className="video-explicacion__buttons">
-                        <button type="button" className="video-explicacion__button" onClick={next}> <ArrowBackSharpIcon /> Regresar</button>
-                        <button type="button" className="video-explicacion__button" onClick={back}> <ArrowForwardSharpIcon /> Continuar</button>
-                        <a href={linksSrc[0]} target="_blank"> <button type="button" className='video-explicacion__button' ><LibraryBooksSharpIcon /> Recurso</button> </a>
-                        <a href={linksSrc[1]} target="_blank">
+                        <button type="button" className="video-explicacion__button" onClick={next}> <ArrowBackIosNewSharpIcon /> Regresar</button>
+                        <button type="button" className="video-explicacion__button" onClick={back}> <ArrowForwardIosSharpIcon /> Continuar</button>
+                        <a href={linksSrc[0]} > <button type="button" className='video-explicacion__button' ><PlayLessonSharpIcon /> Recurso</button> </a>
+                        <a href={linksSrc[1]} >
                             <button type="button" className="video-explicacion__button">
-                                <GamepadSharpIcon/> Refuerzo
+                                <SendTimeExtensionSharpIcon /> Refuerzo
                             </button>
                         </a>
                     </div>
