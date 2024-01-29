@@ -61,9 +61,11 @@ function VideoExplicacion() {
 
     const next = () => {
         audioClick.play();
+        audioClick.play();
         navigate("/")
     }
     const back = () => {
+        audioClick.play();
         audioClick.play();
         navigate("/games/" + id)
     }
