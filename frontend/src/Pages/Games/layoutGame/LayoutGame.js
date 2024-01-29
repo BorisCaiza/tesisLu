@@ -10,6 +10,7 @@ import tuto1 from "../../../assets/tutoriales/Tutorial_1_Segmentación de sonido
 import tuto2 from "../../../assets/tutoriales/Tutorial_2_Conciencia de sílabas.mp4"
 import tuto3 from "../../../assets/tutoriales/Tutorial_3_Conciencia de Rimas.mp4"
 import tuto4 from "../../../assets/tutoriales/Tutorial_4_Similitudes Fonéticas.mp4"
+import soundClick from "../../../assets/sounds/click.wav"
 
 
 import { useNavigate, useParams } from 'react-router-dom';
@@ -29,19 +30,24 @@ const LayoutGame = () => {
     const [backgroundIndex, setBackgroundIndex] = useState(0);
     const [showInstructions, setShowInstructions] = useState(false);
 
+    const audioClick = new Audio(soundClick);
+
     useEffect(() => {
         setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
     }, [id]);
 
     const back = () => {
+        audioClick.play();
         navigate(`/video/${id}`);
     };
 
     const openInstructions = () => {
+        audioClick.play();
         setShowInstructions(true);
     };
 
     const closeInstructions = () => {
+        audioClick.play();
         setShowInstructions(false);
     };
 

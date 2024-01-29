@@ -18,12 +18,16 @@ import ArrowForwardSharpIcon from '@mui/icons-material/ArrowForwardSharp';
 import LibraryBooksSharpIcon from '@mui/icons-material/LibraryBooksSharp';
 import GamepadSharpIcon from '@mui/icons-material/GamepadSharp';
 
+import soundClick from "../../assets/sounds/click.wav";
+
 const backgrounds = [fondo9, fondo10, fondo11, fondo12];
 
 function VideoExplicacion() {
     const { id } = useParams()
     const navigate = useNavigate();
     const [backgroundIndex, setBackgroundIndex] = useState(0);
+
+    const audioClick = new Audio(soundClick);
 
     useEffect(() => {
         setBackgroundIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
@@ -54,9 +58,11 @@ function VideoExplicacion() {
     }
 
     const next = () => {
+        audioClick.play();
         navigate("/")
     }
     const back = () => {
+        audioClick.play();
         navigate("/games/" + id)
     }
 
@@ -78,10 +84,10 @@ function VideoExplicacion() {
                     <div className="video-explicacion__buttons">
                         <button type="button" className="video-explicacion__button" onClick={next}> <ArrowBackSharpIcon /> Regresar</button>
                         <button type="button" className="video-explicacion__button" onClick={back}> <ArrowForwardSharpIcon /> Continuar</button>
-                        <a href={linksSrc[0]} target="_blank"> <button type="button" className='video-explicacion__button' ><LibraryBooksSharpIcon /> Recurso</button> </a>
-                        <a href={linksSrc[1]} target="_blank">
+                        <a href={linksSrc[0]} target="_blank"> <button onClick={audioClick.play()} type="button" className='video-explicacion__button' ><LibraryBooksSharpIcon /> Recurso</button> </a>
+                        <a href={linksSrc[1]} onClick={audioClick.play()} target="_blank">
                             <button type="button" className="video-explicacion__button">
-                                <GamepadSharpIcon/> Refuerzo
+                                <GamepadSharpIcon /> Refuerzo
                             </button>
                         </a>
                     </div>
