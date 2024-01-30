@@ -10,6 +10,7 @@ import soundClick from "../../assets/sounds/click.wav"
 export default function Games() {
 
  
+    const audioClick = new Audio(soundClick);
 
     const elementos = [
         {
@@ -55,7 +56,7 @@ export default function Games() {
                             <div className="card-body">
                                 <h5 className="card-title title-card">{elemento.nombre}</h5>
                                 <p className="card-text">{elemento.descripcion}</p>
-                                <a href={`/video/${elemento.game}`}><button type="button" className="main-button"><DoubleArrowSharpIcon /> Jugar</button> </a>
+                                <a href={`/video/${elemento.game}`}><button type="button" className="main-button" onClick={() => audioClick.play()}>Jugar <DoubleArrowSharpIcon /></button> </a>
                             </div>
                         </div>
                     </div>

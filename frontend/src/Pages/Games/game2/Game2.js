@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import confetti from "canvas-confetti"
 import soundNoMatch from '../../../assets/sounds/no-match.mp3';
 import soundWin from '../../../assets/sounds/win.wav';
+import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 
 
 const Game2 = () => {
@@ -24,7 +25,6 @@ const Game2 = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [audioTarget, setaudioTarget] = useState(null)
     const [images, setImages] = useState([])
-    const [aciertos, setAciertos] = useState(0);
     const [indexWord, setIndexWord] = useState('');
 
     const audioLose = new Audio(soundNoMatch);
@@ -71,7 +71,7 @@ const Game2 = () => {
                 title: '¡Ganaste!',
                 confirmButtonText: 'Continuar',
                 icon: 'success',
-                cancelButtonText: 'Salir',
+                cancelButtonText: "Salir",
                 showCancelButton: true,
                 didOpen: () => {
                     confetti({

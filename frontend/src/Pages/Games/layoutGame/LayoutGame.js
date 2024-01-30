@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import './layoutGame.css';
 import Game1 from '../game1/Game1';
 import Game2 from '../game2/Game2';
@@ -26,7 +26,7 @@ import ArrowBackIosNewSharpIcon from '@mui/icons-material/ArrowBackIosNewSharp';
 import VideogameAssetSharpIcon from '@mui/icons-material/VideogameAssetSharp';
 
 import DoubleArrowSharpIcon from '@mui/icons-material/DoubleArrowSharp';
-
+import CloseSharpIcon from '@mui/icons-material/CloseSharp';
 
 const backgrounds = [fondo3, fondo4, fondo5, fondo6, fondo7, fondo8];
 
@@ -82,9 +82,7 @@ const LayoutGame = () => {
             </div>
             <div className="instructions-button">
                 <button className="large-blue-button" onClick={openInstructions}>
-                    <VideogameAssetSharpIcon style={{ fontSize: 50 }} />
-
-                    ¿Cómo jugar?
+                    ¿Cómo jugar?                     <VideogameAssetSharpIcon style={{ fontSize: 50 }} />
                 </button>
             </div>
 
@@ -99,9 +97,9 @@ const LayoutGame = () => {
                     </Player>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" style={{ background: "orange", border: "none" }} onClick={closeInstructions}>
-                        Cerrar
-                    </Button>
+                    <button  type="button" className="main-button" style={{ background: "orange", border: "none" }} onClick={closeInstructions}>
+                        Cerrar <CloseSharpIcon />
+                    </button>
                 </Modal.Footer>
             </Modal>
         </div>

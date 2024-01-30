@@ -61,11 +61,9 @@ function VideoExplicacion() {
 
     const next = () => {
         audioClick.play();
-        audioClick.play();
         navigate("/")
     }
     const back = () => {
-        audioClick.play();
         audioClick.play();
         navigate("/games/" + id)
     }
@@ -87,7 +85,7 @@ function VideoExplicacion() {
                     </div>
                     <div className="video-explicacion__buttons">
                         <button type="button" className="video-explicacion__button" onClick={next}> <ArrowBackIosNewSharpIcon /> Regresar</button>
-                        <button type="button" className="video-explicacion__button" onClick={back}> <ArrowForwardIosSharpIcon /> Continuar</button>
+                        <button type="button" className="video-explicacion__button" onClick={back}>Continuar <ArrowForwardIosSharpIcon /></button>
                         <a href={linksSrc[0]} > <button type="button" className='video-explicacion__button' ><PlayLessonSharpIcon /> Recurso</button> </a>
                         <a href={linksSrc[1]} >
                             <button type="button" className="video-explicacion__button">
