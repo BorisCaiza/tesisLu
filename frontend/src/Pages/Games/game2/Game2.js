@@ -30,7 +30,6 @@ const Game2 = () => {
     const audioLose = new Audio(soundNoMatch);
     const audioWin = new Audio(soundWin);
 
-
     useEffect(() => {
         const { selectedWord, imagesWords } = getWord(parseInt(localStorage.getItem("indexWord")) || 0);
         setaudioTarget(new Audio(selectedWord.audioSilaba));
@@ -69,9 +68,9 @@ const Game2 = () => {
             Swal.fire({
                 html: html,
                 title: '¡Ganaste!',
-                confirmButtonText: 'Continuar',
-                icon: 'success',
-                cancelButtonText: "Salir",
+                confirmButtonText: '<i class="fa fa-play"></i> Continuar',
+                confirmButtonColor: "#e4800e",
+                cancelButtonText: `<i class="fa fa-times"></i> Salir`,
                 showCancelButton: true,
                 didOpen: () => {
                     confetti({
@@ -104,10 +103,12 @@ const Game2 = () => {
         } else {
             audioLose.play();
             Swal.fire({
-                text: "Perdiste !!!",
+                title: '¡Perdiste!',
+                text: "Perdiste",
                 icon: 'error',
-                confirmButtonText: 'Jugar de Nuevo',
-                cancelButtonText: 'Salir',
+                confirmButtonText: '<i class="fa fa-repeat"></i>  Jugar de Nuevo',
+                confirmButtonColor: "#e4800e",
+                cancelButtonText: `<i class="fa fa-times"></i> Salir`,
                 showCancelButton: true
             }).then((result) => {
                 saveScore();

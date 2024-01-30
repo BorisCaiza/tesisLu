@@ -109,15 +109,16 @@ function Game1() {
         const html = `<div>
         <p style="font-size: 40px">⭐⭐⭐</p>
         <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
-        </div>` 
+        </div>`
         Swal.fire({
             html: html,
             title: '¡Ganaste!',
             text: '¿Quieres jugar de nuevo?',
             icon: 'success',
             showCancelButton: true,
-            confirmButtonText: 'Continuar',
-            cancelButtonText: 'Salir',
+            confirmButtonText: '<i class="fa fa-play"></i> Continuar',
+            confirmButtonColor: "#e4800e",
+            cancelButtonText: `<i class="fa fa-times"></i> Salir`,
             didOpen: () => {
                 confetti({
                     particleCount: 100,
@@ -155,8 +156,9 @@ function Game1() {
             text: '¿Quieres jugar de nuevo?',
             icon: 'error',
             showCancelButton: true,
-            confirmButtonText: 'Sí',
-            cancelButtonText: 'No',
+            confirmButtonText: '<i class="fa fa-repeat"></i>  Jugar de Nuevo',
+            confirmButtonColor: "#e4800e",
+            cancelButtonText: `<i class="fa fa-times"></i> Salir`,
         }).then((result) => {
             if (result.value) {
                 setScore(0);
