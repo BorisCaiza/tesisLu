@@ -116,7 +116,7 @@ const Game3 = () => {
             text: gano ? '¡Bien hecho! La palabra rima correctamente.' : 'La palabra seleccionada no rima correctamente.',
             icon: gano ? 'success' : 'error',
             html: gano && html,
-            confirmButtonText:  gano ? '<i class="fa fa-play"></i> Continuar' : '<i class="fa fa-repeat"></i>  Jugar de Nuevo',
+            confirmButtonText: gano ? '<i class="fa fa-play"></i> Continuar' : '<i class="fa fa-repeat"></i>  Jugar de Nuevo',
             confirmButtonColor: "#e4800e",
             cancelButtonText: `<i class="fa fa-times"></i> Salir`,
             showCancelButton: true,

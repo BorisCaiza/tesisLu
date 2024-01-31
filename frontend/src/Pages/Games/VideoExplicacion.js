@@ -20,10 +20,10 @@ import SendTimeExtensionSharpIcon from '@mui/icons-material/SendTimeExtensionSha
 
 import soundClick from "../../assets/sounds/click.wav"
 
-
 const backgrounds = [fondo9, fondo10, fondo11, fondo12];
 
 function VideoExplicacion() {
+
     const { id } = useParams()
     const navigate = useNavigate();
     const [backgroundIndex, setBackgroundIndex] = useState(0);
@@ -72,8 +72,11 @@ function VideoExplicacion() {
     const videoSrc = videoUrls[id] || "";
     const linksSrc = refuersosUtls[id] || "";
 
-    return (
+    const playAudio = () => {
+        audioClick.play();
+    };
 
+    return (
         <div className="video-explicacion">
             <div className="video-explicacion__background" style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}>
                 <div className="video-explicacion__content">
@@ -86,12 +89,17 @@ function VideoExplicacion() {
                     <div className="video-explicacion__buttons">
                         <button type="button" className="video-explicacion__button" onClick={next}> <ArrowBackIosNewSharpIcon /> Regresar</button>
                         <button type="button" className="video-explicacion__button" onClick={back}>Continuar <ArrowForwardIosSharpIcon /></button>
-                        <a href={linksSrc[0]} > <button type="button" className='video-explicacion__button' ><PlayLessonSharpIcon /> Recurso</button> </a>
-                        <a href={linksSrc[1]} >
+                        <a href={linksSrc[0]} onClick={playAudio} target="_blank">
+                            <button type="button" className='video-explicacion__button'>
+                                <PlayLessonSharpIcon /> Recurso
+                            </button>
+                        </a>
+                        <a href={linksSrc[1]} onClick={playAudio} target="_blank">
                             <button type="button" className="video-explicacion__button">
                                 <SendTimeExtensionSharpIcon /> Refuerzo
                             </button>
                         </a>
+
                     </div>
                 </div>
             </div>

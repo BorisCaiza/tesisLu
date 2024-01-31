@@ -105,11 +105,12 @@ function Game1() {
 
     const showWinAlert = () => {
         audioWin.play();
-        saveScore()
-        const html = `<div>
-        <p style="font-size: 40px">⭐⭐⭐</p>
-        <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
-        </div>`
+        saveScore();
+        const html = `
+            <div>
+                <p style="font-size: 40px">⭐⭐⭐</p>
+                <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
+            </div>`;
         Swal.fire({
             html: html,
             title: '¡Ganaste!',
@@ -132,7 +133,7 @@ function Game1() {
                 });
             },
         }).then((result) => {
-            if (result.value) {
+            if (result.isConfirmed) {
                 localStorage.setItem(
                     "aciertosGame1",
                     localStorage.getItem("aciertosGame1")
@@ -141,10 +142,10 @@ function Game1() {
                 );
                 window.location.reload();
                 setScore(score + 1);
-                setAciertos(aciertos + 1)
+                setAciertos(aciertos + 1);
                 generateRandomOptions();
             } else {
-                navigator("/")
+                navigator("/");
             }
         });
     };

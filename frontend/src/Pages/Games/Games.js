@@ -6,10 +6,12 @@ import juego2 from "../../assets/images/juego2.png"
 import juego3 from "../../assets/images/juego3.png"
 import juego4 from "../../assets/images/juego4.png"
 import soundClick from "../../assets/sounds/click.wav"
+import { useNavigate } from 'react-router-dom';
 
 export default function Games() {
 
- 
+    const navigator = useNavigate();
+
     const audioClick = new Audio(soundClick);
 
     const elementos = [
@@ -39,6 +41,12 @@ export default function Games() {
         }
     ];
 
+    const handleButtonClick = (elemento) => {
+        audioClick.play();
+        navigator(`/video/${elemento.game}`);
+    };
+
+
     return (
         <div className='container-fluid background-games up p-5'>
             <div className='row justify-content-center'>
@@ -56,7 +64,10 @@ export default function Games() {
                             <div className="card-body">
                                 <h5 className="card-title title-card">{elemento.nombre}</h5>
                                 <p className="card-text">{elemento.descripcion}</p>
-                                <a href={`/video/${elemento.game}`}><button type="button" className="main-button" onClick={() => audioClick.play()}>Jugar <DoubleArrowSharpIcon /></button> </a>
+
+                                <button onClick={() => handleButtonClick(elemento)} type="button" className="main-button">Jugar <DoubleArrowSharpIcon /></button>
+
+
                             </div>
                         </div>
                     </div>

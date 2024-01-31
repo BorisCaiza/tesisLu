@@ -155,9 +155,9 @@ const Game4 = () => {
             <p style="font-size: 40px">⭐⭐⭐</p>
             <p style="font-weight: bold; font-size: 20px">¡Felicidades!</p>
             </div>`,
-            icon: 'success' ,
-            confirmButtonText: '<i class="fa fa-play"></i> Continuar',                confirmButtonColor: "#e4800e",
-          cancelButtonText: `<i class="fa fa-times"></i> Salir`,
+            icon: 'success',
+            confirmButtonText: '<i class="fa fa-play"></i> Continuar', confirmButtonColor: "#e4800e",
+            cancelButtonText: `<i class="fa fa-times"></i> Salir`,
             showCancelButton: true,
             didOpen: () => {
                 confetti({
