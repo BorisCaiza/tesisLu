@@ -59,7 +59,7 @@ const Game3 = () => {
     const getDatos = () => {
         const orden = Math.random() < 0.5 ? 1 : 2;
 
-        const initialValue = parseInt(localStorage.getItem("indexWordRhyming")) ? parseInt(localStorage.getItem("indexWordRhyming")) : 1;
+        const initialValue = parseInt(localStorage.getItem("indexWordRhyming")) ? parseInt(localStorage.getItem("indexWordRhyming")) : 2;
         const { palabra, rima, palabraAleatoria, targetIndex} = getrhymingWords(initialValue);
         localStorage.setItem("indexWordRhyming",targetIndex)
         setTargetWord(palabra);
@@ -102,7 +102,7 @@ const Game3 = () => {
             saveScore();
         }
         if (gano) {
-            localStorage.setItem("indexWordRhyming", localStorage.getItem("indexWordRhyming") ? parseInt(localStorage.getItem("indexWordRhyming")) + 1 : 1)
+            localStorage.setItem("indexWordRhyming", localStorage.getItem("indexWordRhyming") ? parseInt(localStorage.getItem("indexWordRhyming")) + 2 : 1)
             audioWin.play();
         } else {
             audioLose.play();
@@ -180,7 +180,7 @@ const Game3 = () => {
             </div>
             <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
             <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime}</div>
-            <div style={{ fontWeight: "bold" }}>Aciertos: {indexWord}/25</div>
+            <div style={{ fontWeight: "bold" }}>Aciertos: {(indexWord)/2}/25</div>
         </div>
     );
 };

@@ -244,23 +244,23 @@ export function getrhymingWords(index) {
     const palabras = wordsDataService();
     let targetIndex = index;
     if (index > (palabras.length - 1)) {
-        targetIndex = 1
+        targetIndex = 2
     }
 
-    const palabra = palabras[targetIndex];
+    const palabra = palabras.find(word => word.id === targetIndex);
 
     const rima = palabras.find(word => word.id === palabra?.rimas);
 
-    let idAleatorio = targetIndex;
-    while (idAleatorio === targetIndex || rima.id === idAleatorio) {
+    let idAleatorio = palabra.id;
+    while (idAleatorio === palabra.id || rima.id === idAleatorio || idAleatorio === 0) {
         idAleatorio = Math.floor(Math.random() * palabras.length);
     }
 
-    console.log("index", index);
+    console.log(" palabra.id", palabra.id);
     console.log("rima.id", rima.id);
     console.log("idAleatorio", idAleatorio);
 
-    const palabraAleatoria = palabras[idAleatorio];
+    const palabraAleatoria = palabras.find(word => word.id === idAleatorio);
 
     return {
         palabra,
@@ -272,7 +272,7 @@ export function getrhymingWords(index) {
 
 
 export const getWord = (index) => {
-    const allWords = wordsDataService();
+   /* const allWords = wordsDataService();
     let targetIndex = index;
     if (index > (allWords.length - 1)) {
         targetIndex = 1
@@ -282,17 +282,22 @@ export const getWord = (index) => {
     let randomIndex = index;
     while (randomIndex === index) {
         randomIndex = Math.floor(Math.random() * allWords.length);
-    }
-    const rhymingWord = allWords[randomIndex];
+    }*/
+
+    console.log(index);
+
+    const { palabra, rima, palabraAleatoria, targetIndex} = getrhymingWords(index);
+
     const imagesWords = [
-        { src: selectedWord.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: selectedWord.audio, audioPlay: new Audio(selectedWord.audio,) },
-        { src: rhymingWord.image, alt: 'Imagen Fondo2', correct: false, audioPalabra: rhymingWord.audio, audioPlay: new Audio(rhymingWord.audio,) }
+        { src: palabra.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: palabra.audio, audioPlay: new Audio(palabra.audio) },
+        { src: palabraAleatoria.image, alt: 'Imagen Fondo2', correct: false, audioPalabra: palabraAleatoria.audio, audioPlay: new Audio(palabraAleatoria.audio) }
     ];
     for (let i = imagesWords.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [imagesWords[i], imagesWords[j]] = [imagesWords[j], imagesWords[i]];
     }
-    return { selectedWord, imagesWords, targetIndex };
+
+    return { selectedWord: palabra, imagesWords, targetIndex };
 };
 
 export const lettersDataService = () => {
