@@ -244,7 +244,7 @@ export function getrhymingWords(index) {
     const palabras = wordsDataService();
     let targetIndex = index;
     if (index > (palabras.length - 1)) {
-        targetIndex = palabras.length - 1
+        targetIndex = 1
     }
 
     const palabra = palabras[targetIndex];
@@ -270,7 +270,7 @@ export const getWord = (index) => {
     const allWords = wordsDataService();
     let targetIndex = index;
     if (index > (allWords.length - 1)) {
-        targetIndex = allWords.length - 1
+        targetIndex = 1
     }
 
     const selectedWord = allWords[targetIndex];
