@@ -60,7 +60,8 @@ const Game3 = () => {
         const orden = Math.random() < 0.5 ? 1 : 2;
 
         const initialValue = parseInt(localStorage.getItem("indexWordRhyming")) ? parseInt(localStorage.getItem("indexWordRhyming")) : 1;
-        const { palabra, rima, palabraAleatoria } = getrhymingWords(initialValue);
+        const { palabra, rima, palabraAleatoria, targetIndex} = getrhymingWords(initialValue);
+        localStorage.setItem("indexWordRhyming",targetIndex)
         setTargetWord(palabra);
         if (orden === 1) {
             setOption1(rima)

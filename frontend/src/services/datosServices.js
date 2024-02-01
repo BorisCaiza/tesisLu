@@ -251,17 +251,22 @@ export function getrhymingWords(index) {
 
     const rima = palabras.find(word => word.id === palabra?.rimas);
 
-    let idAleatorio = index;
-    while (idAleatorio === index || rima.id === idAleatorio) {
+    let idAleatorio = targetIndex;
+    while (idAleatorio === targetIndex || rima.id === idAleatorio) {
         idAleatorio = Math.floor(Math.random() * palabras.length);
     }
+
+    console.log("index", index);
+    console.log("rima.id", rima.id);
+    console.log("idAleatorio", idAleatorio);
 
     const palabraAleatoria = palabras[idAleatorio];
 
     return {
         palabra,
         rima,
-        palabraAleatoria
+        palabraAleatoria,
+        targetIndex
     };
 }
 
