@@ -117,9 +117,9 @@ function Game1() {
             text: '¿Quieres jugar de nuevo?',
             icon: 'success',
             showCancelButton: true,
-            confirmButtonText: '<i class="fa fa-play"></i> Continuar',
+            confirmButtonText: ' <i class="fa fa-thumbs-up"></i> Continuar',
             confirmButtonColor: "#e4800e",
-            cancelButtonText: `<i class="fa fa-times"></i> Salir`,
+            cancelButtonText: `<i class="fa fa-thumbs-down"></i> Salir`,
             didOpen: () => {
                 confetti({
                     particleCount: 100,
