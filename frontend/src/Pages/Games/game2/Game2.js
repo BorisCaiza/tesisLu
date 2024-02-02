@@ -31,13 +31,13 @@ const Game2 = () => {
     const audioWin = new Audio(soundWin);
 
     useEffect(() => {
-        const { selectedWord, imagesWords } = getWord(parseInt(localStorage.getItem("indexWord")) || 0);
+        const { selectedWord, imagesWords, targetIndex } = getWord(parseInt(localStorage.getItem("indexWord")) || 2);
         setaudioTarget(new Audio(selectedWord.audioSilaba));
         setWord(selectedWord);
         setImages(imagesWords);
         setIsRunning(true)
-        const storedIndexWord = localStorage.getItem('indexWord');
-        setIndexWord(storedIndexWord);
+        localStorage.setItem("indexWord",targetIndex)
+        setIndexWord(targetIndex/2);
     }, []);
 
     useEffect(() => {
@@ -90,8 +90,8 @@ const Game2 = () => {
                     localStorage.setItem(
                         "indexWord",
                         localStorage.getItem("indexWord")
-                            ? parseInt(localStorage.getItem("indexWord")) + 1
-                            : 1
+                            ? parseInt(localStorage.getItem("indexWord")) + 2
+                            : 2
                     );
 
                     window.location.reload();
