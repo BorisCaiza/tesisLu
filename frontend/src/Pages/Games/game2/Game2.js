@@ -36,8 +36,8 @@ const Game2 = () => {
         setWord(selectedWord);
         setImages(imagesWords);
         setIsRunning(true)
-        localStorage.setItem("indexWord",targetIndex)
-        setIndexWord(targetIndex/2);
+        localStorage.setItem("indexWord", targetIndex)
+        setIndexWord(targetIndex / 2);
     }, []);
 
     useEffect(() => {
@@ -56,7 +56,6 @@ const Game2 = () => {
 
     const handleDrop = (item) => {
         if (!isVictory && item.correct) {
-            //setAciertos(aciertos + 1)
             setIsVictory(true);
             setImageOpacity(0);
             saveScore();
@@ -172,6 +171,7 @@ const Game2 = () => {
     };
 
     const Image = ({ src, alt, audio, isDragging, opacity, correct, audioPalabra }) => {
+        const [isAudioPlaying, setIsAudioPlaying] = useState(false);
         const [, ref] = useDrag({
             type: 'IMAGE',
             item: { src, alt, correct, audioPalabra },
@@ -185,21 +185,26 @@ const Game2 = () => {
             margin: '30px'
         };
 
+        const playAudio = () => {
+            if (!isAudioPlaying) {
+                audio.play();
+                setIsAudioPlaying(true);
+                audio.onended = () => {
+                    setIsAudioPlaying(false);
+                };
+            }
+        };
+
         return (
             <img
                 ref={ref}
                 src={src}
                 alt={alt}
-                onMouseEnter={() => {
-                    audio.play()
-                }}
+                onMouseEnter={playAudio}
                 style={imageStyle}
             />
         );
     };
-
-
-
 
     const DropTarget = () => {
         const imgRef = useRef(null);
@@ -219,7 +224,6 @@ const Game2 = () => {
                         ref={imgRef}
                         src={word.image}
                         alt="Imagen de Fondo"
-
                     />
                 )}
             </div>
@@ -227,6 +231,25 @@ const Game2 = () => {
     };
 
 
+    const [isTargetAudioPlaying, setIsTargetAudioPlaying] = useState(false);
+
+    const playTargetAudio = () => {
+        if (!isTargetAudioPlaying) {
+            audioTarget.play();
+            setIsTargetAudioPlaying(true);
+            audioTarget.onended = () => {
+                setIsTargetAudioPlaying(false);
+            };
+        }
+    };
+
+    const stopTargetAudio = () => {
+        if (isTargetAudioPlaying) {
+            audioTarget.pause();
+            audioTarget.currentTime = 0;
+            setIsTargetAudioPlaying(false);
+        }
+    };
 
     return (
         <DndProvider backend={HTML5Backend}>
@@ -237,10 +260,11 @@ const Game2 = () => {
                 <div className='title'>
                     {word ? word.word : ''} &nbsp; |
                     &nbsp; {word ? word.syllable_separation : ''} &nbsp; |
-                    &nbsp; <button onMouseEnter={() => audioTarget.play()} ><img src={altavoz} className="altavoz-btn" alt='altavoz' /></button>
-
+                    &nbsp;
+                    <button onMouseEnter={playTargetAudio} onMouseLeave={stopTargetAudio}>
+                        <img src={altavoz} className="altavoz-btn" alt='altavoz' />
+                    </button>
                 </div>
-
                 <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
                 <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime === null ? 'N/A' : `${bestTime} segundos`}</div>
                 <div style={{ fontWeight: "bold" }}>Aciertos: {indexWord}/25</div>
