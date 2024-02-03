@@ -60,8 +60,8 @@ const Game3 = () => {
         const orden = Math.random() < 0.5 ? 1 : 2;
 
         const initialValue = parseInt(localStorage.getItem("indexWordRhyming")) ? parseInt(localStorage.getItem("indexWordRhyming")) : 2;
-        const { palabra, rima, palabraAleatoria, targetIndex} = getrhymingWords(initialValue);
-        localStorage.setItem("indexWordRhyming",targetIndex)
+        const { palabra, rima, palabraAleatoria, targetIndex } = getrhymingWords(initialValue);
+        localStorage.setItem("indexWordRhyming", targetIndex)
         setTargetWord(palabra);
         if (orden === 1) {
             setOption1(rima)
@@ -180,7 +180,7 @@ const Game3 = () => {
             </div>
             <div style={{ fontWeight: "bold" }}>Cronómetro: {time} segundos</div>
             <div style={{ fontWeight: "bold" }}>Mejor tiempo: {bestTime}</div>
-            <div style={{ fontWeight: "bold" }}>Aciertos: {(indexWord)/2}/25</div>
+            <div style={{ fontWeight: "bold" }}>Aciertos: {(indexWord) / 2}/25</div>
         </div>
     );
 };
