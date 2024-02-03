@@ -272,21 +272,21 @@ export function getrhymingWords(index) {
 
 
 export const getWord = (index) => {
-   /* const allWords = wordsDataService();
-    let targetIndex = index;
-    if (index > (allWords.length - 1)) {
-        targetIndex = 1
-    }
-
-    const selectedWord = allWords[targetIndex];
-    let randomIndex = index;
-    while (randomIndex === index) {
-        randomIndex = Math.floor(Math.random() * allWords.length);
-    }*/
+    /* const allWords = wordsDataService();
+     let targetIndex = index;
+     if (index > (allWords.length - 1)) {
+         targetIndex = 1
+     }
+ 
+     const selectedWord = allWords[targetIndex];
+     let randomIndex = index;
+     while (randomIndex === index) {
+         randomIndex = Math.floor(Math.random() * allWords.length);
+     }*/
 
     console.log(index);
 
-    const { palabra, rima, palabraAleatoria, targetIndex} = getrhymingWords(index);
+    const { palabra, rima, palabraAleatoria, targetIndex } = getrhymingWords(index);
 
     const imagesWords = [
         { src: palabra.image, alt: 'Imagen de Fondo', correct: true, audioPalabra: palabra.audio, audioPlay: new Audio(palabra.audio) },
@@ -362,6 +362,8 @@ export const playAudio = (audio) => {
 
     }
 };
+
+
 export const playAudioRimaCon = (targetWord) => {
     if (targetWord) {
         try {
