@@ -2,8 +2,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const instance = axios.create({
-    baseURL: "http://localhost:3004/api/",
-    // baseURL: "https://workout.virtusproject.online/api/"
+   // baseURL: "http://localhost:3004/api/",
+     baseURL: "https://aventuradewernick.cfd/api/"
 });
 instance.interceptors.request.use(
     (config) => {
