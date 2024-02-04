@@ -1,20 +1,25 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import React, { useContext, useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, Navigate, Outlet } from "react-router-dom";
+import React, { lazy, useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from './Context/AuthContext';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
-import ForgetPassword from './Pages/ForgetPassword';
-import Games from './Pages/Games/Games';
-import LayoutGame from './Pages/Games/layoutGame/LayoutGame';
-import Header from './Compoments/Header';
-import VideoExplicacion from './Pages/Games/VideoExplicacion';
-import NewPassword from "./Pages/NewPassword"
+
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'video-react/dist/video-react.css';
-import Footer from './Compoments/Footer';
+import { Suspense } from 'react';
+
+const LazyLogin = lazy(() => import('./Pages/Login'));
+const LazyRegister = lazy(() => import('./Pages/Register'));
+const LazyForgetPassword = lazy(() => import('./Pages/ForgetPassword'));
+const LazyGames = lazy(() => import('./Pages/Games/Games'));
+const LazyLayoutGame = lazy(() => import('./Pages/Games/layoutGame/LayoutGame'));
+const LazyHeader = lazy(() => import('./Compoments/Header'));
+const LazyVideoExplicacion = lazy(() => import('./Pages/Games/VideoExplicacion'));
+const LazyNewPassword = lazy(() => import('./Pages/NewPassword'));
+const LazyFooter = lazy(() => import('./Compoments/Footer'));
+
+
 
 function App() {
 
@@ -27,36 +32,46 @@ function App() {
 
 
       {!user ? (
-        <>
-          <Routes>
-            <Route index element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/forgot-password' element={<ForgetPassword />} />
-            <Route path='/newPassword/:token' element={<NewPassword />} />
+
+        <Routes>
+          <Route path='/' element={<Layout />} >
+            <Route index element={<LazyLogin />} />
+            <Route path='/register' element={<LazyRegister />} />
+            <Route path='/forgot-password' element={<LazyForgetPassword />} />
+            <Route path='/newPassword/:token' element={<LazyNewPassword />} />
             <Route
               path="*"
               element={<Navigate to="/" replace />}
             />
-          </Routes>
-          <Footer />
-        </>
+          </Route>
+        </Routes>
       ) : (
-        <>
-          <Header />
-          <Routes>
-            <Route index element={<Games />} />
-            <Route path='/video/:id' element={<VideoExplicacion />} />
-            <Route path='/games/:id' element={<LayoutGame />} />
+        <Routes>
+          <Route path='/' element={<Layout >     <LazyHeader /></Layout>} >
+            <Route index element={<LazyGames />} />
+            <Route path='/video/:id' element={<LazyVideoExplicacion />} />
+            <Route path='/games/:id' element={<LazyLayoutGame />} />
             <Route
               path="*"
               element={<Navigate to="/" replace />}
             />
-          </Routes>
-          <Footer />
-        </>
+          </Route>
+        </Routes>
       )}
     </>
   );
 }
+
+
+const Layout = ({ children }) => (
+  <>
+    <Suspense fallback={<div>Loading...</div>}>
+      {children}
+      <Outlet/>
+      <LazyFooter />
+    </Suspense>
+  </>
+);
+
 
 export default App;

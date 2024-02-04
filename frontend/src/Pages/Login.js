@@ -1,8 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, lazy, Suspense } from "react";
 import './login.css';
-import Swal from 'sweetalert2'
-import Cookies from 'universal-cookie';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
@@ -29,7 +26,7 @@ function Login() {
 
     const navigator = useNavigate()
 
-    const { error, login } = useContext(AuthContext);
+    const {login } = useContext(AuthContext);
 
 
 
@@ -39,15 +36,8 @@ function Login() {
 
     const authSubmitHandler = async (e) => {
         e.preventDefault();
-
         const user = { email, password }
-
         await login(user)
-
-
-
-
-
     };
 
 
@@ -58,8 +48,8 @@ function Login() {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-
     return (
+
         <div className='container-fluid-login  background'>
             <div className='row justify-content-center'>
                 <div className='col-sm'>
