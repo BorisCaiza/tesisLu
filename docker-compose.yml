@@ -13,6 +13,7 @@ services:
       - /html:/usr/share/nginx/html
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     restart: always
@@ -23,6 +24,7 @@ services:
       - /vhostd:/etc/nginx/vhost.d
       - /html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
   nginx:
     restart: always
     build:
@@ -38,6 +40,7 @@ services:
     environment:
       - VIRTUAL_HOST=aventuradewernick.cfd
       - LETSENCRYPT_HOST=aventuradewernick.cfd
+
   backend:
     restart: always
     build:
@@ -45,11 +48,20 @@ services:
       context: ./backend
     ports:
       - '3004:3004'
+    volumes:
+      - /mnt/volumen_datos/data/backend:/app  # Monta el directorio del backend en el contenedor
+
   frontend:
     build:
       dockerfile: Dockerfile
-      context: ./frontend
+      context: ./frontend/
     ports:
       - '3005:3000'
+    volumes:
+      - /mnt/volumen_datos/data/frontend:/app  # Monta el directorio del frontend en el contenedor
     links:
       - backend
+volumes:
+    certs:
+    html:
+    vhost:
